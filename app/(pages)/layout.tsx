@@ -29,7 +29,7 @@ export default function RootLayout({
           <Header />
           <div className="flex p-8">
             <Nav />
-            <div className="ml-8">{children}</div>
+            <div className="ml-8 w-full">{children}</div>
           </div>
         </ThemeProvider>
       </body>

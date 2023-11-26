@@ -4,13 +4,13 @@ import Image from "next/image";
 
 const Nav = () => {
   return (
-    <div className="bg-main-900 p-8 text-sm rounded-lg">
-      <ul className="space-y-4">
+    <div className="bg-main-900  py-8 px-6 w-64 text-sm rounded-lg flex items-center justify-center">
+      <ul className="space-y-4  ">
         {Object.values(PROG_LNG).map((progLang) => (
           <li key={progLang.name}>
             <Link
               href={`/snippets/${progLang.name}`}
-              className="flex items-center gap-4"
+              className="flex items-center gap-4 "
             >
               <Image
                 src={progLang.src}
