@@ -3,7 +3,6 @@ import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import { Header } from "@/components/Header";
 import { Nav } from "@/components/Nav";
-import { ThemeProvider } from "@/components/ui/theme-provider";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 
@@ -19,19 +18,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${montserrat.className} bg-main-800 text-white`}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <Header />
-          <div className="flex p-8">
-            <Nav />
-            <div className="ml-8 w-full">{children}</div>
-          </div>
-        </ThemeProvider>
+      <body className={`${montserrat.className} bg-main-800 text-white dark`}>
+        <Header />
+        <div className="flex p-8">
+          <Nav />
+          <div className="ml-8 w-full">{children}</div>
+        </div>
       </body>
     </html>
   );
