@@ -1,5 +1,7 @@
-npx prisma generate
 
-npm install @prisma/cli --save-dev
+
+npm install prisma @prisma/cli --save-dev
+
+npx prisma generate
 
 npx prisma migrate dev --name init
