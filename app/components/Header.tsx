@@ -10,10 +10,7 @@ export function Header() {
         <Image src={logoPng} alt="Logo" />
       </Link>
       <div className="flex items-center space-x-3">
-        <UserButton
-          afterSignOutUrl={"/sign-in"}
-          afterSwitchSessionUrl="/sign-in"
-        />
+        <UserButton />
       </div>
     </header>
   );
