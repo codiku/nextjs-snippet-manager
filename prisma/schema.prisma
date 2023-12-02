@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -8,6 +5,21 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("POSTGRES_URL")
+}
+
+model Snippet {
+  id       Int      @id @default(autoincrement())
+  title    String
+  content  String
+  language Language
+  User     User?    @relation(fields: [userId], references: [id])
+  userId   Int?
+}
+
+model User {
+  id       Int       @id
+  email    String
+  snippets Snippet[]
 }
 
 enum Language {
@@ -28,19 +40,4 @@ enum Language {
   rust
   typescript
   html
-}
-
-model Snippet {
-  id       Int      @id @default(autoincrement())
-  title    String
-  content  String
-  language Language
-  User     User?    @relation(fields: [userId], references: [id])
-  userId   Int?
-}
-
-model User {
-  id       Int       @id
-  email    String
-  snippets Snippet[]
 }
