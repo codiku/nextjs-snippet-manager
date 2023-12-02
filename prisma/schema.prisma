@@ -35,4 +35,12 @@ model Snippet {
   title    String
   content  String
   language Language
+  User     User?    @relation(fields: [userId], references: [id])
+  userId   Int?
+}
+
+model User {
+  id       Int       @id
+  email    String
+  snippets Snippet[]
 }
