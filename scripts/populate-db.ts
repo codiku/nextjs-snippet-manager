@@ -45,6 +45,7 @@ async function main() {
   ];
 
   const snippets = languages.map((language, i) => ({
+    userId: 1,
     title: `Display hello in ${language}`,
     content: (codeSnippets as any)[language],
     language: language,

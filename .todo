@@ -5,3 +5,11 @@ npm install prisma @prisma/cli --save-dev
 npx prisma generate
 
 npx prisma migrate dev --name init
+
+/posts/[...slug] will match
+
+/posts/a, /posts/a/b, /posts/a/b/c
+
+/posts/[[...slug]] will match
+
+/posts and /posts/a, /posts/a/b, /posts/a/b/c
