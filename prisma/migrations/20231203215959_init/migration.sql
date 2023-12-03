@@ -7,6 +7,7 @@ CREATE TABLE "Snippet" (
     "title" TEXT NOT NULL,
     "content" TEXT NOT NULL,
     "language" "Language" NOT NULL,
+    "userId" TEXT NOT NULL,
 
     CONSTRAINT "Snippet_pkey" PRIMARY KEY ("id")
 );

@@ -7,22 +7,9 @@ import Image from "next/image";
 
 export function SnippetCard(p: { snippet: Snippet }) {
   const progLngItem = PROG_LNG[p.snippet.language];
-  const radialGradient = (
-    <div
-      style={{
-        background: `linear-gradient(to bottom right, ${progLngItem.color} 5%, #0A0B0F 50%)`,
-      }}
-      className={`shadow-2xl rounded-3xl h-full w-full opacity-20 absolute`}
-    ></div>
-  );
 
   const cardBody = (
-    <div className="px-5 py-6 flex flex-col justify-end h-full  ">
-      <Image
-        className="w-24 absolute -top-10 left-10"
-        src={progLngItem.src}
-        alt="Prog language image"
-      />
+    <div className="px-5 py-6 flex flex-col justify-end h-full ">
       <div>
         <div className="font-semibold text-md text-main-100 uppercase">
           {p.snippet.language}
@@ -34,10 +21,25 @@ export function SnippetCard(p: { snippet: Snippet }) {
       </div>
     </div>
   );
+
   return (
-    <div className="cursor-pointer relative h-52 w-60 bg-main-900 rounded-3xl">
-      {radialGradient}
-      {cardBody}
+    <div className="relative cursor-pointer shadow-xl bg-main-900 h-52 w-60 rounded-3xl transition transform hover:scale-105 ">
+      <div className="overflow-hidden relative rounded-tl-3xl  h-full w-full">
+        <div
+          style={{
+            background: `radial-gradient(circle at center, ${progLngItem.color} 15%, #0A0B0F 70%)`,
+          }}
+          className={` opacity-20 absolute  h-full w-full -top-20 -left-20`}
+        />
+        {cardBody}
+      </div>
+      <Image
+        className="w-24 absolute -top-10 left-10"
+        src={progLngItem.src}
+        alt="Prog language image"
+      />
     </div>
   );
 }
+/*
+ */

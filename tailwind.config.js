@@ -2,11 +2,11 @@
 module.exports = {
   darkMode: ["class"],
   content: [
-    "./pages/**/*.{ts,tsx}",
-    "./components/**/*.{ts,tsx}",
-    "./app/**/*.{ts,tsx}",
-    "./src/**/*.{ts,tsx}",
-  ],
+    './pages/**/*.{ts,tsx}',
+    './components/**/*.{ts,tsx}',
+    './app/**/*.{ts,tsx}',
+    './src/**/*.{ts,tsx}',
+	],
   theme: {
     container: {
       center: true,
@@ -84,9 +84,5 @@ module.exports = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate"),
-  function ({ addVariant }) {
-    addVariant('child', '& > *');
-    addVariant('child-hover', '& > *:hover');
-}],
-};
+  plugins: [require("tailwindcss-animate")],
+}
