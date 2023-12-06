@@ -17,7 +17,7 @@ enum Language {
   swift
   kotlin
   c
-  cplusplus
+  cpp
   bash
   css
   nextjs

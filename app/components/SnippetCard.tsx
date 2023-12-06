@@ -7,6 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 export function SnippetCard(p: { snippet: Snippet }) {
+  console.log("***", p.snippet);
   const progLngItem = PROG_LNG[p.snippet.language];
 
   const cardBody = (
