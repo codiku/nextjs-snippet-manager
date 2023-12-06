@@ -12,16 +12,16 @@ const Nav = () => {
             className="transition transform hover:scale-125"
           >
             <Link
-              href={`/snippets/${progLang.name}`}
+              href={`/snippets/language/${progLang.name}`}
               className="flex items-center gap-4 "
             >
               <Image
                 src={progLang.src}
-                alt={progLang.name}
+                alt={progLang.label}
                 width={30}
                 height={30}
               />
-              <span>{progLang.name}</span>
+              <span>{progLang.label}</span>
             </Link>
           </li>
         ))}

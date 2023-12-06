@@ -4,6 +4,7 @@ import { RxCopy } from "react-icons/rx";
 import { Snippet } from "@prisma/client";
 import { PROG_LNG } from "@/constant";
 import Image from "next/image";
+import Link from "next/link";
 
 export function SnippetCard(p: { snippet: Snippet }) {
   const progLngItem = PROG_LNG[p.snippet.language];
@@ -23,7 +24,10 @@ export function SnippetCard(p: { snippet: Snippet }) {
   );
 
   return (
-    <div className="relative cursor-pointer shadow-xl bg-main-900 h-52 w-60 rounded-3xl transition transform hover:scale-105 ">
+    <Link
+      href={`/snippets/${p.snippet.id}`}
+      className="relative cursor-pointer shadow-xl bg-main-900 h-52 w-60 rounded-3xl transition transform hover:scale-105 "
+    >
       <div className="overflow-hidden relative rounded-tl-3xl  h-full w-full">
         <div
           style={{
@@ -38,7 +42,7 @@ export function SnippetCard(p: { snippet: Snippet }) {
         src={progLngItem.src}
         alt="Prog language image"
       />
-    </div>
+    </Link>
   );
 }
 /*

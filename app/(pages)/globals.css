@@ -73,4 +73,7 @@
   body {
     @apply text-foreground  text-white h-screen overflow-y-hidden;
   }
+  h1 {
+    @apply text-main-200 text-3xl font-medium;
+  }
 }

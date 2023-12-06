@@ -5,7 +5,7 @@ import { Snippet } from "@prisma/client";
 import Link from "next/link";
 import { useState } from "react";
 
-export function HomePage(p: { snippets: Snippet[] }) {
+export function SnippetSearch(p: { snippets: Snippet[] }) {
   const [snippets] = useState<Snippet[]>(p.snippets);
   const [currSearchQuery, setCurrSearchQuery] = useState<string>("");
   const filteredSnippets = snippets.filter((s) =>

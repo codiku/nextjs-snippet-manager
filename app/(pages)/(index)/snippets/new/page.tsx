@@ -1,3 +1,7 @@
 export default function NewSnippetPage(p: {}) {
-  return <>todo</>;
+  return (
+    <div>
+      <h1>New snippet</h1>
+    </div>
+  );
 }

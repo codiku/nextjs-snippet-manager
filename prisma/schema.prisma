@@ -16,6 +16,7 @@ enum Language {
   ruby
   swift
   kotlin
+  c
   cplusplus
   bash
   css
