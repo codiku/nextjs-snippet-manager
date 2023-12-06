@@ -1,12 +1,10 @@
-import { SearchBar } from "@/components/SearchBar";
-import { SnippetCard } from "@/components/SnippetCard";
-import SnippetList from "@/components/SnippetList";
+import { HomePage } from "@/components/HomePage";
+import { db } from "@/lib/db";
+import { auth } from "@clerk/nextjs";
 
-export default function Home() {
-  return (
-    <main>
-      <SearchBar />
-      <SnippetList />
-    </main>
-  );
+export default async function Home() {
+  const { userId } = auth();
+  const snippets = await db.snippet.findMany({ where: { userId: userId! } });
+
+  return <HomePage snippets={snippets} />;
 }

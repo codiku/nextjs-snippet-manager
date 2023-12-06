@@ -1,9 +1,8 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
-import { ClerkProvider, SignedIn } from "@clerk/nextjs";
+import { ClerkProvider } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
-
 const montserrat = Montserrat({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
