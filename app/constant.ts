@@ -33,9 +33,9 @@ export const PROG_LNG: {
     label: "javascript",
   },
   java: { src: java, name: "java", color: "#FFFFFF", label: "java" },
-  cplusplus: {
+  cpp: {
     src: cplusplus,
-    name: "cplusplus",
+    name: "cpp",
     color: "#00589C",
     label: "c++",
   },
