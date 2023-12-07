@@ -13,6 +13,7 @@
     "@clerk/nextjs": "^4.27.2",
     "@clerk/themes": "^1.7.9",
     "@prisma/client": "^5.7.0",
+    "@radix-ui/react-label": "^2.0.2",
     "@types/react-icons": "^3.0.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
