@@ -1,7 +1,7 @@
 import { db } from "@/lib/db";
 import { auth } from "@clerk/nextjs";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { atomDark as theme } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { a11yDark as theme } from "react-syntax-highlighter/dist/esm/styles/hljs";
 
 export default async function SnippetDetailPage(p: { params: { id: string } }) {
   const { userId } = auth();

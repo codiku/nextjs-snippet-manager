@@ -7,26 +7,26 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "populate": "ts-node --skipProject ./scripts/populate-db.ts"
+    "populate": "ts-node ./scripts/populate-db.ts",
+    "popu": "ts-node -O '{\"module\": \"commonjs\"}' -r tsconfig-paths/register ./scripts/populate-db.ts"
   },
   "dependencies": {
     "@clerk/nextjs": "^4.27.2",
     "@clerk/themes": "^1.7.9",
-    "@prisma/client": "^5.6.0",
+    "@prisma/client": "^5.7.0",
     "@types/react-icons": "^3.0.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "lucide-react": "^0.293.0",
     "next": "14.0.3",
-    "prisma": "^5.6.0",
     "radix-ui": "^1.0.1",
     "react": "^18",
     "react-dom": "^18",
     "react-icons": "^4.12.0",
     "react-syntax-highlighter": "^15.5.0",
-    "svix": "^1.14.0",
     "tailwind-merge": "^2.1.0",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "tsconfig-paths": "^4.2.0"
   },
   "devDependencies": {
     "@types/node": "20.10.1",
@@ -37,7 +37,9 @@
     "eslint": "^8",
     "eslint-config-next": "14.0.3",
     "postcss": "^8",
+    "prisma": "^5.7.0",
     "tailwindcss": "^3.3.0",
+    "tsx": "^4.6.2",
     "typescript": "5.3.2"
   }
 }

@@ -1,5 +1,3 @@
-import { FiArrowUpRight } from "react-icons/fi";
-import { BsBoxArrowUpRight } from "react-icons/bs";
 import { RxCopy } from "react-icons/rx";
 import { Snippet } from "@prisma/client";
 import { PROG_LNG } from "@/constant";
