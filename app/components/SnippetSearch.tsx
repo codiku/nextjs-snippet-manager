@@ -13,10 +13,11 @@ export function SnippetSearch(p: { snippets: Snippet[] }) {
       field.toLowerCase().includes(currSearchQuery?.toLowerCase())
     )
   );
+
   return (
-    <main>
+    <main className="flex flex-col h-[90vh] ">
       <SearchBar onChange={setCurrSearchQuery} />
-      <div className="overflow-y-auto h-[50rem]">
+      <div className="overflow-y-auto ">
         {filteredSnippets.length > 0 ? (
           <SnippetList snippets={filteredSnippets} />
         ) : (

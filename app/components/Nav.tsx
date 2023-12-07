@@ -13,7 +13,7 @@ const Nav = () => {
           >
             <Link
               href={`/snippets/language/${progLang.technology}`}
-              className="flex items-center gap-4 "
+              className="flex items-center gap-4 font-semibold"
             >
               <Image
                 src={progLang.src}
