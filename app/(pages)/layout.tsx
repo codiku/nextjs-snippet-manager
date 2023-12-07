@@ -1,4 +1,4 @@
-import "./globals.css";
+import "../globals.css";
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
@@ -30,7 +30,9 @@ export default function RootLayout({
       }}
     >
       <html lang="en">
-        <body className={`${montserrat.className} bg-main-800 text-white `}>
+        <body
+          className={`${montserrat.className} bg-main-800  h-screen overflow-y-hidden `}
+        >
           <Toaster />
           {children}
         </body>

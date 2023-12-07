@@ -18,7 +18,7 @@ import html from "/public/programming-lang/html.png";
 import { StaticImageData } from "next/image";
 import { Language, Technology } from "@prisma/client";
 
-export const TECHNO_LNG_MAP: {
+export const TECHNO_MAPPER: {
   [key: string]: {
     src: StaticImageData;
     color: string;

@@ -71,9 +71,12 @@
     @apply border-border;
   }
   body {
-    @apply text-foreground  text-white h-screen overflow-y-hidden;
+    @apply bg-background text-foreground;
   }
   h1 {
-    @apply text-main-200 text-3xl font-medium;
+    @apply text-main-300 text-4xl;
+  }
+  h2 {
+    @apply text-white text-2xl font-semibold;
   }
 }

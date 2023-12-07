@@ -1,14 +1,14 @@
 "use client";
 import { RxCopy } from "react-icons/rx";
 import { Snippet } from "@prisma/client";
-import { TECHNO_LNG_MAP } from "@/constant";
+import { TECHNO_MAPPER } from "@/constant";
 import Image from "next/image";
 import Link from "next/link";
 import { MouseEvent } from "react";
 import { useToast } from "./ui/use-toast";
 
 export function SnippetCard(p: { snippet: Snippet }) {
-  const progLngItem = TECHNO_LNG_MAP[p.snippet.technology];
+  const progLngItem = TECHNO_MAPPER[p.snippet.technology];
   const { toast } = useToast();
 
   const copyCodeToClipboard = (e: MouseEvent<HTMLDivElement>) => {
@@ -29,8 +29,8 @@ export function SnippetCard(p: { snippet: Snippet }) {
           {p.snippet.language}
         </div>
         <div className="flex justify-between ">
-          <div className="text-sm">{p.snippet.title}</div>
-          <RxCopy />
+          <div className="text-sm text-white">{p.snippet.title}</div>
+          <RxCopy className="text-white" />
         </div>
       </div>
     </div>

@@ -2,11 +2,11 @@
 module.exports = {
   darkMode: ["class"],
   content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}',
-	],
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
+  ],
   theme: {
     container: {
       center: true,
@@ -19,8 +19,8 @@ module.exports = {
       colors: {
         main: {
           900: "#0A0B0F",
-          800: "#111113",
-          700: "#1C1D22",
+          800: "#141519",
+          700: "#1A1B1F",
           600: "#2E2F34",
           500: "#404145",
           400: "#525357",
@@ -85,4 +85,4 @@ module.exports = {
     },
   },
   plugins: [require("tailwindcss-animate")],
-}
+};
