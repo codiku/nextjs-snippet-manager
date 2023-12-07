@@ -6,7 +6,7 @@ import Link from "next/link";
 
 export function SnippetCard(p: { snippet: Snippet }) {
   console.log("***", p.snippet);
-  const progLngItem = TECHNO_LNG_MAP[p.snippet.language];
+  const progLngItem = TECHNO_LNG_MAP[p.snippet.technology];
 
   const cardBody = (
     <div className="px-5 py-6 flex flex-col justify-end h-full ">
