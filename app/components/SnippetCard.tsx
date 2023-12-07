@@ -1,12 +1,12 @@
 import { RxCopy } from "react-icons/rx";
 import { Snippet } from "@prisma/client";
-import { PROG_LNG } from "@/constant";
+import { TECHNO_LNG_MAP } from "@/constant";
 import Image from "next/image";
 import Link from "next/link";
 
 export function SnippetCard(p: { snippet: Snippet }) {
   console.log("***", p.snippet);
-  const progLngItem = PROG_LNG[p.snippet.language];
+  const progLngItem = TECHNO_LNG_MAP[p.snippet.language];
 
   const cardBody = (
     <div className="px-5 py-6 flex flex-col justify-end h-full ">

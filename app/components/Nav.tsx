@@ -1,4 +1,4 @@
-import { PROG_LNG } from "@/constant";
+import { TECHNO_LNG_MAP } from "@/constant";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -6,7 +6,7 @@ const Nav = () => {
   return (
     <div className="bg-main-900 py-8 px-6  min-w-[12rem] text-sm rounded-lg flex h-full  justify-center">
       <ul className="space-y-4">
-        {Object.values(PROG_LNG).map((progLang) => (
+        {Object.values(TECHNO_LNG_MAP).map((progLang) => (
           <li
             key={progLang.name}
             className="transition transform hover:scale-125"
