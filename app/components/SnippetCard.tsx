@@ -1,3 +1,4 @@
+"use client";
 import { RxCopy } from "react-icons/rx";
 import { Snippet } from "@prisma/client";
 import { TECHNO_LNG_MAP } from "@/constant";
@@ -14,16 +15,20 @@ export function SnippetCard(p: { snippet: Snippet }) {
     e.preventDefault();
     navigator.clipboard.writeText(p.snippet.content);
     toast({
+      duration: 1000,
       title: "Code copied into clipboard",
     });
   };
   const cardBody = (
-    <div className="px-5 py-6 flex flex-col justify-end h-full ">
-      <div>
+    <div className="flex flex-col justify-end h-full ">
+      <div
+        className="hover:bg-main-700 px-5 py-4 rounded-b-3xl"
+        onClick={copyCodeToClipboard}
+      >
         <div className="font-semibold text-md text-main-100 uppercase">
           {p.snippet.language}
         </div>
-        <div className="flex justify-between" onClick={copyCodeToClipboard}>
+        <div className="flex justify-between ">
           <div className="text-sm">{p.snippet.title}</div>
           <RxCopy />
         </div>
