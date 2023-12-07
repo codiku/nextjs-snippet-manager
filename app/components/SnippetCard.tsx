@@ -3,18 +3,27 @@ import { Snippet } from "@prisma/client";
 import { TECHNO_LNG_MAP } from "@/constant";
 import Image from "next/image";
 import Link from "next/link";
+import { MouseEvent } from "react";
+import { useToast } from "./ui/use-toast";
 
 export function SnippetCard(p: { snippet: Snippet }) {
-  console.log("***", p.snippet);
   const progLngItem = TECHNO_LNG_MAP[p.snippet.technology];
+  const { toast } = useToast();
 
+  const copyCodeToClipboard = (e: MouseEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    navigator.clipboard.writeText(p.snippet.content);
+    toast({
+      title: "Code copied into clipboard",
+    });
+  };
   const cardBody = (
     <div className="px-5 py-6 flex flex-col justify-end h-full ">
       <div>
         <div className="font-semibold text-md text-main-100 uppercase">
           {p.snippet.language}
         </div>
-        <div className="flex justify-between">
+        <div className="flex justify-between" onClick={copyCodeToClipboard}>
           <div className="text-sm">{p.snippet.title}</div>
           <RxCopy />
         </div>
