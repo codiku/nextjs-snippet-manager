@@ -21,7 +21,6 @@ import { Language, Technology } from "@prisma/client";
 export const TECHNO_LNG_MAP: {
   [key: string]: {
     src: StaticImageData;
-    name: string;
     color: string;
     label: string;
     language: Language;
@@ -30,7 +29,6 @@ export const TECHNO_LNG_MAP: {
 } = {
   python: {
     src: python,
-    name: "python",
     color: "#5E95FF",
     label: "python",
     language: "python",
@@ -38,7 +36,6 @@ export const TECHNO_LNG_MAP: {
   },
   javascript: {
     src: javascript,
-    name: "javascript",
     color: "#FFEC3E",
     label: "javascript",
     language: "javascript",
@@ -46,7 +43,6 @@ export const TECHNO_LNG_MAP: {
   },
   java: {
     src: java,
-    name: "java",
     color: "#FFFFFF",
     label: "java",
     language: "java",
@@ -54,7 +50,6 @@ export const TECHNO_LNG_MAP: {
   },
   cpp: {
     src: cplusplus,
-    name: "cpp",
     color: "#00589C",
     label: "c++",
     language: "cpp",
@@ -62,7 +57,6 @@ export const TECHNO_LNG_MAP: {
   },
   csharp: {
     src: csharp,
-    name: "csharp",
     color: "#3F049F",
     label: "c#",
     language: "csharp",
@@ -70,7 +64,6 @@ export const TECHNO_LNG_MAP: {
   },
   php: {
     src: php,
-    name: "php",
     color: "#777BB3",
     label: "php",
     language: "php",
@@ -78,7 +71,6 @@ export const TECHNO_LNG_MAP: {
   },
   ruby: {
     src: ruby,
-    name: "ruby",
     color: "#FFB4AE",
     label: "ruby",
     language: "ruby",
@@ -86,7 +78,6 @@ export const TECHNO_LNG_MAP: {
   },
   swift: {
     src: swift,
-    name: "swift",
     color: "#FFE9E2",
     label: "swift",
     language: "swift",
@@ -94,7 +85,6 @@ export const TECHNO_LNG_MAP: {
   },
   kotlin: {
     src: kotlin,
-    name: "kotlin",
     color: "#C5C0EB",
     label: "kotlin",
     language: "kotlin",
@@ -102,7 +92,6 @@ export const TECHNO_LNG_MAP: {
   },
   bash: {
     src: bash,
-    name: "bash",
     color: "#00FF85",
     label: "bash",
     language: "bash",
@@ -110,7 +99,6 @@ export const TECHNO_LNG_MAP: {
   },
   css: {
     src: css,
-    name: "css",
     color: "#214CE5",
     label: "css",
     language: "css",
@@ -118,7 +106,6 @@ export const TECHNO_LNG_MAP: {
   },
   nextjs: {
     src: nextjs,
-    name: "nextjs",
     color: "#FFFFFF",
     label: "nextjs",
     language: "jsx",
@@ -126,7 +113,6 @@ export const TECHNO_LNG_MAP: {
   },
   nodejs: {
     src: nodejs,
-    name: "nodejs",
     color: "#8BCC00",
     label: "nodejs",
     language: "typescript",
@@ -134,7 +120,6 @@ export const TECHNO_LNG_MAP: {
   },
   react: {
     src: react,
-    name: "react",
     color: "#00B4CC",
     label: "react",
     language: "jsx",
@@ -142,7 +127,6 @@ export const TECHNO_LNG_MAP: {
   },
   rust: {
     src: rust,
-    name: "rust",
     color: "#F74C00",
     label: "rust",
     language: "rust",
@@ -150,7 +134,6 @@ export const TECHNO_LNG_MAP: {
   },
   typescript: {
     src: typescript,
-    name: "typescript",
     color: "#4950FF",
     label: "typescript",
     language: "typescript",
@@ -158,10 +141,9 @@ export const TECHNO_LNG_MAP: {
   },
   html: {
     src: html,
-    name: "html",
     color: "#D3D3D3",
     label: "html",
     technology: "html",
-    language: "xmlDoc",
+    language: "jsx",
   },
 };

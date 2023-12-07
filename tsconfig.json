@@ -28,7 +28,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "scripts/populate-db.js"
+    "scripts/populate-db.mjs"
   ],
   "exclude": ["node_modules"]
 }

@@ -8,11 +8,11 @@ const Nav = () => {
       <ul className="space-y-4">
         {Object.values(TECHNO_LNG_MAP).map((progLang) => (
           <li
-            key={progLang.name}
+            key={progLang.technology}
             className="transition transform hover:scale-125"
           >
             <Link
-              href={`/snippets/language/${progLang.name}`}
+              href={`/snippets/language/${progLang.technology}`}
               className="flex items-center gap-4 "
             >
               <Image

@@ -1,7 +1,7 @@
 import { db } from "@/lib/db";
 import { auth } from "@clerk/nextjs";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { a11yDark as theme } from "react-syntax-highlighter/dist/esm/styles/hljs";
+import { atomDark as theme } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 export default async function SnippetDetailPage(p: { params: { id: string } }) {
   const { userId } = auth();
@@ -9,14 +9,21 @@ export default async function SnippetDetailPage(p: { params: { id: string } }) {
     where: { userId: userId!, id: Number(p.params.id) },
   });
 
+  if (!snippet) {
+    return <div>No snippet found...</div>;
+  }
+
   return (
     <div>
-      <h1>New snippet</h1>
-      <div className="p-8 mt-20 w-[80‰] border-2 border-main-500 rounded-xl space-y-8">
+      <div className="p-8 mt-10 w-[80‰] border-2 border-main-500 rounded-xl space-y-8">
         <div className="text-xl font-bold">{snippet?.title}</div>
         <div></div>
-        <SyntaxHighlighter language="javascript" style={theme}>
-          {snippet!.content}
+        <SyntaxHighlighter
+          showLineNumbers
+          language={snippet.language}
+          style={theme}
+        >
+          {snippet.content}
         </SyntaxHighlighter>
       </div>
     </div>

@@ -1,14 +1,14 @@
 import { SnippetSearch } from "@/components/SnippetSearch";
 import { db } from "@/lib/db";
 import { auth } from "@clerk/nextjs";
-import { Language } from "@prisma/client";
+import { Language, Technology } from "@prisma/client";
 
 export default async function SnippetByLngPage(p: {
-  params: { lng: Language };
+  params: { technology: Technology };
 }) {
   const { userId } = auth();
   const snippets = await db.snippet.findMany({
-    where: { userId: userId!, language: p.params.lng },
+    where: { userId: userId!, technology: p.params.technology },
   });
 
   return <SnippetSearch snippets={snippets} />;
