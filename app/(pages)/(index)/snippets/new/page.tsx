@@ -2,74 +2,86 @@
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { useFormState } from "react-dom";
 import { Button } from "@/components/ui/button";
-import { CreateSnippetResponse, create } from "./action";
-import { useEffect, useRef } from "react";
-import { useToast } from "@/components/ui/use-toast";
+import ky from "ky";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { TECHNO_MAPPER } from "@/constant";
+import { ApiResponse } from "@/types/response";
+import { toast } from "@/components/ui/use-toast";
+import { Snippet } from "@prisma/client";
 
-export default function NewSnippetPage(p: {}) {
-  const [formResponse, formAction] = useFormState<
-    CreateSnippetResponse,
-    FormData
-  >(create, { message: undefined });
-  const formRef = useRef<HTMLFormElement | null>(null);
-  const { toast } = useToast();
+export default function NewSnippetPage() {
+  const submit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    // Get form data
+    const form = new FormData(event.currentTarget);
+    const formData = Object.fromEntries(form.entries()) as {
+      technology: string;
+      content: string;
+      title: string;
+    };
+    // Retrieve associated language
+    const language = TECHNO_MAPPER[formData.technology].language;
+    // Create the snippet
+    const resp: ApiResponse<Snippet> = await ky
+      .post("/api/snippets", {
+        json: {
+          ...formData,
+          language,
+        },
+      })
+      .json();
 
-  useEffect(() => {
-    if (formResponse.message) {
-      toast({
-        duration: 1000,
-        description: formResponse.error
-          ? "Error while trying to generate code metadata"
-          : "Metadata found",
-        variant: formResponse.error ? "destructive" : "default",
-      });
-    }
-  }, [formResponse, toast]);
-
-  const saveSnippet = async () => {
-    await (await fetch("/api/snippets", { method: "POST" })).json();
+    toast({
+      duration: 1000,
+      description: resp.message,
+      variant: resp.error ? "destructive" : "default",
+    });
   };
-
+  const renderTechnoSelect = () => {
+    return (
+      <>
+        <Label>Language / Framework / Library</Label>
+        <Select name="technology">
+          <SelectTrigger className="w-[180px]">
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
+            {Object.keys(TECHNO_MAPPER).map((techno) => {
+              return (
+                <SelectItem key={techno} value={techno} className="flex">
+                  <div>{TECHNO_MAPPER[techno].label}</div>
+                </SelectItem>
+              );
+            })}
+          </SelectContent>
+        </Select>
+      </>
+    );
+  };
   return (
-    <form
-      ref={formRef}
-      method="POST"
-      action={formAction}
-      className="space-y-6 w-[50rem] "
-    >
-      <h1>New snippet</h1>
-      <div className="space-y-3">
-        <Label>Content</Label>
-        <Textarea
-          name="code"
-          className="h-96"
-          onPaste={(e) => {
-            setTimeout(() => {
-              formRef.current?.requestSubmit();
-            }, 300);
-          }}
-        />
+    <form onSubmit={submit} className="space-y-8 w-[50rem] ">
+      <div className="space-y-6">
+        <h1>New snippet</h1>
+        <div className="space-y-3 w-72">
+          <Label>Title</Label>
+          <Input type="text" name="title" />
+        </div>
+        <div className="space-y-3 w-60">{renderTechnoSelect()}</div>
+        <div className="space-y-3">
+          <Label>Content</Label>
+          <Textarea name="content" className="h-96" />
+        </div>
       </div>
-      <div className="space-y-3 w-72">
-        <Label>Title</Label>
-        <Input
-          defaultValue={formResponse.data?.title}
-          type="text"
-          name="title"
-        />
-      </div>
-      <div className="space-y-3 w-52">
-        <Label>Programming language</Label>
-        <Input
-          defaultValue={formResponse.data?.language}
-          type="text"
-          name="language"
-        />
-      </div>
+
       <div className="flex justify-end ">
-        <Button variant="secondary" onClick={saveSnippet}>
+        <Button variant="secondary" type="submit">
           Save
         </Button>
       </div>

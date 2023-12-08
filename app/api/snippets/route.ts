@@ -1,4 +1,6 @@
 import { db } from "@/lib/db";
+import { auth } from "@clerk/nextjs";
+import { getAuth } from "@clerk/nextjs/server";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET() {
@@ -7,11 +9,22 @@ export async function GET() {
 }
 
 export async function POST(req: NextRequest) {
+  const { userId } = getAuth(req);
+  console.log("*** user ", userId);
   const body = await req.json();
   try {
-    const snippetCreated = await db.snippet.create({ data: body });
-    return NextResponse.json(snippetCreated);
+    const snippetCreated = await db.snippet.create({
+      data: {
+        ...body,
+        userId,
+      },
+    });
+    return NextResponse.json({
+      data: snippetCreated,
+      message: "Snippet created successfully",
+    });
   } catch (err) {
+    console.log("***", err);
     return NextResponse.json(
       { error: "Could not create the snippet" },
       { status: 400 }

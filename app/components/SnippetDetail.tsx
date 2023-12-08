@@ -20,14 +20,16 @@ export function SnippetDetail(p: { snippet: Snippet }) {
     });
   };
   return (
-    <div className="p-8 mt-10 relative border-2 border-main-500 rounded-xl">
+    <div className="p-8 mb-44 relative border-2 border-main-500 rounded-xl">
       <div>
-        <Image
-          className="w-24 absolute -top-10 right-[10%] "
-          src={progLngItem.src}
-          alt="Prog language image"
-        />
-        <h1 className="mb-6">{p.snippet?.title}</h1>
+        <div className="flex space-x-4">
+          <Image
+            className="w-10  -top-10 right-[10%] "
+            src={progLngItem.src}
+            alt="Prog language image"
+          />
+          <h1>{p.snippet?.title}</h1>
+        </div>
         <div className="flex flex-col ">
           <div
             onClick={copyCodeToClipboard}
@@ -47,13 +49,3 @@ export function SnippetDetail(p: { snippet: Snippet }) {
     </div>
   );
 }
-/*
-<div className="overflow-hidden relative rounded-tl-3xl  h-full w-full">
-  <div
-    style={{
-      background: `radial-gradient(circle at center, ${progLngItem.color} 15%, #0A0B0F 70%)`,
-    }}
-    className={` opacity-20 absolute  h-full w-full -top-20 -left-20`}
-  />
-</div>;
-*/

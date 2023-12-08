@@ -11,7 +11,7 @@ export default function SnippetLayout({
       <Header />
       <div className="flex p-8">
         <Nav />
-        <div className="ml-8 w-full">{children}</div>
+        <div className="ml-8 w-full h-screen overflow-y-auto">{children}</div>
       </div>
     </div>
   );
