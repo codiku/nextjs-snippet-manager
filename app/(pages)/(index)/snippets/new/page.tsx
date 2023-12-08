@@ -15,8 +15,11 @@ import { TECHNO_MAPPER } from "@/constant";
 import { ApiResponse } from "@/types/response";
 import { toast } from "@/components/ui/use-toast";
 import { Snippet } from "@prisma/client";
+import { useRouter } from "next/navigation";
 
 export default function NewSnippetPage() {
+  const router = useRouter();
+
   const submit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     // Get form data
@@ -43,6 +46,8 @@ export default function NewSnippetPage() {
       description: resp.message,
       variant: resp.error ? "destructive" : "default",
     });
+
+    router.push("/");
   };
   const renderTechnoSelect = () => {
     return (
