@@ -24,7 +24,7 @@ export function SnippetSearch(p: { snippets: Snippet[] }) {
           <div className="h-full flex flex-col justify-center items-center">
             {"You don't have any snippet !"}
             <Link
-              href="/snippets/new"
+              href="/snippets/create"
               className="underline underline-offset-4 text-white;"
             >
               Start by creating one

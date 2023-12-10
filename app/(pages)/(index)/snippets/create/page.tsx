@@ -17,7 +17,7 @@ import { toast } from "@/components/ui/use-toast";
 import { Snippet } from "@prisma/client";
 import { useRouter } from "next/navigation";
 
-export default function NewSnippetPage() {
+export default function CreateSnippetPage() {
   const router = useRouter();
 
   const submit = async (event: React.FormEvent<HTMLFormElement>) => {
