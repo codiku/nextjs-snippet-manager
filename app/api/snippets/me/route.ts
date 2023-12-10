@@ -4,6 +4,9 @@ import { NextRequest, NextResponse } from "next/server";
 import { ApiResponse } from "@/types/response";
 import { Snippet } from "@prisma/client";
 import { fetchSnippetsByUser } from "./service";
+
+// zod todo
+
 export async function GET(
   req: NextRequest
 ): Promise<NextResponse<ApiResponse<Snippet[]>>> {
