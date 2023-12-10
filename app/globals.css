@@ -71,12 +71,20 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground text-white;
   }
   h1 {
     @apply text-main-100 text-4xl;
   }
   h2 {
-    @apply text-white text-2xl font-semibold;
+    @apply text-2xl font-semibold;
+  }
+  link {
+    @apply underline underline-offset-4;
+  }
+  input,
+  textarea,
+  button {
+    @apply text-main-800;
   }
 }

@@ -10,7 +10,9 @@ export default function AuthLayout({
       <div className="flex-1 flex justify-center items-center">{children}</div>
       <div className="space-y-4 flex-1 flex flex-col items-center bg-main-700 h-full justify-center rounded-bl-[8rem] shadow-2xl">
         <Image src={logoAuthPng} alt="Logo" />
-        <div className="text-2xl">All your snippets empowered with AI</div>
+        <div className="text-2xl text-white">
+          All your snippets empowered with AI
+        </div>
       </div>
     </div>
   );

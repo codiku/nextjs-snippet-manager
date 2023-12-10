@@ -3,7 +3,6 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import ky from "ky";
 import {
   Select,
   SelectContent,
@@ -12,43 +11,52 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { TECHNO_MAPPER } from "@/constant";
-import { ApiResponse } from "@/types/response";
-import { toast } from "@/components/ui/use-toast";
-import { Snippet } from "@prisma/client";
-import { useRouter } from "next/navigation";
 
+import { useFormState } from "react-dom";
+import { ApiResponse } from "@/types/response";
+import { Snippet, Technology } from "@prisma/client";
+import { FormEvent, FormEventHandler, useEffect } from "react";
+import { toast } from "@/components/ui/use-toast";
+import { useRouter } from "next/navigation";
+import ky from "ky";
+import { revalidateTag } from "next/cache";
+
+type Form = { title: string; content: string; technology: Technology };
 export default function CreateSnippetPage() {
   const router = useRouter();
 
-  const submit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    // Get form data
-    const form = new FormData(event.currentTarget);
-    const formData = Object.fromEntries(form.entries()) as {
-      technology: string;
-      content: string;
-      title: string;
-    };
+  const createSnippet = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.currentTarget);
+    const formValues = Object.fromEntries(formData.entries()) as Form;
     // Retrieve associated language
-    const language = TECHNO_MAPPER[formData.technology].language;
+    const language = TECHNO_MAPPER[formValues.technology].language;
     // Create the snippet
-    const resp: ApiResponse<Snippet> = await ky
+    const createdSnippet: ApiResponse<Snippet> = await ky
       .post("/api/snippets", {
         json: {
-          ...formData,
+          ...formValues,
           language,
         },
       })
       .json();
-
-    toast({
-      duration: 1000,
-      description: resp.message,
-      variant: resp.error ? "destructive" : "default",
-    });
-
-    router.push("/");
+    if (!createdSnippet.error) {
+      toast({
+        duration: 1000,
+        description: "Snippet created successfully",
+      });
+      router.push("/");
+      router.refresh();
+    } else {
+      toast({
+        duration: 1000,
+        description: createdSnippet.error,
+        variant: "destructive",
+      });
+    }
   };
+
   const renderTechnoSelect = () => {
     return (
       <>
@@ -71,7 +79,7 @@ export default function CreateSnippetPage() {
     );
   };
   return (
-    <form onSubmit={submit} className="space-y-8 w-[50rem] ">
+    <form onSubmit={createSnippet} className="space-y-8 w-[50rem] ">
       <div className="space-y-6">
         <h1>New snippet</h1>
         <div className="space-y-3 w-72">
@@ -86,9 +94,7 @@ export default function CreateSnippetPage() {
       </div>
 
       <div className="flex justify-end ">
-        <Button variant="secondary" type="submit">
-          Save
-        </Button>
+        <Button variant="secondary">Save</Button>
       </div>
     </form>
   );

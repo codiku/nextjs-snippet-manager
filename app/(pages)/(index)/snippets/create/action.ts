@@ -1,4 +1,12 @@
 // import { TextCortexResponse } from "@/types/text-cortex-ai-type";
+"use server";
+import { TECHNO_MAPPER } from "@/constant";
+import { ApiResponse } from "@/types/response";
+import { Snippet } from "@prisma/client";
+import ky from "ky";
+import { revalidatePath } from "next/cache";
+import { NextRequest, NextResponse } from "next/server";
+import { FormEventHandler } from "react";
 
 // export type CreateSnippetResponse = {
 //   error?: boolean;
@@ -61,3 +69,36 @@
 //   const code = formData.get("code")?.toString();
 
 // }
+/*
+export const createSnippet = async (
+  state: ApiResponse<Snippet>,
+  formData: FormData
+): Promise<ApiResponse<Snippet>> => {
+  // Get form data
+  console.log("*** createSnippet");
+  const formValues = Object.fromEntries(formData.entries()) as {
+    technology: string;
+    content: string;
+    title: string;
+  };
+  // Retrieve associated language
+  const language = TECHNO_MAPPER[formValues.technology].language;
+  // Create the snippet
+  console.log("***", process.env);
+  const createdSnippet: ApiResponse<Snippet> = await ky
+    .post("/api/snippets", {
+      json: {
+        ...formValues,
+        language,
+      },
+    })
+    .json();
+
+  revalidatePath("/");
+  if (createdSnippet.error) {
+    return { message: "Nope", error: true };
+  } else {
+    return createdSnippet;
+  }
+};
+*/

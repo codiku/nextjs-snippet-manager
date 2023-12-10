@@ -23,7 +23,6 @@ export async function POST(req: NextRequest) {
   try {
     //Will be catched if not successfull
     createSnippetSchema.parse(body);
-
     const snippetCreated = await db.snippet.create({
       data: {
         ...body,
@@ -35,9 +34,8 @@ export async function POST(req: NextRequest) {
       message: "Snippet created successfully",
     });
   } catch (err) {
-    console.log("***", err);
     return NextResponse.json(
-      { error: "Could not create the snippet" },
+      { message: "Could not create the snippet", error: true },
       { status: 400 }
     );
   }

@@ -21,7 +21,7 @@ export function SearchBar(p: { onChange: (query: string) => void }) {
 
         <RiSearchLine className="h-5 w-5 absolute top-1/2 left-3 transform -translate-y-1/2 text-gray-400" />
       </div>
-      <Button onClick={() => router.push("/snippets/new")}>+ ADD</Button>
+      <Button onClick={() => router.push("/snippets/create")}>+ ADD</Button>
     </div>
   );
 }
