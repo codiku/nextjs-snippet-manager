@@ -12,12 +12,13 @@ export const deleteMySnippet = async (
       return {
         error: true,
         status: 401,
-        message: "User not logged",
+        message: "User not signed in",
       };
     }
     const deletedSnippet = await db.snippet.delete({ where: { id, userId } });
     return {
       data: deletedSnippet,
+      message: "Snippet deleted successfully",
     };
   } catch (error) {
     return {

@@ -1,4 +1,5 @@
 "use client";
+import { MdOutlineDeleteOutline } from "react-icons/md";
 import { BiDotsVerticalRounded } from "react-icons/bi";
 import { toast } from "@/components/ui/use-toast";
 import { Snippet } from "@prisma/client";
@@ -29,20 +30,27 @@ import {
 } from "@/components/ui/alert-dialog";
 import ky from "ky";
 import { ApiResponse } from "@/types/response";
+import { useRouter } from "next/navigation";
 
 export function SnippetDetail(p: { snippet: Snippet }) {
+  const router = useRouter();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const progLngItem = TECHNO_MAPPER[p.snippet.technology];
 
-  const deleteSnippet = async () => {
-    const deletedSnippet = await ky
+  const handleDeleteSnippet = async () => {
+    setIsDialogOpen(false);
+    const response = await ky
       .delete("/api/snippets/" + p.snippet.id)
       .json<ApiResponse<Snippet>>();
-    if (deletedSnippet.error) {
-      toast({
-        duration: 1000,
-        description: deletedSnippet.message,
-      });
+
+    toast({
+      duration: 1000,
+      description: response.message,
+      variant: response.error ? "destructive" : "default",
+    });
+    if (!response.error) {
+      router.push("/");
+      router.refresh();
     }
   };
   const copyCodeToClipboard = (e: MouseEvent<HTMLDivElement>) => {
@@ -90,6 +98,7 @@ export function SnippetDetail(p: { snippet: Snippet }) {
         <DropdownMenuSeparator />
         <DropdownMenuItem>Update</DropdownMenuItem>
         <DropdownMenuItem onClick={() => setIsDialogOpen(true)}>
+          <MdOutlineDeleteOutline className="w-5 h-5 text-destructive" />
           Delete
         </DropdownMenuItem>
       </DropdownMenuContent>
@@ -98,11 +107,10 @@ export function SnippetDetail(p: { snippet: Snippet }) {
 
   const confirmDeleteDialog = (
     <AlertDialog open={isDialogOpen}>
-      <AlertDialogTrigger>Open</AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle className="text-main-800">
-            Are you absolutely sure?
+            Delete snippet ?
           </AlertDialogTitle>
           <AlertDialogDescription>
             This action cannot be undone. This will permanently delete your
@@ -114,7 +122,7 @@ export function SnippetDetail(p: { snippet: Snippet }) {
             Cancel
           </AlertDialogCancel>
           <AlertDialogAction
-            onClick={() => setIsDialogOpen(false)}
+            onClick={handleDeleteSnippet}
             className="bg-destructive"
           >
             Continue
