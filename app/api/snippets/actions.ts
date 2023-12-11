@@ -32,8 +32,9 @@ const createSnippetSchema = z.object({
   language: z.nativeEnum(Language),
   technology: z.nativeEnum(Technology),
 });
+
 export const createSnippet = async (
-  body: Omit<Snippet, "id">
+  body: typeof createSnippetSchema._type
 ): Promise<ApiResponse<Snippet>> => {
   try {
     const { userId } = auth();
