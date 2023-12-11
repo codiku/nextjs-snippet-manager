@@ -30,9 +30,7 @@ export default function RootLayout({
       }}
     >
       <html lang="en">
-        <body
-          className={`${montserrat.className} bg-main-800  h-screen overflow-y-hidden `}
-        >
+        <body className={`${montserrat.className} `}>
           <Toaster />
           {children}
         </body>

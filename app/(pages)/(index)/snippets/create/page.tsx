@@ -12,16 +12,22 @@ import {
 } from "@/components/ui/select";
 import { TECHNO_MAPPER } from "@/constant";
 
-import { useFormState } from "react-dom";
 import { ApiResponse } from "@/types/response";
 import { Snippet, Technology } from "@prisma/client";
-import { FormEvent, FormEventHandler, useEffect } from "react";
+import { FormEvent } from "react";
 import { toast } from "@/components/ui/use-toast";
 import { useRouter } from "next/navigation";
 import ky from "ky";
-import { revalidateTag } from "next/cache";
+import { z } from "zod";
 
 type Form = { title: string; content: string; technology: Technology };
+
+const formSchema = z.object({
+  title: z.string(),
+  content: z.string(),
+  technology: z.nativeEnum(Technology),
+});
+
 export default function CreateSnippetPage() {
   const router = useRouter();
 
@@ -29,29 +35,38 @@ export default function CreateSnippetPage() {
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget);
-    const formValues = Object.fromEntries(formData.entries()) as Form;
-    // Retrieve associated language
-    const language = TECHNO_MAPPER[formValues.technology].language;
-    // Create the snippet
-    const createdSnippet: ApiResponse<Snippet> = await ky
-      .post("/api/snippets", {
-        json: {
-          ...formValues,
-          language,
-        },
-      })
-      .json();
-    if (!createdSnippet.error) {
+    const formValues = Object.fromEntries(
+      formData.entries()
+    ) as typeof formSchema._type;
+
+    if (formSchema.safeParse(formValues).success) {
+      // Retrieve associated language
+      const language = TECHNO_MAPPER[formValues.technology].language;
+      // Create the snippet
+      const createdSnippet: ApiResponse<Snippet> = await ky
+        .post("/api/snippets", {
+          json: {
+            ...formValues,
+            language,
+          },
+        })
+        .json();
       toast({
         duration: 1000,
-        description: "Snippet created successfully",
+        description: createdSnippet.error
+          ? "Snippet created successfully"
+          : createdSnippet.message,
+        variant: createdSnippet.error ? "destructive" : "default",
       });
-      router.push("/");
-      router.refresh();
+
+      if (!createdSnippet.error) {
+        router.push("/");
+        router.refresh();
+      }
     } else {
       toast({
         duration: 1000,
-        description: createdSnippet.error,
+        description: "Please fill all fields",
         variant: "destructive",
       });
     }

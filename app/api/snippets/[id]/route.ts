@@ -1,7 +1,7 @@
 import { db } from "@/lib/db";
 import { Snippet } from "@prisma/client";
-import { NextPageContext } from "next";
 import { NextRequest, NextResponse } from "next/server";
+import { deleteMySnippet } from "./actions";
 
 export async function PATCH(
   req: NextRequest,
@@ -28,15 +28,5 @@ export async function DELETE(
   req: NextRequest,
   { params }: { params: { id: string } }
 ) {
-  try {
-    const deletedSnippet = await db.snippet.delete({
-      where: { id: Number(params.id) },
-    });
-    return NextResponse.json(deletedSnippet);
-  } catch (err) {
-    return NextResponse.json(
-      { error: "Couldn't delete snippet" },
-      { status: 400 }
-    );
-  }
+  return NextResponse.json(await deleteMySnippet(Number(params.id)));
 }

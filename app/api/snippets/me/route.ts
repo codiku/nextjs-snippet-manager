@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { ApiResponse } from "@/types/response";
 import { Snippet } from "@prisma/client";
-import { fetchSnippetCurrUser } from "./action";
+import { readAllMySnippet } from "./actions";
 
 export async function GET(
   req: NextRequest
 ): Promise<NextResponse<ApiResponse<Snippet[]>>> {
-  return NextResponse.json(await fetchSnippetCurrUser());
+  return NextResponse.json(await readAllMySnippet());
 }

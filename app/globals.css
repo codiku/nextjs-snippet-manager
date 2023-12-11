@@ -67,11 +67,8 @@
 }
 
 @layer base {
-  * {
-    @apply border-border;
-  }
   body {
-    @apply bg-background text-foreground text-white;
+    @apply text-white bg-main-800  h-screen overflow-y-hidden;
   }
   h1 {
     @apply text-main-100 text-4xl;
@@ -86,5 +83,11 @@
   textarea,
   button {
     @apply text-main-800;
+  }
+}
+
+@layer components {
+  .icon-box {
+    @apply text-white rounded-lg border-2 border-main-700 w-14 h-14 hover:bg-main-500 flex justify-center items-center;
   }
 }

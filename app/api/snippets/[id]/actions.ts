@@ -2,11 +2,10 @@ import { db } from "@/lib/db";
 import { ApiResponse } from "@/types/response";
 import { auth } from "@clerk/nextjs";
 import { Snippet } from "@prisma/client";
-import { NextResponse } from "next/server";
 
-export const fetchSnippetCurrUser = async (): Promise<
-  ApiResponse<Snippet[]>
-> => {
+export const deleteMySnippet = async (
+  id: number
+): Promise<ApiResponse<Snippet>> => {
   try {
     const { userId } = auth();
     if (!userId) {
@@ -16,15 +15,15 @@ export const fetchSnippetCurrUser = async (): Promise<
         message: "User not logged",
       };
     }
-    const snippet = await db.snippet.findMany({ where: { userId: userId } });
+    const deletedSnippet = await db.snippet.delete({ where: { id, userId } });
     return {
-      data: snippet,
+      data: deletedSnippet,
     };
   } catch (error) {
     return {
       error: true,
       status: 500,
-      message: "Something went wrong when fetching snippets",
+      message: "Something went wrong when deleting the snippet",
     };
   }
 };
