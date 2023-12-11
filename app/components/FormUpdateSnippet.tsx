@@ -39,8 +39,8 @@ export function FormUpdateSnippet(p: { snippet: Snippet }) {
     toast({
       description: (
         <ul>
-          {updatedSnippet.message?.split(",").map((msg) => (
-            <li>{msg}</li>
+          {updatedSnippet.message?.split(",").map((msg, i) => (
+            <li key={i}>{msg}</li>
           ))}
         </ul>
       ),
