@@ -1,8 +1,8 @@
 "use client";
 import { BiDotsVerticalRounded } from "react-icons/bi";
-import { toast, useToast } from "@/components/ui/use-toast";
+import { toast } from "@/components/ui/use-toast";
 import { Snippet } from "@prisma/client";
-import { MouseEvent } from "react";
+import { MouseEvent, useState } from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { atomDark as theme } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { RxCopy } from "react-icons/rx";
@@ -16,15 +16,41 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import ky from "ky";
+import { ApiResponse } from "@/types/response";
+
 export function SnippetDetail(p: { snippet: Snippet }) {
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
   const progLngItem = TECHNO_MAPPER[p.snippet.technology];
 
+  const deleteSnippet = async () => {
+    const deletedSnippet = await ky
+      .delete("/api/snippets/" + p.snippet.id)
+      .json<ApiResponse<Snippet>>();
+    if (deletedSnippet.error) {
+      toast({
+        duration: 1000,
+        description: deletedSnippet.message,
+      });
+    }
+  };
   const copyCodeToClipboard = (e: MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
     navigator.clipboard.writeText(p.snippet.content);
     toast({
       duration: 1000,
-      title: "Code copied into clipboard",
+      description: "Code copied into clipboard",
     });
   };
 
@@ -63,9 +89,39 @@ export function SnippetDetail(p: { snippet: Snippet }) {
         <DropdownMenuLabel>Actions</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem>Update</DropdownMenuItem>
-        <DropdownMenuItem>Delete</DropdownMenuItem>
+        <DropdownMenuItem onClick={() => setIsDialogOpen(true)}>
+          Delete
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
+  );
+
+  const confirmDeleteDialog = (
+    <AlertDialog open={isDialogOpen}>
+      <AlertDialogTrigger>Open</AlertDialogTrigger>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle className="text-main-800">
+            Are you absolutely sure?
+          </AlertDialogTitle>
+          <AlertDialogDescription>
+            This action cannot be undone. This will permanently delete your
+            snippet.
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel onClick={() => setIsDialogOpen(false)}>
+            Cancel
+          </AlertDialogCancel>
+          <AlertDialogAction
+            onClick={() => setIsDialogOpen(false)}
+            className="bg-destructive"
+          >
+            Continue
+          </AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
   );
   return (
     <div>
@@ -79,6 +135,7 @@ export function SnippetDetail(p: { snippet: Snippet }) {
           </div>
         </div>
       </div>
+      {confirmDeleteDialog}
     </div>
   );
 }

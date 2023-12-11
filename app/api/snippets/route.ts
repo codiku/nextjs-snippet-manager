@@ -4,9 +4,14 @@ import { Language, Technology } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 
-export async function GET() {
-  const snippets = await db.snippet.findMany();
-  return NextResponse.json(snippets);
+import { ApiResponse } from "@/types/response";
+import { Snippet } from "@prisma/client";
+import { readAllSnippet } from "./actions";
+
+export async function GET(
+  req: NextRequest
+): Promise<NextResponse<ApiResponse<Snippet[]>>> {
+  return NextResponse.json(await readAllSnippet());
 }
 
 const createSnippetSchema = z.object({
