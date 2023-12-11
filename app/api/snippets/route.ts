@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 import { ApiResponse } from "@/types/response";
 import { Snippet } from "@prisma/client";
-import { createSnippet, readAllSnippet } from "./actions";
+import { createSnippet, readAllSnippet } from "./service";
 
 export async function GET(
   req: NextRequest

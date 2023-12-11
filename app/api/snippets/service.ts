@@ -3,6 +3,7 @@ import { ApiResponse } from "@/types/response";
 import { auth } from "@clerk/nextjs";
 import { Language, Snippet, Technology } from "@prisma/client";
 import { z } from "zod";
+
 export const readAllSnippet = async (): Promise<ApiResponse<Snippet[]>> => {
   try {
     const { userId } = auth();

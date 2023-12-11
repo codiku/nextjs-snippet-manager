@@ -20,8 +20,6 @@ import { useRouter } from "next/navigation";
 import ky from "ky";
 import { z } from "zod";
 
-type Form = { title: string; content: string; technology: Technology };
-
 const formSchema = z.object({
   title: z.string(),
   content: z.string(),
@@ -31,7 +29,7 @@ const formSchema = z.object({
 export default function CreateSnippetPage() {
   const router = useRouter();
 
-  const createSnippet = async (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget);
@@ -94,7 +92,7 @@ export default function CreateSnippetPage() {
     );
   };
   return (
-    <form onSubmit={createSnippet} className="space-y-8 w-[50rem] ">
+    <form onSubmit={handleSubmit} className="space-y-8 w-[50rem] ">
       <div className="space-y-6">
         <h1>New snippet</h1>
         <div className="space-y-3 w-72">

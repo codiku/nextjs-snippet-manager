@@ -1,4 +1,5 @@
 "use client";
+import { MdEdit } from "react-icons/md";
 import { MdOutlineDeleteOutline } from "react-icons/md";
 import { BiDotsVerticalRounded } from "react-icons/bi";
 import { toast } from "@/components/ui/use-toast";
@@ -96,10 +97,19 @@ export function SnippetDetail(p: { snippet: Snippet }) {
       <DropdownMenuContent>
         <DropdownMenuLabel>Actions</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>Update</DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setIsDialogOpen(true)}>
+        <DropdownMenuItem
+          className="space-x-2"
+          onClick={() => router.push("/snippets/update/" + p.snippet.id)}
+        >
+          <MdEdit className="w-5 h-5" />
+          <div>Update</div>
+        </DropdownMenuItem>
+        <DropdownMenuItem
+          className="space-x-2"
+          onClick={() => setIsDialogOpen(true)}
+        >
           <MdOutlineDeleteOutline className="w-5 h-5 text-destructive" />
-          Delete
+          <div>Delete</div>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

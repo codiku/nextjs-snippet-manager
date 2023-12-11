@@ -1,7 +1,5 @@
-import { db } from "@/lib/db";
-import { Snippet } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
-import { deleteSnippet, updateSnippet } from "./actions";
+import { deleteSnippet, updateSnippet } from "./service";
 
 export async function PATCH(
   req: NextRequest,

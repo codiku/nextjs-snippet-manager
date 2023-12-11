@@ -1,4 +1,4 @@
-import { readAllSnippet } from "@/api/snippets/actions";
+import { readAllSnippet } from "@/api/snippets/service";
 
 import { SnippetSearch } from "@/components/SnippetSearch";
 
