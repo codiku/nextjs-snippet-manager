@@ -32,8 +32,8 @@ export const deleteSnippet = async (
 
 const updateSnippetSchema = z
   .object({
-    content: z.string().optional(),
-    title: z.string().optional(),
+    content: z.string().min(1).optional(),
+    title: z.string().min(1).optional(),
     language: z.nativeEnum(Language).optional(),
     technology: z.nativeEnum(Technology).optional(),
   })
@@ -54,9 +54,17 @@ export const updateSnippet = async (
         message: "User not signed in",
       };
     }
-
-    updateSnippetSchema.parse(body);
-
+    try {
+      updateSnippetSchema.parse(body);
+    } catch (error) {
+      return {
+        error: true,
+        status: 500,
+        message: (error as z.ZodError).issues
+          .map((err) => "Field '" + err.path + "' : " + err.message)
+          .toString(),
+      };
+    }
     const updatedSnippet = await db.snippet.update({
       where: { id, userId },
       data: body,

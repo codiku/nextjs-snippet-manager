@@ -32,6 +32,7 @@ import {
 import ky from "ky";
 import { ApiResponse } from "@/types/response";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export function SnippetDetail(p: { snippet: Snippet }) {
   const router = useRouter();
@@ -91,18 +92,20 @@ export function SnippetDetail(p: { snippet: Snippet }) {
 
   const dropdownMenu = (
     <DropdownMenu>
-      <DropdownMenuTrigger className="icon-box focus-visible:border-0">
+      <DropdownMenuTrigger className="icon-box focus-visible:outline-none">
         <BiDotsVerticalRounded className="w-7 h-7" />
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuLabel>Actions</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem
-          className="space-x-2"
-          onClick={() => router.push("/snippets/update/" + p.snippet.id)}
-        >
-          <MdEdit className="w-5 h-5" />
-          <div>Update</div>
+        <DropdownMenuItem>
+          <Link
+            className="space-x-2 flex"
+            href={"/snippets/update/" + p.snippet.id}
+          >
+            <MdEdit className="w-5 h-5" />
+            <div>Edit</div>
+          </Link>
         </DropdownMenuItem>
         <DropdownMenuItem
           className="space-x-2"

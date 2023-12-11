@@ -16,6 +16,7 @@ import { Snippet, Technology } from "@prisma/client";
 import { useRouter } from "next/navigation";
 import { z } from "zod";
 import { updateSnippetServAction } from "@/api/snippets/[id]/actions";
+import { toast } from "./ui/use-toast";
 
 export const updateSnippetFormSchema = z
   .object({
@@ -29,11 +30,27 @@ export const updateSnippetFormSchema = z
 
 export function FormUpdateSnippet(p: { snippet: Snippet }) {
   const router = useRouter();
+  const handleFormAction = async (formData: FormData) => {
+    const updatedSnippet = await updateSnippetServAction.bind(
+      null,
+      p.snippet.id
+    )(formData);
 
-  const updateUserServActionBind = updateSnippetServAction.bind(
-    null,
-    p.snippet.id
-  );
+    toast({
+      description: (
+        <ul>
+          {updatedSnippet.message?.split(",").map((msg) => (
+            <li>{msg}</li>
+          ))}
+        </ul>
+      ),
+      variant: updatedSnippet.error ? "destructive" : "default",
+    });
+    if (!updatedSnippet.error) {
+      router.push("/");
+      router.refresh();
+    }
+  };
 
   const renderTechnoSelect = () => {
     return (
@@ -57,7 +74,7 @@ export function FormUpdateSnippet(p: { snippet: Snippet }) {
     );
   };
   return (
-    <form action={updateUserServActionBind} className="space-y-8 w-[50rem] ">
+    <form action={handleFormAction} className="space-y-8 w-[50rem] ">
       <div className="space-y-6">
         <h1>Update snippet</h1>
         <div className="space-y-3 w-72">

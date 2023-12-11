@@ -3,21 +3,19 @@ import { SearchBar } from "@/components/SearchBar";
 import SnippetList from "@/components/SnippetList";
 import { Snippet } from "@prisma/client";
 import Link from "next/link";
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import useSWR from "swr";
-import ky from "ky";
-import { usePathname } from "next/navigation";
-import { ApiResponse } from "@/types/response";
+import { useState } from "react";
+import { TECHNO_MAPPER } from "@/constant";
 
-function fetcher<T>(url: string) {
-  return ky.get(url, { next: { tags: ["snippets-me"] } }).json<T>();
-}
-// let isFirstRender = true;
 export function SnippetSearch(p: { snippets: Snippet[] }) {
   const [currSearchQuery, setCurrSearchQuery] = useState<string>("");
   const filteredSnippets = p.snippets!.filter((s) =>
-    [s.language, s.title, s.content].some((field) =>
+    [
+      s.language,
+      s.technology,
+      s.title,
+      s.content,
+      TECHNO_MAPPER[s.technology].label,
+    ].some((field) =>
       field.toLowerCase().includes(currSearchQuery?.toLowerCase())
     )
   );
