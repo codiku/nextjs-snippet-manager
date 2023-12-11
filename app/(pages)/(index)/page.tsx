@@ -1,10 +1,8 @@
-import { fetchSnippetsByUser } from "@/api/snippets/me/service";
+import { fetchSnippetCurrUser } from "@/api/snippets/me/action";
+
 import { SnippetSearch } from "@/components/SnippetSearch";
-import { auth } from "@clerk/nextjs";
 
 export default async function IndexPage() {
-  const { userId } = auth();
-  const snippets = await fetchSnippetsByUser(userId!);
-
-  return <SnippetSearch snippets={snippets} />;
+  const { data: snippets } = await fetchSnippetCurrUser();
+  return <SnippetSearch snippets={snippets!} />;
 }
