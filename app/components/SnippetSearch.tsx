@@ -20,6 +20,17 @@ export function SnippetSearch(p: { snippets: Snippet[] }) {
     )
   );
 
+  const linkCreateSnippet = (
+    <div className="flex  h-full  flex-col justify-center items-center">
+      {"You don't have any snippet !"}
+      <Link
+        href="/snippets/create"
+        className="underline underline-offset-4 text-white"
+      >
+        Start by creating one
+      </Link>
+    </div>
+  );
   return (
     <main className="flex flex-col h-[90vh] ">
       <SearchBar onChange={setCurrSearchQuery} />
@@ -27,15 +38,7 @@ export function SnippetSearch(p: { snippets: Snippet[] }) {
         {filteredSnippets.length > 0 ? (
           <SnippetList snippets={filteredSnippets} />
         ) : (
-          <div className="flex  h-full  flex-col justify-center items-center">
-            {"You don't have any snippet !"}
-            <Link
-              href="/snippets/create"
-              className="underline underline-offset-4 text-white"
-            >
-              Start by creating one
-            </Link>
-          </div>
+          linkCreateSnippet
         )}
       </div>
     </main>

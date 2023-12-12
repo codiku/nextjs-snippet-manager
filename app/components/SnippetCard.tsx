@@ -5,11 +5,10 @@ import { TECHNO_MAPPER } from "@/constant";
 import Image from "next/image";
 import Link from "next/link";
 import { MouseEvent } from "react";
-import { useToast } from "./ui/use-toast";
+import { toast } from "./ui/use-toast";
 
 export function SnippetCard(p: { snippet: Snippet }) {
   const progLngItem = TECHNO_MAPPER[p.snippet.technology];
-  const { toast } = useToast();
 
   const copyCodeToClipboard = (e: MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
@@ -36,18 +35,21 @@ export function SnippetCard(p: { snippet: Snippet }) {
     </div>
   );
 
+  const radialGradient = (
+    <div
+      style={{
+        background: `radial-gradient(circle at center, ${progLngItem.color} 15%, #0A0B0F 70%)`,
+      }}
+      className={` opacity-20 absolute  h-full w-full -top-20 -left-20`}
+    />
+  );
   return (
     <Link
       href={`/snippets/${p.snippet.id}`}
       className="relative cursor-pointer shadow-xl bg-main-900 h-52 w-60 rounded-3xl transition transform hover:scale-105 "
     >
       <div className="overflow-hidden relative rounded-tl-3xl  h-full w-full">
-        <div
-          style={{
-            background: `radial-gradient(circle at center, ${progLngItem.color} 15%, #0A0B0F 70%)`,
-          }}
-          className={` opacity-20 absolute  h-full w-full -top-20 -left-20`}
-        />
+        {radialGradient}
         {cardBody}
       </div>
       <Image

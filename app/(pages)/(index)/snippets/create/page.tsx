@@ -70,42 +70,47 @@ export default function CreateSnippetPage() {
     }
   };
 
-  const renderTechnoSelect = () => {
-    return (
-      <>
-        <Label>Language / Framework / Library</Label>
-        <Select name="technology">
-          <SelectTrigger className="w-[180px]">
-            <SelectValue />
-          </SelectTrigger>
-          <SelectContent>
-            {Object.keys(TECHNO_MAPPER).map((techno) => {
-              return (
-                <SelectItem key={techno} value={techno} className="flex">
-                  <div>{TECHNO_MAPPER[techno].label}</div>
-                </SelectItem>
-              );
-            })}
-          </SelectContent>
-        </Select>
-      </>
-    );
-  };
+  const technoSelect = (
+    <div className="space-y-3 w-60">
+      <Label>Language / Framework / Library</Label>
+      <Select name="technology">
+        <SelectTrigger className="w-[180px]">
+          <SelectValue />
+        </SelectTrigger>
+        <SelectContent>
+          {Object.keys(TECHNO_MAPPER).map((techno) => {
+            return (
+              <SelectItem key={techno} value={techno} className="flex">
+                <div>{TECHNO_MAPPER[techno].label}</div>
+              </SelectItem>
+            );
+          })}
+        </SelectContent>
+      </Select>
+    </div>
+  );
+
+  const titleInput = (
+    <div className="space-y-3 w-72">
+      <Label>Title</Label>
+      <Input type="text" name="title" />
+    </div>
+  );
+
+  const textareaContent = (
+    <div className="space-y-3">
+      <Label>Content</Label>
+      <Textarea name="content" className="h-96" />
+    </div>
+  );
   return (
     <form onSubmit={handleSubmit} className="space-y-8 w-[50rem] ">
       <div className="space-y-6">
         <h1>New snippet</h1>
-        <div className="space-y-3 w-72">
-          <Label>Title</Label>
-          <Input type="text" name="title" />
-        </div>
-        <div className="space-y-3 w-60">{renderTechnoSelect()}</div>
-        <div className="space-y-3">
-          <Label>Content</Label>
-          <Textarea name="content" className="h-96" />
-        </div>
+        {titleInput}
+        {technoSelect}
+        {textareaContent}
       </div>
-
       <div className="flex justify-end ">
         <Button variant="secondary">Save</Button>
       </div>

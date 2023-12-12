@@ -52,48 +52,55 @@ export function FormUpdateSnippet(p: { snippet: Snippet }) {
     }
   };
 
-  const renderTechnoSelect = () => {
-    return (
-      <>
-        <Label>Language / Framework / Library</Label>
-        <Select name="technology" defaultValue={p.snippet.technology}>
-          <SelectTrigger className="w-[180px]">
-            <SelectValue />
-          </SelectTrigger>
-          <SelectContent>
-            {Object.keys(TECHNO_MAPPER).map((techno) => {
-              return (
-                <SelectItem key={techno} value={techno} className="flex">
-                  <div>{TECHNO_MAPPER[techno].label}</div>
-                </SelectItem>
-              );
-            })}
-          </SelectContent>
-        </Select>
-      </>
-    );
-  };
+  const technoSelect = (
+    <div className="space-y-3 w-60">
+      <Label>Language / Framework / Library</Label>
+      <Select name="technology" defaultValue={p.snippet.technology}>
+        <SelectTrigger className="w-[180px]">
+          <SelectValue />
+        </SelectTrigger>
+        <SelectContent>
+          {Object.keys(TECHNO_MAPPER).map((techno) => {
+            return (
+              <SelectItem key={techno} value={techno} className="flex">
+                <div>{TECHNO_MAPPER[techno].label}</div>
+              </SelectItem>
+            );
+          })}
+        </SelectContent>
+      </Select>
+    </div>
+  );
+
+  const inputTitle = (
+    <div className="space-y-3 w-72">
+      <Label>Title</Label>
+      <Input type="text" name="title" defaultValue={p.snippet.title} />
+    </div>
+  );
+
+  const textareaContent = (
+    <div className="space-y-3">
+      <Label>Content</Label>
+      <Textarea
+        defaultValue={p.snippet.content}
+        name="content"
+        className="h-96"
+      />
+    </div>
+  );
   return (
     <form action={handleFormAction} className="space-y-8 w-[50rem] ">
       <div className="space-y-6">
         <h1>Update snippet</h1>
-        <div className="space-y-3 w-72">
-          <Label>Title</Label>
-          <Input type="text" name="title" defaultValue={p.snippet.title} />
-        </div>
-        <div className="space-y-3 w-60">{renderTechnoSelect()}</div>
-        <div className="space-y-3">
-          <Label>Content</Label>
-          <Textarea
-            defaultValue={p.snippet.content}
-            name="content"
-            className="h-96"
-          />
-        </div>
+        {inputTitle}
+        {technoSelect}
+        {textareaContent}
       </div>
-
       <div className="flex justify-end ">
-        <Button variant="secondary">Save</Button>
+        <Button type="submit" variant="secondary">
+          Save
+        </Button>
       </div>
     </form>
   );

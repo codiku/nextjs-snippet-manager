@@ -5,7 +5,6 @@ import { updateSnippet } from "./service";
 import { ApiResponse } from "@/types/response";
 import { TECHNO_MAPPER } from "@/constant";
 import { updateSnippetFormSchema } from "@/components/FormUpdateSnippet";
-import { redirect } from "next/navigation";
 
 export async function updateSnippetServAction(
   id: number,

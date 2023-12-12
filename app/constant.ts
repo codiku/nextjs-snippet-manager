@@ -18,14 +18,16 @@ import html from "/public/programming-lang/html.png";
 import { StaticImageData } from "next/image";
 import { Language, Technology } from "@prisma/client";
 
+export type TechnoItem = {
+  src: StaticImageData;
+  color: string;
+  label: string;
+  language: Language;
+  technology: Technology;
+};
+
 export const TECHNO_MAPPER: {
-  [key: string]: {
-    src: StaticImageData;
-    color: string;
-    label: string;
-    language: Language;
-    technology: Technology;
-  };
+  [key: string]: TechnoItem;
 } = {
   bash: {
     src: bash,
