@@ -1,10 +1,21 @@
+import { NextRequest } from "next/server";
+
 import { authMiddleware } from "@clerk/nextjs";
 
-// This example protects all routes including api/trpc routes
-// Please edit this to allow other routes to be public as needed.
-// See https://clerk.com/docs/references/nextjs/auth-middleware for more information about configuring your Middleware
-export default authMiddleware({});
+export default async function middlewares(req: NextRequest) {
+  const pathname = req.nextUrl.pathname;
+  if (pathname.match("/api/*")) {
+    console.log("Calling api...", pathname);
+  } else if (pathname.match("/snippets/*")) {
+    console.log("Navigation on ... ", pathname);
+  }
+  //@ts-ignore
+  return authMiddleware({})(req);
+}
 
 export const config = {
   matcher: ["/((?!.+\\.[\\w]+$|_next).*)", "/", "/(api|trpc)(.*)"],
 };
+// evrything but .something and  not containing _next,
+// exactly /
+// /api or /trpc with extra string after

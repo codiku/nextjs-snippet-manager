@@ -19,6 +19,7 @@ export const readAllSnippet = async (): Promise<ApiResponse<Snippet[]>> => {
       data: snippet,
     };
   } catch (error) {
+    console.log(error);
     return {
       error: true,
       status: 500,
