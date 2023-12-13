@@ -15,6 +15,8 @@ import react from "/public/programming-lang/react.png";
 import rust from "/public/programming-lang/rust.png";
 import typescript from "/public/programming-lang/typescript.png";
 import html from "/public/programming-lang/html.png";
+import c from "/public/programming-lang/c.png";
+
 import { StaticImageData } from "next/image";
 import { Language, Technology } from "@prisma/client";
 
@@ -35,6 +37,13 @@ export const TECHNO_MAPPER: {
     label: "Bash",
     language: "bash",
     technology: "bash",
+  },
+  c: {
+    src: c,
+    color: "#00599C",
+    label: "C",
+    language: "c",
+    technology: "c",
   },
   csharp: {
     src: csharp,

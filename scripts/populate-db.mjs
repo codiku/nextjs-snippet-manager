@@ -10,6 +10,13 @@ const SNIPPETS = [
   },
   {
     userId: "user_2Z1x35ia3xdSMPZ83v3NmMxD4RD",
+    title: `Display hello in c`,
+    language: "c",
+    technology: "c",
+    content: `printf("Hello, World!")`,
+  },
+  {
+    userId: "user_2Z1x35ia3xdSMPZ83v3NmMxD4RD",
     title: `Display hello in javascript`,
     language: "javascript",
     technology: "javascript",

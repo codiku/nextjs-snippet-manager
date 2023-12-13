@@ -32,8 +32,6 @@ export default function CreateSnippetPage() {
     mode: "onChange",
   });
 
-  console.log(watch("content"));
-  console.log("errr", errors);
   const submit = async (formData: Form) => {
     // Retrieve associated language
     const language = TECHNO_MAPPER[formData.technology].language;
