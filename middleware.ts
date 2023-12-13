@@ -20,23 +20,28 @@ export const config = {
 // exactly /
 // /api or /trpc with extra string after
 */
-
 import { authMiddleware, redirectToSignIn } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
 
 export default authMiddleware({
-  afterAuth(auth, req, evt) {
+  beforeAuth: (req) => {
     const pathname = req.nextUrl.pathname;
     if (pathname.match("/api/*")) {
       console.log("Calling api...", pathname);
-    } else if (pathname.match("/snippets/*")) {
+    } else {
       console.log("Navigation on ... ", pathname);
     }
-    // Allow users visiting public routes to access them
-    return NextResponse.next();
   },
 });
 
 export const config = {
   matcher: ["/((?!.+\\.[\\w]+$|_next).*)", "/", "/(api|trpc)(.*)"],
 };
+/*
+import { authMiddleware } from "@clerk/nextjs";
+
+export default authMiddleware({});
+export const config = {
+  matcher: ["/((?!.+\\.[\\w]+$|_next).*)", "/", "/(api|trpc)(.*)"],
+};
+*/

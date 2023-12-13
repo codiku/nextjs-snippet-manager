@@ -100,7 +100,7 @@ export function SnippetDetail(p: { snippet: Snippet }) {
         <DropdownMenuSeparator />
         <DropdownMenuItem>
           <Link
-            className="space-x-2 flex"
+            className="space-x-2 flex w-full h-full"
             href={"/snippets/update/" + p.snippet.id}
           >
             <MdEdit className="w-5 h-5" />

@@ -1,15 +1,7 @@
 "use client";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+
 import { TECHNO_MAPPER } from "@/constant";
 
 import { Snippet, Technology } from "@prisma/client";
@@ -17,24 +9,48 @@ import { useRouter } from "next/navigation";
 import { z } from "zod";
 import { updateSnippetServAction } from "@/api/snippets/[id]/actions";
 import { toast } from "./ui/use-toast";
+import { InputField } from "./InputField";
+import { Form } from "./ui/form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  FieldValue,
+  FieldValues,
+  SubmitHandler,
+  useForm,
+} from "react-hook-form";
+import { SelectField } from "./SelectField";
 
-export const updateSnippetFormSchema = z
-  .object({
-    title: z.string(),
-    content: z.string(),
-    technology: z.nativeEnum(Technology),
-  })
-  .refine((data) => Object.values(data).some((value) => value !== undefined), {
-    message: "At least one value must be provided",
-  });
+const formSchema = z.object({
+  title: z.string().min(1),
+  content: z.string().min(1),
+  technology: z.nativeEnum(Technology),
+});
+type Form = typeof formSchema._type;
 
 export function FormUpdateSnippet(p: { snippet: Snippet }) {
   const router = useRouter();
-  const handleFormAction = async (formData: FormData) => {
+
+  const form = useForm<Form>({
+    resolver: zodResolver(formSchema),
+    mode: "onChange",
+    defaultValues: {
+      content: p.snippet.content,
+      title: p.snippet.title,
+      technology: p.snippet.technology,
+    },
+  });
+
+  const {
+    handleSubmit,
+    getValues,
+    formState: { errors },
+  } = form;
+
+  const submitServerAction = async (formData: FieldValues) => {
     const updatedSnippet = await updateSnippetServAction.bind(
       null,
       p.snippet.id
-    )(formData);
+    )(formData as FormData);
 
     toast({
       description: (
@@ -54,54 +70,55 @@ export function FormUpdateSnippet(p: { snippet: Snippet }) {
 
   const technoSelect = (
     <div className="space-y-3 w-60">
-      <Label>Language / Framework / Library</Label>
-      <Select name="technology" defaultValue={p.snippet.technology}>
-        <SelectTrigger className="w-[180px]">
-          <SelectValue />
-        </SelectTrigger>
-        <SelectContent>
-          {Object.keys(TECHNO_MAPPER).map((techno) => {
-            return (
-              <SelectItem key={techno} value={techno} className="flex">
-                <div>{TECHNO_MAPPER[techno].label}</div>
-              </SelectItem>
-            );
-          })}
-        </SelectContent>
-      </Select>
+      <SelectField
+        name="technology"
+        label="Frame/Technology/Language"
+        options={Object.keys(TECHNO_MAPPER).map((techno) => {
+          const { technology: value, label } = TECHNO_MAPPER[techno];
+          return {
+            value,
+            label,
+            key: value,
+          };
+        })}
+      />
     </div>
   );
 
   const inputTitle = (
     <div className="space-y-3 w-72">
-      <Label>Title</Label>
-      <Input type="text" name="title" defaultValue={p.snippet.title} />
+      <InputField label="Title" name="title" />
     </div>
   );
 
   const textareaContent = (
     <div className="space-y-3">
-      <Label>Content</Label>
-      <Textarea
-        defaultValue={p.snippet.content}
+      <InputField
+        label="Content"
+        as={Textarea}
         name="content"
         className="h-96"
       />
     </div>
   );
   return (
-    <form action={handleFormAction} className="space-y-8 w-[50rem] ">
-      <div className="space-y-6">
-        <h1>Update snippet</h1>
-        {inputTitle}
-        {technoSelect}
-        {textareaContent}
-      </div>
-      <div className="flex justify-end ">
-        <Button type="submit" variant="secondary">
-          Save
-        </Button>
-      </div>
-    </form>
+    <Form {...form}>
+      <form
+        onSubmit={handleSubmit(submitServerAction)}
+        className="space-y-8 w-[50rem] "
+      >
+        <div className="space-y-6">
+          <h1>Update snippet</h1>
+          {inputTitle}
+          {technoSelect}
+          {textareaContent}
+        </div>
+        <div className="flex justify-end ">
+          <Button type="submit" variant="secondary">
+            Save
+          </Button>
+        </div>
+      </form>
+    </Form>
   );
 }
