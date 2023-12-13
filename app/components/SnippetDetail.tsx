@@ -1,8 +1,6 @@
 "use client";
-import { MdEdit } from "react-icons/md";
-import { MdOutlineDeleteOutline } from "react-icons/md";
-import { BiDotsVerticalRounded } from "react-icons/bi";
-import { toast } from "@/components/ui/use-toast";
+import { MdDelete, MdEdit } from "react-icons/md";
+import { toast } from "sonner";
 import { Snippet } from "@prisma/client";
 import { MouseEvent, useState } from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
@@ -10,25 +8,7 @@ import { atomDark as theme } from "react-syntax-highlighter/dist/esm/styles/pris
 import { RxCopy } from "react-icons/rx";
 import { TECHNO_MAPPER } from "@/constant";
 import Image from "next/image";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
+
 import ky from "ky";
 import { ApiResponse } from "@/types/response";
 import { useRouter } from "next/navigation";
@@ -38,18 +18,15 @@ export function SnippetDetail(p: { snippet: Snippet }) {
   const router = useRouter();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const progLngItem = TECHNO_MAPPER[p.snippet.technology];
-
   const handleDeleteSnippet = async () => {
     setIsDialogOpen(false);
     const response = await ky
       .delete("/api/snippets/" + p.snippet.id)
       .json<ApiResponse<Snippet>>();
 
-    toast({
-      duration: 1000,
-      description: response.message,
-      variant: response.error ? "destructive" : "default",
-    });
+    toast[response.error ? "error" : "info"](
+      response.error ? "Snippet created successfully" : response.message
+    );
     if (!response.error) {
       router.push("/");
       router.refresh();
@@ -58,15 +35,23 @@ export function SnippetDetail(p: { snippet: Snippet }) {
   const copyCodeToClipboard = (e: MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
     navigator.clipboard.writeText(p.snippet.content);
-    toast({
-      duration: 1000,
-      description: "Code copied into clipboard",
-    });
+    toast("Code copied into clipboard");
   };
 
-  const buttonCopyClipboard = (
-    <div onClick={copyCodeToClipboard} className="icon-box self-end">
-      <RxCopy />
+  const actionButtons = (
+    <div className="flex justify-end">
+      <Link
+        href={"/snippets/update/" + p.snippet.id}
+        className="icon-box self-end"
+      >
+        <MdEdit />
+      </Link>
+      <div onClick={() => setIsDialogOpen(true)} className="icon-box self-end">
+        <MdDelete />
+      </div>
+      <div onClick={copyCodeToClipboard} className="icon-box self-end">
+        <RxCopy />
+      </div>
     </div>
   );
 
@@ -90,68 +75,42 @@ export function SnippetDetail(p: { snippet: Snippet }) {
     </div>
   );
 
-  const dropdownMenu = (
-    <DropdownMenu>
-      <DropdownMenuTrigger className="icon-box focus-visible:outline-none">
-        <BiDotsVerticalRounded className="w-7 h-7" />
-      </DropdownMenuTrigger>
-      <DropdownMenuContent>
-        <DropdownMenuLabel>Actions</DropdownMenuLabel>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem>
-          <Link
-            className="space-x-2 flex w-full h-full"
-            href={"/snippets/update/" + p.snippet.id}
-          >
-            <MdEdit className="w-5 h-5" />
-            <div>Edit</div>
-          </Link>
-        </DropdownMenuItem>
-        <DropdownMenuItem
-          className="space-x-2"
-          onClick={() => setIsDialogOpen(true)}
-        >
-          <MdOutlineDeleteOutline className="w-5 h-5 text-destructive" />
-          <div>Delete</div>
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
-  );
-
   const confirmDeleteDialog = (
-    <AlertDialog open={isDialogOpen}>
-      <AlertDialogContent>
-        <AlertDialogHeader>
-          <AlertDialogTitle className="text-main-800">
-            Delete snippet ?
-          </AlertDialogTitle>
-          <AlertDialogDescription>
-            This action cannot be undone. This will permanently delete your
-            snippet.
-          </AlertDialogDescription>
-        </AlertDialogHeader>
-        <AlertDialogFooter>
-          <AlertDialogCancel onClick={() => setIsDialogOpen(false)}>
-            Cancel
-          </AlertDialogCancel>
-          <AlertDialogAction
-            onClick={handleDeleteSnippet}
-            className="bg-destructive"
-          >
-            Continue
-          </AlertDialogAction>
-        </AlertDialogFooter>
-      </AlertDialogContent>
-    </AlertDialog>
+    <div
+      className={`${
+        isDialogOpen ? "block" : "hidden"
+      } overflow-y-auto overflow-x-hidden fixed flex justify-center items-center left-0 z-50  w-full md:inset-0 h-[calc(100%-1rem)] max-h-full`}
+    >
+      <div className="relative p-4 w-full max-w-md max-h-full">
+        <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
+          <div className="p-4 md:p-5 text-center">
+            <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
+              Delete snippet ?
+            </h3>
+            <button
+              onClick={handleDeleteSnippet}
+              className="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center me-2"
+            >
+              Yes, I'm sure
+            </button>
+            <button
+              className="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
+              onClick={() => setIsDialogOpen(false)}
+            >
+              No, cancel
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   );
   return (
     <div>
-      <div className="flex justify-end mx-1 my-4">{dropdownMenu}</div>
       <div className="p-8 mb-44 relative border-2 border-main-500 rounded-xl">
         <div>
           {title}
           <div className="flex flex-col">
-            {buttonCopyClipboard}
+            {actionButtons}
             {codeHightLighter}
           </div>
         </div>

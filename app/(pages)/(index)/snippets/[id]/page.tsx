@@ -1,5 +1,4 @@
 import { SnippetDetail } from "@/components/SnippetDetail";
-import { useToast } from "@/components/ui/use-toast";
 import { db } from "@/lib/db";
 import { auth } from "@clerk/nextjs";
 

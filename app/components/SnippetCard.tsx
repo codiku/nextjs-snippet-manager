@@ -5,7 +5,7 @@ import { TECHNO_MAPPER } from "@/constant";
 import Image from "next/image";
 import Link from "next/link";
 import { MouseEvent } from "react";
-import { toast } from "./ui/use-toast";
+import { toast } from "sonner";
 
 export function SnippetCard(p: { snippet: Snippet }) {
   const progLngItem = TECHNO_MAPPER[p.snippet.technology];
@@ -13,10 +13,8 @@ export function SnippetCard(p: { snippet: Snippet }) {
   const copyCodeToClipboard = (e: MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
     navigator.clipboard.writeText(p.snippet.content);
-    toast({
-      duration: 1000,
-      title: "Code copied into clipboard",
-    });
+
+    toast("Code copied into clipboard");
   };
   const cardBody = (
     <div className="flex flex-col justify-end h-full ">
