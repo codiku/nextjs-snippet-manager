@@ -58,5 +58,3 @@ export function SnippetCard(p: { snippet: Snippet }) {
     </Link>
   );
 }
-/*
- */

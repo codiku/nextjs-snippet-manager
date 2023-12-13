@@ -37,10 +37,10 @@ export function FormUpdateSnippet(p: { snippet: Snippet }) {
   });
 
   const submitServerAction = async (formData: FormValuesUpdateSnippet) => {
-    const updatedSnippet = await updateSnippetServAction.bind(
-      null,
-      p.snippet.id
-    )(formData);
+    const updatedSnippet = await updateSnippetServAction(
+      p.snippet.id,
+      formData
+    );
 
     toast(
       <ul>
