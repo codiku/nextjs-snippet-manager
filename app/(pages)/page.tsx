@@ -1,3 +1,3 @@
 export default function Index() {
-  return <h1 className="text">Hello Next.JS devs</h1>;
+  return <h1>This should be auth protected</h1>;
 }
