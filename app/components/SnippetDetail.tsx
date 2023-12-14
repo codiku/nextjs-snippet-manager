@@ -42,15 +42,24 @@ export function SnippetDetail(p: { snippet: Snippet }) {
     <div className="flex justify-end">
       <Link
         href={"/snippets/update/" + p.snippet.id}
-        className="icon-box self-end"
+        className="icon-box self-end flex flex-col"
       >
         <MdEdit />
+        Edit
       </Link>
-      <div onClick={() => setIsDialogOpen(true)} className="icon-box self-end">
+      <div
+        onClick={() => setIsDialogOpen(true)}
+        className="icon-box self-end flex flex-col"
+      >
         <MdDelete />
+        Delete
       </div>
-      <div onClick={copyCodeToClipboard} className="icon-box self-end">
+      <div
+        onClick={copyCodeToClipboard}
+        className="icon-box self-end flex flex-col"
+      >
         <RxCopy />
+        Copy
       </div>
     </div>
   );

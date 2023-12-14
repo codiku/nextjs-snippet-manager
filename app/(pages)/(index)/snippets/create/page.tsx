@@ -58,8 +58,8 @@ export default function CreateSnippetPage() {
 
   const technoSelect = (
     <div className="space-y-3 w-80">
-      <label>Framework / Technology / Language</label>
-      <select {...register("technology")}>
+      <label htmlFor="technology">Framework / Technology / Language</label>
+      <select {...register("technology")} id="technology">
         {Object.keys(TECHNO_MAPPER).map((techno) => {
           const { technology: value, label } = TECHNO_MAPPER[techno];
           return (
@@ -75,16 +75,16 @@ export default function CreateSnippetPage() {
 
   const inputTitle = (
     <div className="space-y-3 w-72">
-      <label>Title</label>
-      <input {...register("title")} />
+      <label htmlFor="title">Title</label>
+      <input {...register("title")} id="title" />
       <FieldError errors={errors} name="title" />
     </div>
   );
 
   const textareaContent = (
     <div className="space-y-3">
-      <label>Content</label>
-      <textarea {...register("content")} className="h-96 w-full" />
+      <label htmlFor="content">Content</label>
+      <textarea {...register("content")} id="content" className="h-96 w-full" />
       <FieldError errors={errors} name="content" />
     </div>
   );

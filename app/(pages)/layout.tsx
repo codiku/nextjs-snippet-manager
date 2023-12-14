@@ -20,12 +20,13 @@ export default function RootLayout({
     <ClerkProvider
       appearance={{
         baseTheme: dark,
-        variables: { colorPrimary: "#FF6C1E" },
+        variables: { colorPrimary: "#d44700" },
         elements: {
           header: "child:text-white",
           footerActionText: "text-white",
           card: "bg-main-700 shadow-none",
           formFieldLabel: "text-white",
+          footerActionLink: { color: "#ff8f57" },
         },
       }}
     >

@@ -7,9 +7,8 @@ import { useRouter } from "next/navigation";
 import { z } from "zod";
 import { updateSnippetServAction } from "@/api/snippets/[id]/actions";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { FieldValues, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-import { ErrorMessage } from "@hookform/error-message";
 import { FieldError } from "./FieldError";
 
 const formSchema = z.object({
@@ -57,16 +56,16 @@ export function FormUpdateSnippet(p: { snippet: Snippet }) {
 
   const inputTitle = (
     <div className="space-y-3 w-72">
-      <label>Title</label>
-      <input {...register("title")} />
+      <label htmlFor="title">Title</label>
+      <input {...register("title")} id="title" />
       <FieldError errors={errors} name="title" />
     </div>
   );
 
   const technoSelect = (
     <div className="space-y-3 w-80">
-      <label>Framework / Technology / Language</label>
-      <select {...register("technology")}>
+      <label htmlFor="technology">Framework / Technology / Language</label>
+      <select {...register("technology")} id="technology">
         {Object.keys(TECHNO_MAPPER).map((techno) => {
           const { technology: value, label } = TECHNO_MAPPER[techno];
           return (
@@ -82,8 +81,8 @@ export function FormUpdateSnippet(p: { snippet: Snippet }) {
 
   const textareaContent = (
     <div className="space-y-3">
-      <label>Content</label>
-      <textarea {...register("content")} className="h-96" />
+      <label htmlFor="content">Content</label>
+      <textarea {...register("content")} className="h-96" id="content" />
       <FieldError errors={errors} name="content" />
     </div>
   );

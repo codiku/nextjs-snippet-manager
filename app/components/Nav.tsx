@@ -14,7 +14,7 @@ const Nav = () => {
       >
         <Image
           src={technoItem.src}
-          alt={technoItem.label}
+          alt={"Icon for the technology " + technoItem.label}
           width={30}
           height={30}
         />

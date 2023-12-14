@@ -44,6 +44,6 @@
 
 @layer components {
   .icon-box {
-    @apply text-white rounded-lg border-2 border-main-700 w-14 h-14 hover:bg-main-500 flex justify-center items-center;
+    @apply text-white text-xs rounded-lg border-2 border-main-700 w-16 h-16 hover:bg-main-500 flex justify-center items-center cursor-pointer;
   }
 }
