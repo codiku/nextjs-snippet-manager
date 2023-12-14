@@ -11,7 +11,7 @@ export function Header() {
         <Image src={logoPng} alt="Logo" className="w-48" />
       </Link>
       <div className="flex items-center space-x-3">
-        <UserButton afterSignOutUrl="/sign-in" />
+        <UserButton afterSignOutUrl="/auth/sign-in" />
       </div>
     </header>
   );

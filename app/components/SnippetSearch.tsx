@@ -21,7 +21,7 @@ export function SnippetSearch(p: { snippets: Snippet[] }) {
   );
 
   const linkCreateSnippet = (
-    <div className="flex  h-full  flex-col justify-center items-center">
+    <div className="text-white flex h-full  flex-col justify-center items-center">
       {"You don't have any snippet !"}
       <Link
         href="/snippets/create"

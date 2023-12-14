@@ -16,7 +16,7 @@ export function SearchBar(p: { onChange: (query: string) => void }) {
         onChange={handleOnChange}
         className="pl-10"
       />
-      <RiSearchLine className="h-5 w-5 absolute top-5 left-3 transform -translate-y-1/2 text-gray-400" />
+      <RiSearchLine className="h-5 w-5 absolute top-2 left-3 text-gray-400" />
     </div>
   );
   return (
