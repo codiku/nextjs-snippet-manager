@@ -1,4 +1,4 @@
-import logoAuthPng from "/public/logo-auth.png";
+import logoAuthPng from "/public/logo.png";
 import Image from "next/image";
 export default function AuthLayout({
   children,
