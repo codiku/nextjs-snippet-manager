@@ -30,7 +30,7 @@ export default function RootLayout({
       }}
     >
       <html lang="en">
-        <body className={`${montserrat.className} `}>
+        <body className={`${montserrat.className}`}>
           <Toaster />
           {children}
         </body>
