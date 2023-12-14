@@ -8,25 +8,18 @@
   h1 {
     @apply text-main-100 text-4xl;
   }
-  h2 {
-    @apply text-2xl font-semibold;
-  }
   link {
-    @apply underline underline-offset-4;
+    @apply text-white underline underline-offset-4;
   }
-
   label {
     @apply text-white block mb-2 text-sm font-medium;
   }
-
   input {
     @apply outline-2 -outline-offset-2 bg-gray-50  border-gray-300 text-sm rounded-lg focus:ring-0  block w-full p-2.5;
   }
-
   textarea {
     @apply outline-2 -outline-offset-2 block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300;
   }
-
   select {
     @apply appearance-none outline-2 -outline-offset-2  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5;
     /* Create another arrow for the select with css only */
