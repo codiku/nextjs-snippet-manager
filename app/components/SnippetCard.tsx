@@ -23,7 +23,7 @@ export function SnippetCard(p: { snippet: Snippet }) {
         onClick={copyCodeToClipboard}
       >
         <div className="font-semibold text-md text-main-100 uppercase">
-          {p.snippet.language}
+          {p.snippet.technology}
         </div>
         <div className="flex justify-between ">
           <div className="text-sm text-white">{p.snippet.title}</div>
