@@ -5,11 +5,11 @@ import { TECHNO_MAPPER } from "@/constant";
 import { Snippet, Technology } from "@prisma/client";
 import { useRouter } from "next/navigation";
 import { z } from "zod";
-import { updateSnippetServAction } from "@/api/snippets/[id]/actions";
+import { updateSnippetServAction } from "@/components/FormUpdateSnippet/actions";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-import { FieldError } from "./FieldError";
+import { FieldError } from "@/components/FieldError";
 
 const formSchema = z.object({
   title: z.string().min(1),
