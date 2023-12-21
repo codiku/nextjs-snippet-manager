@@ -1,10 +1,11 @@
-import { NextResponse } from "next/server";
-import { readAllSnippet } from "./service";
+import { NextRequest, NextResponse } from "next/server";
+import { createSnippet, readAllSnippet } from "./service";
 
 export async function GET() {
   return NextResponse.json(await readAllSnippet());
 }
 
-export async function POST() {
-  return NextResponse.json({ data: "Hello" });
+export async function POST(req: NextRequest) {
+  const body = await req.json();
+  return NextResponse.json(await createSnippet(body));
 }
