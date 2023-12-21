@@ -3,11 +3,9 @@ import { createSnippet, readAllSnippet } from "./service";
 import { Snippet } from "@prisma/client";
 
 export async function GET(req: NextRequest) {
-  //const params = Object.fromEntries(req.nextUrl.searchParams.entries());
   const filters: Partial<Snippet> = Object.fromEntries(
     req.nextUrl.searchParams
   );
-
   return NextResponse.json(await readAllSnippet(filters));
 }
 
