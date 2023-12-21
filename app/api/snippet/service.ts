@@ -1,8 +1,12 @@
 import { db } from "@/app/lib/db";
 import { Snippet } from "@prisma/client";
 
-export async function readAllSnippet() {
-  return await db.snippet.findMany();
+export async function readAllSnippet(filters: Partial<Snippet>) {
+  return await db.snippet.findMany({
+    where: {
+      ...filters,
+    },
+  });
 }
 
 export async function createSnippet(body: Omit<Snippet, "id">) {
