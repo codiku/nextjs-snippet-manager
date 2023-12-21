@@ -3,14 +3,15 @@ import { TECHNO_MAPPER } from "@/constant";
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import { ApiResponse } from "@/types/response";
-import { Snippet, Technology } from "@prisma/client";
+import { Language, Snippet, Technology } from "@prisma/client";
 import { useRouter } from "next/navigation";
 import ky from "ky";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 import { FieldError } from "@/components/FieldError";
-import { ClipboardEvent, ClipboardEventHandler } from "react";
+import { ClipboardEvent, ClipboardEventHandler, useState } from "react";
+import { genCodeMetadata } from "@/actions/text-cortex";
 
 const formSchema = z.object({
   title: z.string().min(1),
@@ -22,13 +23,16 @@ type Form = typeof formSchema._type;
 
 export function FormCreateSnippet() {
   const router = useRouter();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
+    setValue,
   } = useForm<Form>({
     resolver: zodResolver(formSchema),
     mode: "onChange",
+    defaultValues: {},
   });
 
   const submit = async (formData: Form) => {
@@ -52,6 +56,22 @@ export function FormCreateSnippet() {
     if (!createdSnippet.error) {
       router.push("/");
       router.refresh();
+    }
+  };
+
+  const handleContentPaste = async (e: ClipboardEvent<HTMLTextAreaElement>) => {
+    const pastedText = e.clipboardData.getData("Text");
+    console.log(pastedText, "pastedText");
+    const { title, language, error } = await genCodeMetadata(pastedText);
+    if (!error) {
+      setValue("title", title);
+      const technoItemKey = Object.keys(TECHNO_MAPPER).find(
+        (techno) => TECHNO_MAPPER[techno].language === language
+      );
+      if (technoItemKey) {
+        console.log(TECHNO_MAPPER[technoItemKey].technology);
+        setValue("technology", TECHNO_MAPPER[technoItemKey].technology);
+      }
     }
   };
 
@@ -80,24 +100,6 @@ export function FormCreateSnippet() {
     </div>
   );
 
-  const handleContentPaste = (e: ClipboardEvent<HTMLTextAreaElement>) => {
-    const pastedText = e.currentTarget.value;
-
-    const options = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer undefined",
-      },
-      body: '{"max_tokens":512,"model":"chat-sophos-1","n":1,"source_lang":"string","target_lang":"string","temperature":0.65,"text":"string"}',
-    };
-
-    fetch("https://api.textcortex.com/v1/texts/completions", options)
-      .then((response) => response.json())
-      .then((response) => console.log(response))
-      .catch((err) => console.error(err));
-  };
-
   const textareaContent = (
     <div className="space-y-3">
       <label htmlFor="content">Content</label>
@@ -115,9 +117,9 @@ export function FormCreateSnippet() {
     <form onSubmit={handleSubmit(submit)} className="space-y-8 w-[50rem] ">
       <div className="space-y-6">
         <h1>New snippet</h1>
+        {textareaContent}
         {inputTitle}
         {technoSelect}
-        {textareaContent}
       </div>
       <div className="flex justify-end">
         <button>Save</button>

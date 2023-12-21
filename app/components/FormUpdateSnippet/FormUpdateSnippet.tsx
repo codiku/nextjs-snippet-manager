@@ -5,7 +5,7 @@ import { TECHNO_MAPPER } from "@/constant";
 import { Snippet, Technology } from "@prisma/client";
 import { useRouter } from "next/navigation";
 import { z } from "zod";
-import { updateSnippetServAction } from "@/components/FormUpdateSnippet/actions";
+import { updateSnippetServAction } from "@/actions/snippets";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
