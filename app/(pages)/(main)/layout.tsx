@@ -1,4 +1,5 @@
 import { Header } from "@/app/components/Header/Header";
+import { Nav } from "@/app/components/Nav/Nav";
 
 export default function MainLayout({
   children,
@@ -8,7 +9,10 @@ export default function MainLayout({
   return (
     <div>
       <Header />
-      {children}
+      <div className="flex p-8">
+        <Nav />
+        {children}
+      </div>
     </div>
   );
 }
