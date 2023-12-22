@@ -19,7 +19,7 @@ import c from "/public/programming-lang/c.png";
 import { StaticImageData } from "next/image";
 import { Language, Technology } from "@prisma/client";
 
-export type SnippetMetada = {
+export type SnippetMetadata = {
   src: StaticImageData;
   color: string;
   label: string;
@@ -27,7 +27,7 @@ export type SnippetMetada = {
   technology: Technology;
 };
 
-export const SNIPPETS_METADATA: { [key: string]: SnippetMetada } = {
+export const SNIPPETS_METADATA: { [key: string]: SnippetMetadata } = {
   bash: {
     src: bash,
     color: "#00FF85",
