@@ -11,7 +11,7 @@ type Resp =
     };
 export async function genCodeMetadata(code: string): Promise<Resp> {
   const codeWithoutLineBreaks = code.replace(/(\r\n|\n|\r)/gm, "");
-  const prompt = `An exemple of short good title can be Sort array by first letter or Simple http server or Modal component.Return also the technology(language or framework or library) of the code.Your response should have the following format : title/technology  No dot at the end. Example: Find max value in array/python or Generate random value/java  The technology should be in lowercase.Here is a list of all valid technologies :  python javascript java csharp php ruby swift kotlin c cpp bash css nextjs nodejs react rust typescript html. Return a response for this piece of code : ${codeWithoutLineBreaks}`;
+  const prompt = `An exemple of short good title can be Sort array by first letter or Simple http server or Modal component.Return also the technology(language or framework or library) of the code.Your response should have the following format : title/technology  Example: Find max value in array/python or Generate random value/java  The technology should be in lowercase.Here is a list of all valid technologies :  python javascript java csharp php ruby swift kotlin c cpp bash css nextjs nodejs react rust typescript html. Return a response for this piece of code : ${codeWithoutLineBreaks}`;
 
   const options = {
     method: "POST",
@@ -26,7 +26,15 @@ export async function genCodeMetadata(code: string): Promise<Resp> {
     const res: TextCortexResponse = await fetch(
       "https://api.textcortex.com/v1/texts/completions",
       options
-    ).then((response) => response.json());
+    )
+      .then(async (response) => {
+        const r = await response.json();
+        console.log("json", r);
+        return r;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
 
     const [title, technology] = res.data.outputs[0].text.split("/");
     console.log({
