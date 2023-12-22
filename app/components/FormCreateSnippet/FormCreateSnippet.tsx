@@ -1,21 +1,22 @@
 "use client";
-import { TECHNO_MAPPER } from "@/constant";
+import { RxMagicWand } from "react-icons/rx";
+import { SNIPPETS_METADATA } from "@/constant";
 import { useForm } from "react-hook-form";
-import { ErrorMessage } from "@hookform/error-message";
 import { ApiResponse } from "@/types/response";
-import { Language, Snippet, Technology } from "@prisma/client";
+import { Snippet, Technology } from "@prisma/client";
 import { useRouter } from "next/navigation";
 import ky from "ky";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 import { FieldError } from "@/components/FieldError";
-import { ClipboardEvent, ClipboardEventHandler, useState } from "react";
+import { ClipboardEvent } from "react";
 import { genCodeMetadata } from "@/actions/text-cortex";
 
+const MAX_LENGTH_CONTENT = 500;
 const formSchema = z.object({
   title: z.string().min(1),
-  content: z.string().min(1),
+  content: z.string().min(1).max(MAX_LENGTH_CONTENT),
   technology: z.nativeEnum(Technology),
 });
 
@@ -29,15 +30,16 @@ export function FormCreateSnippet() {
     handleSubmit,
     formState: { errors },
     setValue,
+    watch,
   } = useForm<Form>({
     resolver: zodResolver(formSchema),
     mode: "onChange",
     defaultValues: {},
   });
-
+  const content = watch("content");
   const submit = async (formData: Form) => {
     // Retrieve associated language
-    const language = TECHNO_MAPPER[formData.technology].language;
+    const language = SNIPPETS_METADATA[formData.technology].language;
     // Create the snippet
     const createdSnippet: ApiResponse<Snippet> = await ky
       .post("/api/snippets", {
@@ -61,26 +63,33 @@ export function FormCreateSnippet() {
 
   const handleContentPaste = async (e: ClipboardEvent<HTMLTextAreaElement>) => {
     const pastedText = e.clipboardData.getData("Text");
-    console.log(pastedText, "pastedText");
-    const { title, language, error } = await genCodeMetadata(pastedText);
-    if (!error) {
-      setValue("title", title);
-      const technoItemKey = Object.keys(TECHNO_MAPPER).find(
-        (techno) => TECHNO_MAPPER[techno].language === language
-      );
-      if (technoItemKey) {
-        console.log(TECHNO_MAPPER[technoItemKey].technology);
-        setValue("technology", TECHNO_MAPPER[technoItemKey].technology);
+    if (pastedText.trim().length < MAX_LENGTH_CONTENT) {
+      const { title, technology, error } = await genCodeMetadata(pastedText);
+      if (!error) {
+        setValue("title", title);
+
+        if (SNIPPETS_METADATA[technology]) {
+          setValue("technology", technology);
+        }
       }
+    } else {
+      e.preventDefault();
+      toast(
+        "Can't paste more than " +
+          MAX_LENGTH_CONTENT +
+          " characters ( AI ain't cheap )"
+      );
     }
   };
 
   const technoSelect = (
     <div className="space-y-3 w-80">
-      <label htmlFor="technology">Framework / Technology / Language</label>
+      <label htmlFor="technology" className="flex space-x-4">
+        <div>Framework / Technology / Language</div> <RxMagicWand />
+      </label>
       <select {...register("technology")} id="technology">
-        {Object.keys(TECHNO_MAPPER).map((techno) => {
-          const { technology: value, label } = TECHNO_MAPPER[techno];
+        {Object.keys(SNIPPETS_METADATA).map((techno) => {
+          const { technology: value, label } = SNIPPETS_METADATA[techno];
           return (
             <option key={value} value={value}>
               {label}
@@ -93,8 +102,10 @@ export function FormCreateSnippet() {
   );
 
   const inputTitle = (
-    <div className="space-y-3 w-72">
-      <label htmlFor="title">Title</label>
+    <div className="space-y-3">
+      <label htmlFor="title" className="flex items-center space-x-4">
+        <div>Title</div> <RxMagicWand />
+      </label>
       <input {...register("title")} id="title" />
       <FieldError errors={errors} name="title" />
     </div>
@@ -112,14 +123,13 @@ export function FormCreateSnippet() {
       <FieldError errors={errors} name="content" />
     </div>
   );
-
   return (
     <form onSubmit={handleSubmit(submit)} className="space-y-8 w-[50rem] ">
       <div className="space-y-6">
         <h1>New snippet</h1>
         {textareaContent}
-        {inputTitle}
-        {technoSelect}
+        {content && inputTitle}
+        {content && technoSelect}
       </div>
       <div className="flex justify-end">
         <button>Save</button>

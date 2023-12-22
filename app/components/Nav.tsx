@@ -1,4 +1,4 @@
-import { TECHNO_MAPPER, TechnoItem } from "@/constant";
+import { SNIPPETS_METADATA, TechnoItem } from "@/constant";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -25,7 +25,7 @@ const Nav = () => {
   return (
     <div className="text-white bg-main-900 py-8 px-6  min-w-[12rem] text-sm rounded-lg flex h-full  justify-center">
       <ul className="space-y-4">
-        {Object.values(TECHNO_MAPPER).map(renderLinkItem)}
+        {Object.values(SNIPPETS_METADATA).map(renderLinkItem)}
       </ul>
     </div>
   );

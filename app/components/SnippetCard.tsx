@@ -1,14 +1,14 @@
 "use client";
 import { RxCopy } from "react-icons/rx";
 import { Snippet } from "@prisma/client";
-import { TECHNO_MAPPER } from "@/constant";
+import { SNIPPETS_METADATA } from "@/constant";
 import Image from "next/image";
 import Link from "next/link";
 import { MouseEvent } from "react";
 import { toast } from "sonner";
 
 export function SnippetCard(p: { snippet: Snippet }) {
-  const progLngItem = TECHNO_MAPPER[p.snippet.technology];
+  const progLngItem = SNIPPETS_METADATA[p.snippet.technology];
 
   const copyCodeToClipboard = (e: MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
@@ -25,9 +25,11 @@ export function SnippetCard(p: { snippet: Snippet }) {
         <div className="font-semibold text-md text-main-100 uppercase">
           {p.snippet.technology}
         </div>
-        <div className="flex justify-between ">
-          <div className="text-sm text-white">{p.snippet.title}</div>
-          <RxCopy className="text-white" />
+        <div className="flex justify-between text-white">
+          <div className="text-sm line-clamp-3  pr-1 ">{p.snippet.title}</div>
+          <div className="w-5 h-5">
+            <RxCopy />
+          </div>
         </div>
       </div>
     </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import { TECHNO_MAPPER } from "@/constant";
+import { SNIPPETS_METADATA } from "@/constant";
 
 import { Snippet, Technology } from "@prisma/client";
 import { useRouter } from "next/navigation";
@@ -66,8 +66,8 @@ export function FormUpdateSnippet(p: { snippet: Snippet }) {
     <div className="space-y-3 w-80">
       <label htmlFor="technology">Framework / Technology / Language</label>
       <select {...register("technology")} id="technology">
-        {Object.keys(TECHNO_MAPPER).map((techno) => {
-          const { technology: value, label } = TECHNO_MAPPER[techno];
+        {Object.keys(SNIPPETS_METADATA).map((techno) => {
+          const { technology: value, label } = SNIPPETS_METADATA[techno];
           return (
             <option key={value} value={value}>
               {label}

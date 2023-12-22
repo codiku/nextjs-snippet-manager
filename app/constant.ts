@@ -28,7 +28,7 @@ export type TechnoItem = {
   technology: Technology;
 };
 
-export const TECHNO_MAPPER: {
+export const SNIPPETS_METADATA: {
   [key: string]: TechnoItem;
 } = {
   bash: {

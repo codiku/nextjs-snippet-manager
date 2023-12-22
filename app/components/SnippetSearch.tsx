@@ -4,7 +4,7 @@ import SnippetList from "@/components/SnippetList";
 import { Snippet } from "@prisma/client";
 import Link from "next/link";
 import { useState } from "react";
-import { TECHNO_MAPPER } from "@/constant";
+import { SNIPPETS_METADATA } from "@/constant";
 
 export function SnippetSearch(p: { snippets: Snippet[] }) {
   const [currSearchQuery, setCurrSearchQuery] = useState<string>("");
@@ -14,7 +14,7 @@ export function SnippetSearch(p: { snippets: Snippet[] }) {
       s.technology,
       s.title,
       s.content,
-      TECHNO_MAPPER[s.technology].label,
+      SNIPPETS_METADATA[s.technology].label,
     ].some((field) =>
       field.toLowerCase().includes(currSearchQuery?.toLowerCase())
     )

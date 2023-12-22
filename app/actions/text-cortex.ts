@@ -1,18 +1,17 @@
 "use server";
 import { TextCortexResponse } from "@/types/text-cortex-ai-type";
-import { Language, Technology } from "@prisma/client";
+import { Technology } from "@prisma/client";
 
 type Resp =
-  | { title: string; language: Language; error?: false }
+  | { title: string; technology: Technology; error?: false }
   | {
       title?: string;
-      language?: Language;
+      technology?: Technology;
       error: true;
     };
 export async function genCodeMetadata(code: string): Promise<Resp> {
   const codeWithoutLineBreaks = code.replace(/(\r\n|\n|\r)/gm, "");
-
-  const prompt = `An exemple of short good title can be Sort array by first letter or Simple http server or Modal component.Return also the language of the code.Your response should have the following format : title,language. No dot at the end. Example: Find max value in array,python or Generate random value,java The language should be in lowercase. No dot at the end. Return a response for this piece of code : ${codeWithoutLineBreaks}`;
+  const prompt = `An exemple of short good title can be Sort array by first letter or Simple http server or Modal component.Return also the technology(language or framework or library) of the code.Your response should have the following format : title/technology  No dot at the end. Example: Find max value in array/python or Generate random value/java  The technology should be in lowercase.Here is a list of all valid technologies :  python javascript java csharp php ruby swift kotlin c cpp bash css nextjs nodejs react rust typescript html. Return a response for this piece of code : ${codeWithoutLineBreaks}`;
 
   const options = {
     method: "POST",
@@ -29,11 +28,15 @@ export async function genCodeMetadata(code: string): Promise<Resp> {
       options
     ).then((response) => response.json());
 
-    const [title, language] = res.data.outputs[0].text.split(",");
-    console.log("response", res.data.outputs[0]);
+    const [title, technology] = res.data.outputs[0].text.split("/");
+    console.log({
+      title,
+      technology: technology.toLowerCase() as Technology,
+      "token remaining": res.data.remaining_credits,
+    });
     return {
       title,
-      language: language as Language,
+      technology: technology.toLowerCase() as Technology,
     };
   } catch (err) {
     return {

@@ -6,7 +6,7 @@ import { MouseEvent, useState } from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { atomDark as theme } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { RxCopy } from "react-icons/rx";
-import { TECHNO_MAPPER } from "@/constant";
+import { SNIPPETS_METADATA } from "@/constant";
 import Image from "next/image";
 
 import ky from "ky";
@@ -17,7 +17,7 @@ import Link from "next/link";
 export function SnippetDetail(p: { snippet: Snippet }) {
   const router = useRouter();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const progLngItem = TECHNO_MAPPER[p.snippet.technology];
+  const progLngItem = SNIPPETS_METADATA[p.snippet.technology];
   const handleDeleteSnippet = async () => {
     setIsDialogOpen(false);
     const response = await ky
