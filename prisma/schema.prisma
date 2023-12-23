@@ -31,6 +31,7 @@ enum Technology {
 
 model Snippet {
   id         Int        @id @default(autoincrement())
+  name       String     @unique
   title      String
   content    String
   technology Technology

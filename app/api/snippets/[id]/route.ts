@@ -1,11 +1,18 @@
 import { NextRequest, NextResponse } from "next/server";
-import { deleteSnippet, readSnippet, updateSnippet } from "./service";
+import {
+  deleteSnippet,
+  readSnippet,
+  readSnippetSchema,
+  updateSnippet,
+} from "./service";
+import { getQueryParams } from "@/lib/server-utils";
 
 export async function GET(
   req: NextRequest,
   { params }: { params: { id: string } }
 ) {
-  return NextResponse.json(await readSnippet(Number(params.id)));
+  const queryParams = getQueryParams(req) as typeof readSnippetSchema._type;
+  return NextResponse.json(await readSnippet(Number(params.id), queryParams));
 }
 
 export async function PATCH(

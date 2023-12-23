@@ -83,21 +83,27 @@ export const updateSnippet = async (
   }
 };
 
+export const readSnippetSchema = z.object({
+  userId: z.string().min(1),
+});
+
 export const readSnippet = async (
-  id: number
+  id: number,
+  queryParams: typeof readSnippetSchema._type
 ): Promise<ApiResponse<Snippet>> => {
   try {
-    // const { userId } = auth();
-    // if (!userId) {
-    //   return {
-    //     error: true,
-    //     status: 401,
-    //     message: "User not signed in",
-    //   };
-    // }
-
+    readSnippetSchema.parse(queryParams);
+    /* const { userId } = auth();
+    if (!userId) {
+      return {
+        error: true,
+        status: 401,
+        message: "User not signed in",
+      };
+    }
+*/
     const snippetFound = await db.snippet.findUnique({
-      where: { id },
+      where: { id, userId: queryParams.userId },
     });
 
     return {

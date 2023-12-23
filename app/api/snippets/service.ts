@@ -4,7 +4,13 @@ import { auth } from "@clerk/nextjs";
 import { Language, Snippet, Technology } from "@prisma/client";
 import { z } from "zod";
 
-export const readAllSnippet = async (): Promise<ApiResponse<Snippet[]>> => {
+export const readAllSnippetsSchema = z.object({
+  name: z.string().optional(),
+  userId: z.string().optional(),
+});
+export const readAllSnippet = async (
+  queryParams: typeof readAllSnippetsSchema._type
+): Promise<ApiResponse<Snippet[]>> => {
   try {
     // const { userId } = auth();
     // if (!userId) {
@@ -14,7 +20,7 @@ export const readAllSnippet = async (): Promise<ApiResponse<Snippet[]>> => {
     //     message: "User not logged",
     //   };
     // }
-    const snippet = await db.snippet.findMany();
+    const snippet = await db.snippet.findMany({ where: { ...queryParams } });
     return {
       data: snippet,
     };
@@ -28,6 +34,7 @@ export const readAllSnippet = async (): Promise<ApiResponse<Snippet[]>> => {
 };
 
 const createSnippetSchema = z.object({
+  name: z.string(),
   content: z.string(),
   title: z.string(),
   language: z.nativeEnum(Language),

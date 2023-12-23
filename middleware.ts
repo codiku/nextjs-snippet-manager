@@ -25,14 +25,6 @@ import { NextResponse } from "next/server";
 
 export default authMiddleware({
   publicRoutes: (req) => req.url.includes("/api"),
-  beforeAuth: (req) => {
-    const pathname = req.nextUrl.pathname;
-    if (pathname.match("/api/*")) {
-      console.log("Calling api...", pathname);
-    } else {
-      console.log("Navigation on ... ", pathname);
-    }
-  },
 });
 
 export const config = {
