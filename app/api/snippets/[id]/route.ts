@@ -1,5 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
-import { deleteSnippet, updateSnippet } from "./service";
+import { deleteSnippet, readSnippet, updateSnippet } from "./service";
+
+export async function GET(
+  req: NextRequest,
+  { params }: { params: { id: string } }
+) {
+  return NextResponse.json(await readSnippet(Number(params.id)));
+}
 
 export async function PATCH(
   req: NextRequest,

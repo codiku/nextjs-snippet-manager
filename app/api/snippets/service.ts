@@ -6,15 +6,15 @@ import { z } from "zod";
 
 export const readAllSnippet = async (): Promise<ApiResponse<Snippet[]>> => {
   try {
-    const { userId } = auth();
-    if (!userId) {
-      return {
-        error: true,
-        status: 401,
-        message: "User not logged",
-      };
-    }
-    const snippet = await db.snippet.findMany({ where: { userId: userId } });
+    // const { userId } = auth();
+    // if (!userId) {
+    //   return {
+    //     error: true,
+    //     status: 401,
+    //     message: "User not logged",
+    //   };
+    // }
+    const snippet = await db.snippet.findMany();
     return {
       data: snippet,
     };
