@@ -6,12 +6,13 @@ import { z } from "zod";
 
 export const readAllSnippetsSchema = z.object({
   name: z.string().optional(),
-  userId: z.string().optional(),
+  userId: z.string(),
 });
 export const readAllSnippet = async (
   queryParams: typeof readAllSnippetsSchema._type
 ): Promise<ApiResponse<Snippet[]>> => {
   try {
+    readAllSnippetsSchema.parse(queryParams);
     // const { userId } = auth();
     // if (!userId) {
     //   return {
