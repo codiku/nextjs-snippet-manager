@@ -29,7 +29,9 @@ export const readAllSnippet = async (
     return {
       error: true,
       status: 500,
-      message: "Something went wrong when fetching snippets",
+      message:
+        "Something went wrong when fetching snippets " +
+        (error as Error).message,
     };
   }
 };
