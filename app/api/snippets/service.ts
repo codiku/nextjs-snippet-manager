@@ -22,6 +22,7 @@ export const readAllSnippet = async (
     //   };
     // }
     const snippet = await db.snippet.findMany({ where: { ...queryParams } });
+
     return {
       data: snippet,
     };

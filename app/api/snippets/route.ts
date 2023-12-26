@@ -13,6 +13,7 @@ export async function GET(
   req: NextRequest
 ): Promise<NextResponse<ApiResponse<Snippet[]>>> {
   const queryParams = getQueryParams<typeof readAllSnippetsSchema._type>(req);
+
   return NextResponse.json(await readAllSnippet(queryParams));
 }
 

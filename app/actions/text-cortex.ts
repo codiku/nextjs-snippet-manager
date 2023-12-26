@@ -28,9 +28,7 @@ export async function genCodeMetadata(code: string): Promise<Resp> {
       options
     )
       .then(async (response) => {
-        const r = await response.json();
-        console.log("json", r);
-        return r;
+        return await response.json();
       })
       .catch((err) => {
         console.log(err);
