@@ -25,7 +25,7 @@ export function Nav(p: {}) {
     );
   };
   return (
-    <div className="text-white bg-main-900 py-8 px-6 text-sm rounded-lg">
+    <div className="text-white bg-main-900 py-8 px-6 text-sm rounded-lg ">
       <ul className="space-y-4">
         {Object.values(SNIPPETS_METADATA).map(renderLinkItem)}
       </ul>

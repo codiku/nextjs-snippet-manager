@@ -3,7 +3,7 @@
 @tailwind utilities;
 @layer base {
   body {
-    @apply bg-main-800 h-screen overflow-y-hidden;
+    @apply bg-main-800 h-screen;
   }
   h1 {
     @apply text-main-100 text-4xl;
