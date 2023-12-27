@@ -11,7 +11,7 @@ export default function MainLayout({
       <Header />
       <div className="flex p-8">
         <Nav />
-        <div className="w-full ml-8">{children}</div>
+        <div className="w-full pl-8">{children}</div>
       </div>
     </div>
   );

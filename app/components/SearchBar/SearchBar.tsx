@@ -1,23 +1,17 @@
 "use client";
-import { RiSearchLine } from "react-icons/ri";
-import { ChangeEvent } from "react";
 import { useRouter } from "next/navigation";
-
+import { RiSearchLine } from "react-icons/ri";
 export function SearchBar(p: {
-  onChange: (query: string) => void;
-  placeholder?: string;
+  onChange: (text: string) => void;
+  placeholder: string;
 }) {
   const router = useRouter();
-
-  function handleOnChange(e: ChangeEvent<HTMLInputElement>) {
-    p.onChange(e.currentTarget.value);
-  }
   const input = (
     <div className="relative w-full">
       <input
-        placeholder={p.placeholder}
-        onChange={handleOnChange}
         className="pl-10"
+        placeholder={p.placeholder}
+        onChange={(e) => p.onChange(e.currentTarget.value)}
       />
       <RiSearchLine className="h-5 w-5 absolute top-2 left-3 text-gray-400" />
     </div>
