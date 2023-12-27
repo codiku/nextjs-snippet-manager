@@ -8,6 +8,7 @@ import { MouseEvent } from "react";
 import { toast } from "sonner";
 import tailwindConf from "@/tailwind.config";
 const colors = tailwindConf.theme.extend.colors;
+
 export function SnippetCard(p: { snippet: Snippet }) {
   const snippetMetaData = SNIPPETS_METADATA[p.snippet.technology];
 
