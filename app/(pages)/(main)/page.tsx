@@ -5,15 +5,14 @@ export default function MainPage(p: {}) {
   return (
     <div>
       <SnippetSearch placeholder={`Search your snippets`} />
-
       <SnippetCard
         snippet={{
+          content: "blbla",
           id: 1,
-          content: "blabla",
           language: "python",
-          title: "Sort an array",
           technology: "python",
-          userId: "userID132é",
+          title: "Some title",
+          userId: "231231",
         }}
       />
     </div>
