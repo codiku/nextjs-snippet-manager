@@ -12,7 +12,8 @@ const readAllSnippetSchema = z
   })
   .optional();
 export async function readAllSnippet(filters?: Partial<Snippet>) {
-  if (!auth().userId) {
+  const { userId } = auth();
+  if (!userId) {
     return {
       data: [],
       error: true,
@@ -25,6 +26,7 @@ export async function readAllSnippet(filters?: Partial<Snippet>) {
     const snippets = await db.snippet.findMany({
       where: {
         ...filters,
+        userId: userId,
       },
     });
     return {
