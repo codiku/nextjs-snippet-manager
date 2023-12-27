@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { MouseEvent } from "react";
 import { RxCopy } from "react-icons/rx";
+import { toast } from "sonner";
 
 export function SnippetCard(p: { snippet: Snippet }) {
   const snippetMetadata = SNIPPETS_METADATA[p.snippet.technology];
@@ -12,6 +13,7 @@ export function SnippetCard(p: { snippet: Snippet }) {
   const copyCodeIntoClipboard = (e: MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
     navigator.clipboard.writeText(p.snippet.content);
+    toast.info("Code copied into clipboard");
   };
   const radialGradient = (
     <div
