@@ -3,7 +3,10 @@ import { RiSearchLine } from "react-icons/ri";
 import { ChangeEvent } from "react";
 import { useRouter } from "next/navigation";
 
-export function SearchBar(p: { onChange: (query: string) => void }) {
+export function SearchBar(p: {
+  onChange: (query: string) => void;
+  placeholder?: string;
+}) {
   const router = useRouter();
 
   function handleOnChange(e: ChangeEvent<HTMLInputElement>) {
@@ -12,7 +15,7 @@ export function SearchBar(p: { onChange: (query: string) => void }) {
   const input = (
     <div className="relative w-full">
       <input
-        placeholder="Search a snippet..."
+        placeholder={p.placeholder}
         onChange={handleOnChange}
         className="pl-10"
       />

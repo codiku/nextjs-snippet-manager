@@ -4,8 +4,8 @@ import { SnippetSearch } from "@/app/components/SnippetSearch/SnippetSearch";
 export default async function MainPage(p: {}) {
   // const snippets = await readAllSnippet();
   return (
-    <div className="">
-      <SnippetSearch />;
+    <div>
+      <SnippetSearch placeholder="Search your snippets" />;
     </div>
   );
 }

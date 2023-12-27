@@ -2,10 +2,13 @@
 
 import { SearchBar } from "../SearchBar/SearchBar";
 
-export function SnippetSearch(p: {}) {
+export function SnippetSearch(p: { placeholder?: string }) {
   return (
     <div>
-      <SearchBar onChange={(query) => console.log(query)} />
+      <SearchBar
+        placeholder={p.placeholder}
+        onChange={(query) => console.log(query)}
+      />
     </div>
   );
 }
