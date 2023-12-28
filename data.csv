@@ -2,18 +2,50 @@ userId,title,language,technology,content
 user_2ZlVfJUvAJgACXFazYUFkcO2l0S,Display hello in python,python,python,"print(""Hello World!"");"
 user_2ZlVfJUvAJgACXFazYUFkcO2l0S,Display hello in c,c,c,"printf(""Hello World!"");"
 user_2ZlVfJUvAJgACXFazYUFkcO2l0S,Display hello in javascript,javascript,javascript,"console.log(""Hello World!"");"
-user_2ZlVfJUvAJgACXFazYUFkcO2l0S,Display hello in java,java,java,"public class Main {\n  public static void main(String[] args) {\n    System.out.println(""Hello World!""); \n  } \n}"
-user_2ZlVfJUvAJgACXFazYUFkcO2l0S,Display hello in cpp,cpp,cpp,"#include <iostream>\nint main() {\n  std::cout << ""Hello World!"";\n  return 0;\n}"
+user_2ZlVfJUvAJgACXFazYUFkcO2l0S,Display hello in java,java,java,"public class Main {
+  public static void main(String[] args) {
+    System.out.println(""Hello World!""); 
+  } 
+}"
+user_2ZlVfJUvAJgACXFazYUFkcO2l0S,Display hello in cpp,cpp,cpp,"#include <iostream>
+int main() {
+  std::cout << "Hello World!";
+  return 0;
+}"
 user_2ZlVfJUvAJgACXFazYUFkcO2l0S,Display hello in csharp,csharp,csharp,"Console.WriteLine(""Hello World!"");"
 user_2ZlVfJUvAJgACXFazYUFkcO2l0S,Display hello in php,php,php,"<?php echo ""Hello World!""; ?>"
 user_2ZlVfJUvAJgACXFazYUFkcO2l0S,Display hello in ruby,ruby,ruby,"puts ""Hello World!"""
 user_2ZlVfJUvAJgACXFazYUFkcO2l0S,Display hello in swift,swift,swift,"print(""Hello World!"");"
-user_2ZlVfJUvAJgACXFazYUFkcO2l0S,Display hello in kotlin,kotlin,kotlin,"fun main(args: Array<String>) {\n  println(""Hello World!"")\n}"
+user_2ZlVfJUvAJgACXFazYUFkcO2l0S,Display hello in kotlin,kotlin,kotlin,"fun main(args: Array<String>) {
+    println(""Hello World!"")
+}"
 user_2ZlVfJUvAJgACXFazYUFkcO2l0S,Display hello in bash,bash,bash,"echo ""Hello World!"""
-user_2ZlVfJUvAJgACXFazYUFkcO2l0S,Display hello in css,css,css,body {\n  background-color: blue;\n}
-user_2ZlVfJUvAJgACXFazYUFkcO2l0S,Display hello in nextjs,jsx,nextjs,export default function Home() {\n  return (\n    <div>\n      Hello World!\n    </div>\n  );\n}
+user_2ZlVfJUvAJgACXFazYUFkcO2l0S,Display hello in css,css,css,"
+  body {
+    background-color: blue;
+  }"
+user_2ZlVfJUvAJgACXFazYUFkcO2l0S,Display hello in nextjs,jsx,nextjs,"export default function Home() {
+  return (
+    <div>
+      Hello World!
+    </div>
+  );
+}"
 user_2ZlVfJUvAJgACXFazYUFkcO2l0S,Display hello in nodejs,typescript,nodejs,"console.log(""Hello World!"");"
-user_2ZlVfJUvAJgACXFazYUFkcO2l0S,Display hello in react,jsx,react,function App() {\n  return (\n    <div>\n      Hello World!\n    </div>\n  );\n}
-user_2ZlVfJUvAJgACXFazYUFkcO2l0S,Display hello in rust,rust,rust,"fn main() {\n  println!(""Hello World!"");\n}"
+user_2ZlVfJUvAJgACXFazYUFkcO2l0S,Display hello in react,jsx,react,"function App() {
+  return (
+    <div>
+      Hello World!
+    </div>
+  );
+}"
+user_2ZlVfJUvAJgACXFazYUFkcO2l0S,Display hello in rust,rust,rust,"fn main() {
+    println!("Hello World!");
+}"
 user_2ZlVfJUvAJgACXFazYUFkcO2l0S,Display hello in typescript,typescript,typescript,"console.log(""Hello World!"");"
-user_2ZlVfJUvAJgACXFazYUFkcO2l0S,Display hello in html,xml-doc,html,<!DOCTYPE html>\n<html>\n  <body>\n    Hello World!\n  </body>\n</html>
+user_2ZlVfJUvAJgACXFazYUFkcO2l0S,Display hello in html,xml-doc,html,"<!DOCTYPE html>
+<html>
+  <body>
+    Hello World!
+  </body>
+</html>"

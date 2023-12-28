@@ -7,6 +7,5 @@ export default async function SnippetDetailPage(p: { params: { id: string } }) {
   if (!snippet) {
     return <div>No snippet found...</div>;
   }
-
   return <SnippetDetail snippet={snippet} />;
 }
