@@ -67,3 +67,34 @@ export async function deleteSnippet(id: number) {
     };
   }
 }
+
+const readSnippetSchema = z.number();
+
+export async function readSnippet(id: number) {
+  const { userId } = auth();
+  if (!userId) {
+    return {
+      data: null,
+      error: true,
+      status: 401,
+      message: "You must be signed in",
+    };
+  }
+  try {
+    readSnippetSchema.parse(id);
+    const snippet = await db.snippet.findUnique({
+      where: { id, userId },
+    });
+    return {
+      data: snippet,
+    };
+  } catch (err) {
+    return {
+      data: null,
+      error: true,
+      status: 500,
+      message:
+        "Something went wrong reading the snippet " + (err as Error).message,
+    };
+  }
+}
