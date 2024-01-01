@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "downlevelIteration": true,
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
 
@@ -28,7 +29,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "scripts/populate-db.mjs"
+    "scripts/populate-db.mjs",
+    "app/script.mjs"
   ],
   "exclude": ["node_modules"]
 }

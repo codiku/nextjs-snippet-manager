@@ -1,0 +1,281 @@
+[
+  {
+    "id": 196,
+    "title": "Queue Implementation",
+    "content": "#include <iostream>\n#include <queue>\n\nint main() {\n    std::queue<int> myQueue;\n\n    myQueue.push(10);\n    myQueue.push(20);\n    myQueue.push(30);\n\n    while (!myQueue.empty()) {\n        std::cout << myQueue.front() << \" \";\n        myQueue.pop();\n    }\n\n    return 0;\n}",
+    "language": "cpp",
+    "userId": "user_2Z3CKSIRMbRMG5mImMwCY9GZYRY",
+    "technology": "cpp",
+    "name": "2"
+  },
+  {
+    "id": 188,
+    "title": "Fetch example",
+    "content": "fetch('https://jsonplaceholder.typicode.com/todos/1')\n    .then(response => response.json())\n    .then(data => {\n        console.log(\"Title:\", data.title);\n        console.log(\"Completed:\", data.completed);\n    });",
+    "language": "javascript",
+    "userId": "user_2Z3CKSIRMbRMG5mImMwCY9GZYRY",
+    "technology": "javascript",
+    "name": "js-fetch"
+  },
+  {
+    "id": 197,
+    "title": "Search and Replace in File",
+    "content": "file=\"example.txt\"\nsearch=\"old_text\"\nreplace=\"new_text\"\n\nsed -i \"s/$search/$replace/g\" \"$file",
+    "language": "bash",
+    "userId": "user_2Z3CKSIRMbRMG5mImMwCY9GZYRY",
+    "technology": "bash",
+    "name": "3"
+  },
+  {
+    "id": 182,
+    "title": "Web scrapper",
+    "content": "import requests\nfrom bs4 import BeautifulSoup\n\nurl = 'https://example.com'\nresponse = requests.get(url)\nsoup = BeautifulSoup(response.text, 'html.parser')\ntitles = soup.find_all('h2')\n\nfor title in titles:\n    print(title.text)",
+    "language": "python",
+    "userId": "user_2Z3CKSIRMbRMG5mImMwCY9GZYRY",
+    "technology": "python",
+    "name": "4"
+  },
+  {
+    "id": 184,
+    "title": "Simple Console App",
+    "content": "using System;\n\nclass Program {\n    static void Main() {\n        Console.WriteLine(\"Hello, C#!\");\n    }\n}",
+    "language": "csharp",
+    "userId": "user_2Z3CKSIRMbRMG5mImMwCY9GZYRY",
+    "technology": "csharp",
+    "name": "5"
+  },
+  {
+    "id": 185,
+    "title": "Generate Random Password",
+    "content": "function generateRandomPassword($length = 8) {\n    $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';\n    $password = '';\n    for ($i = 0; $i < $length; $i++) {\n        $password .= $characters[rand(0, strlen($characters) - 1)];\n    }\n    return $password;\n}\n\necho generateRandomPassword();",
+    "language": "php",
+    "userId": "user_2Z3CKSIRMbRMG5mImMwCY9GZYRY",
+    "technology": "php",
+    "name": "6"
+  },
+  {
+    "id": 186,
+    "title": "Fibonacci Sequence",
+    "content": "def fibonacci(n)\n  return n if n <= 1\n  fibonacci(n - 1) + fibonacci(n - 2)\nend\n\nputs fibonacci(7)",
+    "language": "ruby",
+    "userId": "user_2Z3CKSIRMbRMG5mImMwCY9GZYRY",
+    "technology": "ruby",
+    "name": "7"
+  },
+  {
+    "id": 189,
+    "title": "Read and Print Lines from File",
+    "content": "import java.nio.file.Files;\nimport java.nio.file.Paths;\nimport java.io.IOException;\n\npublic class FileReader {\n    public static void main(String[] args) throws IOException {\n        String fileName = \"sample.txt\";\n        Files.lines(Paths.get(fileName)).forEach(System.out::println);\n    }\n}",
+    "language": "java",
+    "userId": "user_2Z3CKSIRMbRMG5mImMwCY9GZYRY",
+    "technology": "java",
+    "name": "9"
+  },
+  {
+    "id": 190,
+    "title": "Retrieve and Display Data from Database",
+    "content": "using System;\nusing System.Data.SqlClient;\n\nclass Program {\n    static void Main() {\n        string connectionString = \"Data Source=(localdb)\\\\MSSQLLocalDB;Initial Catalog=SampleDB;Integrated Security=True\";\n        using (SqlConnection connection = new SqlConnection(connectionString)) {\n            connection.Open();\n            string sql = \"SELECT Name FROM Employees\";\n            using (SqlCommand command = new SqlCommand(sql, connection)) {\n                using (SqlDataReader reader = command.ExecuteReader()) {\n                    while (reader.Read()) {\n                        Console.WriteLine(\"Employee Name: \" + reader[\"Name\"]);\n                    }\n                }\n            }\n        }\n    }\n}",
+    "language": "csharp",
+    "userId": "user_2Z3CKSIRMbRMG5mImMwCY9GZYRY",
+    "technology": "csharp",
+    "name": "10"
+  },
+  {
+    "id": 191,
+    "title": "Retrieve and Display Data from MySQL Database",
+    "content": "$servername = \"localhost\";\n$username = \"username\";\n$password = \"password\";\n$dbname = \"myDB\";\n\n$conn = new mysqli($servername, $username, $password, $dbname);\n\nif ($conn->connect_error) {\n    die(\"Connection failed: \" . $conn->connect_error);\n}\n\n$sql = \"SELECT id, name, email FROM users\";\n$result = $conn->query($sql);\n\nif ($result->num_rows > 0) {\n    while($row = $result->fetch_assoc()) {\n        echo \"ID: \" . $row[\"id\"]. \" - Name: \" . $row[\"name\"]. \" - Email: \" . $row[\"email\"]. \"<br>\";\n    }\n} else {\n    echo \"0 results\";\n}\n\n$conn->close();",
+    "language": "php",
+    "userId": "user_2Z3CKSIRMbRMG5mImMwCY9GZYRY",
+    "technology": "php",
+    "name": "11"
+  },
+  {
+    "id": 192,
+    "title": "Query and Display Data from MongoDB",
+    "content": "require 'mongo'\n\nclient = Mongo::Client.new('mongodb://localhost:27017/mydb')\ncollection = client[:users]\n\nresult = collection.find({}, projection: { _id: 0, name: 1, email: 1 })\nresult.each { |document| puts \"Name: #{document['name']}, Email: #{document['email']}\" }",
+    "language": "ruby",
+    "userId": "user_2Z3CKSIRMbRMG5mImMwCY9GZYRY",
+    "technology": "ruby",
+    "name": "12"
+  },
+  {
+    "id": 193,
+    "title": "Asynchronous Image Download using URLSession",
+    "content": "import UIKit\n\nfunc downloadImage(from url: URL, completion: @escaping (UIImage?) -> Void) {\n    URLSession.shared.dataTask(with: url) { data, _, error in\n        guard let data = data, error == nil else {\n            completion(nil)\n            return\n        }\n        completion(UIImage(data: data))\n    }.resume()\n}\n\nlet imageUrl = URL(string: \"https://example.com/image.jpg\")!\ndownloadImage(from: imageUrl) { image in\n    if let image = image {\n        print(\"Image downloaded successfully!\")\n    } else {\n        print(\"Failed to download image.\")\n    }\n}",
+    "language": "swift",
+    "userId": "user_2Z3CKSIRMbRMG5mImMwCY9GZYRY",
+    "technology": "swift",
+    "name": "13"
+  },
+  {
+    "id": 194,
+    "title": "Coroutines for Asynchronous File Reading",
+    "content": "import kotlinx.coroutines.Dispatchers\nimport kotlinx.coroutines.GlobalScope\nimport kotlinx.coroutines.launch\nimport java.io.File\n\nfun main() {\n    GlobalScope.launch(Dispatchers.IO) {\n        val fileName = \"sample.txt\"\n        File(fileName).forEachLine { line ->\n            println(\"Read line: $line\")\n        }\n    }\n    Thread.sleep(1000) // Allow time for coroutines to complete\n}",
+    "language": "kotlin",
+    "userId": "user_2Z3CKSIRMbRMG5mImMwCY9GZYRY",
+    "technology": "kotlin",
+    "name": "14"
+  },
+  {
+    "id": 195,
+    "title": "Linked List Implementation",
+    "content": "#include <stdio.h>\n#include <stdlib.h>\n\nstruct Node {\n    int data;\n    struct Node* next;\n};\n\nvoid printList(struct Node* node) {\n    while (node != NULL) {\n        printf(\"%d \", node->data);\n        node = node->next;\n    }\n}\n\nint main() {\n    struct Node* head = NULL;\n    struct Node* second = NULL;\n    struct Node* third = NULL;\n\n    head = (struct Node*)malloc(sizeof(struct Node));\n    second = (struct Node*)malloc(sizeof(struct Node));\n    third = (struct Node*)malloc(sizeof(struct Node));\n\n    head->data = 1;\n    head->next = second;\n\n    second->data = 2;\n    second->next = third;\n\n    third->data = 3;\n    third->next = NULL;\n\n    printList(head);\n\n    return 0;\n}",
+    "language": "c",
+    "userId": "user_2Z3CKSIRMbRMG5mImMwCY9GZYRY",
+    "technology": "c",
+    "name": "15"
+  },
+  {
+    "id": 198,
+    "title": "Responsive Flexbox Layout",
+    "content": ".container {\n    display: flex;\n    flex-wrap: wrap;\n}\n\n.item {\n    flex: 1;\n    min-width: 200px;\n    margin: 10px;\n}",
+    "language": "css",
+    "userId": "user_2Z3CKSIRMbRMG5mImMwCY9GZYRY",
+    "technology": "css",
+    "name": "16"
+  },
+  {
+    "id": 228,
+    "title": "A super function",
+    "content": "function superFunction( a : string){\n return a\n}",
+    "language": "typescript",
+    "userId": "user_2Z3CKSIRMbRMG5mImMwCY9GZYRY",
+    "technology": "nodejs",
+    "name": "17"
+  },
+  {
+    "id": 204,
+    "title": "Metadata",
+    "content": "import { Metadata } from 'next'\n \nexport const metadata: Metadata = {\n  title: 'Next.js',\n}\n \nexport default function Page() {\n  return '...'\n}",
+    "language": "jsx",
+    "userId": "user_2Z3CKSIRMbRMG5mImMwCY9GZYRY",
+    "technology": "nextjs",
+    "name": "nextjs-page-with-metadata"
+  },
+  {
+    "id": 205,
+    "title": "Active link in nav",
+    "content": "'use client'\n \nimport { usePathname } from 'next/navigation'\nimport Link from 'next/link'\n \nexport function Links() {\n  const pathname = usePathname()\n \n  return (\n    <nav>\n      <ul>\n        <li>\n          <Link className={`link ${pathname === '/' ? 'active' : ''}`} href=\"/\">\n            Home\n          </Link>\n        </li>\n        <li>\n          <Link\n            className={`link ${pathname === '/about' ? 'active' : ''}`}\n            href=\"/about\"\n          >\n            About\n          </Link>\n        </li>\n      </ul>\n    </nav>\n  )\n}",
+    "language": "jsx",
+    "userId": "user_2Z3CKSIRMbRMG5mImMwCY9GZYRY",
+    "technology": "nextjs",
+    "name": "29"
+  },
+  {
+    "id": 202,
+    "title": "Simple page",
+    "content": "export default function Page() {\n  return <h1>Hello, Next.js!</h1>\n}",
+    "language": "jsx",
+    "userId": "user_2Z3CKSIRMbRMG5mImMwCY9GZYRY",
+    "technology": "nextjs",
+    "name": "nextjs-page"
+  },
+  {
+    "id": 203,
+    "title": "Root layout",
+    "content": "export default function RootLayout({\n  children,\n}: {\n  children: React.ReactNode\n}) {\n  return (\n    <html lang=\"en\">\n      <body>{children}</body>\n    </html>\n  )\n}",
+    "language": "jsx",
+    "userId": "user_2Z3CKSIRMbRMG5mImMwCY9GZYRY",
+    "technology": "nextjs",
+    "name": "nextjs-layout"
+  },
+  {
+    "id": 206,
+    "title": "useMemo example",
+    "content": "import { useState } from 'react';\n\nexport function CalculateFactorial() {\n  const [number, setNumber] = useState(1);\n  const [inc, setInc] = useState(0);\n\n  const factorial = factorialOf(number);\n\n  const onChange = event => {\n    setNumber(Number(event.target.value));\n  };\n  const onClick = () => setInc(i => i + 1);\n  \n  return (\n    <div>\n      Factorial of \n      <input type=\"number\" value={number} onChange={onChange} />\n      is {factorial}\n      <button onClick={onClick}>Re-render</button>\n    </div>\n  );\n}\n\nfunction factorialOf(n) {\n  console.log('factorialOf(n) called!');\n  return n <= 0 ? 1 : n * factorialOf(n - 1);\n}",
+    "language": "jsx",
+    "userId": "user_2Z3CKSIRMbRMG5mImMwCY9GZYRY",
+    "technology": "react",
+    "name": "19"
+  },
+  {
+    "id": 201,
+    "title": "Simple HTTP Server with Actix-web",
+    "content": "use actix_web::{web, App, HttpServer, Responder};\n\nasync fn index() -> impl Responder {\n    \"Hello, Rust!\"\n}\n\n#[actix_web::main]\nasync fn main() -> std::io::Result<()> {\n    HttpServer::new(|| {\n        App::new().service(web::resource(\"/\").to(index))\n    })\n    .bind(\"127.0.0.1:8080\")?\n    .run()\n    .await\n}",
+    "language": "rust",
+    "userId": "user_2Z3CKSIRMbRMG5mImMwCY9GZYRY",
+    "technology": "rust",
+    "name": "20"
+  },
+  {
+    "id": 208,
+    "title": "Random number",
+    "content": "function getRandomNumber(min, max) {\n    return Math.floor(Math.random() * (max - min + 1) + min);\n}\n\nconst randomValue = getRandomNumber(1, 100);\nconsole.log(\"Random Number:\", randomValue);",
+    "language": "javascript",
+    "userId": "user_2Z3CKSIRMbRMG5mImMwCY9GZYRY",
+    "technology": "javascript",
+    "name": "js-random-number"
+  },
+  {
+    "id": 209,
+    "title": "Reverse a String",
+    "content": "function reverseString(str) {\n    return str.split('').reverse().join('');\n}\n\nconst originalString = \"Hello, World!\";\nconst reversedString = reverseString(originalString);\nconsole.log(\"Reversed String:\", reversedString);",
+    "language": "javascript",
+    "userId": "user_2Z3CKSIRMbRMG5mImMwCY9GZYRY",
+    "technology": "javascript",
+    "name": "js-reverse-string"
+  },
+  {
+    "id": 210,
+    "title": "Palindrome",
+    "content": "function isPalindrome(str) {\n    const cleanedStr = str.toLowerCase().replace(/[^a-zA-Z0-9]/g, '');\n    const reversedStr = cleanedStr.split('').reverse().join('');\n    return cleanedStr === reversedStr;\n}\n\nconst testString = \"A man, a plan, a canal, Panama!\";\nconsole.log(\"Is Palindrome:\", isPalindrome(testString));",
+    "language": "javascript",
+    "userId": "user_2Z3CKSIRMbRMG5mImMwCY9GZYRY",
+    "technology": "javascript",
+    "name": "js-palindrome"
+  },
+  {
+    "id": 211,
+    "title": "Format date YYYY-MM-DD",
+    "content": "// JavaScript - Format Current Date in YYYY-MM-DD\nfunction formatDate() {\n    const date = new Date();\n    const year = date.getFullYear();\n    const month = String(date.getMonth() + 1).padStart(2, '0');\n    const day = String(date.getDate()).padStart(2, '0');\n    return `${year}-${month}-${day}`;\n}\n\nconst formattedDate = formatDate();\nconsole.log(\"Formatted Date:\", formattedDate);",
+    "language": "javascript",
+    "userId": "user_2Z3CKSIRMbRMG5mImMwCY9GZYRY",
+    "technology": "javascript",
+    "name": "js-date-to-yyyymmdd"
+  },
+  {
+    "id": 212,
+    "title": "Square root",
+    "content": "#include <iostream>\n\nint calculateSquare(int num) {\n    return num * num;\n}\n\nint main() {\n    int number = 5;\n    int square = calculateSquare(number);\n    std::cout << \"Square of \" << number << \": \" << square << std::endl;\n    return 0;\n}",
+    "language": "cpp",
+    "userId": "user_2Z3CKSIRMbRMG5mImMwCY9GZYRY",
+    "technology": "cpp",
+    "name": "23"
+  },
+  {
+    "id": 213,
+    "title": "Find maximum",
+    "content": "#include <iostream>\n\nint findMaximum(int a, int b) {\n    return (a > b) ? a : b;\n}\n\nint main() {\n    int num1 = 8, num2 = 12;\n    int maximum = findMaximum(num1, num2);\n    std::cout << \"Maximum of \" << num1 << \" and \" << num2 << \": \" << maximum << std::endl;\n    return 0;\n}",
+    "language": "cpp",
+    "userId": "user_2Z3CKSIRMbRMG5mImMwCY9GZYRY",
+    "technology": "cpp",
+    "name": "24"
+  },
+  {
+    "id": 216,
+    "title": "Responsive Grid tailwind",
+    "content": "<!-- HTML with Tailwind CSS - Responsive Grid -->\n<div class=\"grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4\">\n    <div class=\"bg-gray-200 p-4 rounded\">Item 1</div>\n    <div class=\"bg-gray-200 p-4 rounded\">Item 2</div>\n    <div class=\"bg-gray-200 p-4 rounded\">Item 3</div>\n    <div class=\"bg-gray-200 p-4 rounded\">Item 4</div>\n</div>",
+    "language": "jsx",
+    "userId": "user_2Z3CKSIRMbRMG5mImMwCY9GZYRY",
+    "technology": "html",
+    "name": "25"
+  },
+  {
+    "id": 217,
+    "title": "Area of rectangle",
+    "content": "Swift - Calculate Area of a Rectangle:\nswift\nCopy code\n// Swift - Calculate Area of a Rectangle\nfunc calculateRectangleArea(length: Double, width: Double) -> Double {\n    return length * width\n}\n\nlet area = calculateRectangleArea(length: 5.0, width: 3.0)\nprint(\"Area of the rectangle: \\(area)\")",
+    "language": "swift",
+    "userId": "user_2Z3CKSIRMbRMG5mImMwCY9GZYRY",
+    "technology": "swift",
+    "name": "26"
+  },
+  {
+    "id": 227,
+    "title": "A new one",
+    "content": "function superFunction( param : string ){\n return param\n}",
+    "language": "typescript",
+    "userId": "user_2Z3CKSIRMbRMG5mImMwCY9GZYRY",
+    "technology": "typescript",
+    "name": "27"
+  }
+]

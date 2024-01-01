@@ -1,0 +1,640 @@
+id,title,content,language,userId,technology,name
+196,Queue Implementation,"#include <iostream>
+#include <queue>
+
+int main() {
+    std::queue<int> myQueue;
+
+    myQueue.push(10);
+    myQueue.push(20);
+    myQueue.push(30);
+
+    while (!myQueue.empty()) {
+        std::cout << myQueue.front() << "" "";
+        myQueue.pop();
+    }
+
+    return 0;
+}",cpp,user_2Z3CKSIRMbRMG5mImMwCY9GZYRY,cpp,2
+188,Fetch example,"fetch('https://jsonplaceholder.typicode.com/todos/1')
+    .then(response => response.json())
+    .then(data => {
+        console.log(""Title:"", data.title);
+        console.log(""Completed:"", data.completed);
+    });",javascript,user_2Z3CKSIRMbRMG5mImMwCY9GZYRY,javascript,js-fetch
+197,Search and Replace in File,"file=""example.txt""
+search=""old_text""
+replace=""new_text""
+
+sed -i ""s/$search/$replace/g"" ""$file""",bash,user_2Z3CKSIRMbRMG5mImMwCY9GZYRY,bash,3
+182,Web scrapper,"import requests
+from bs4 import BeautifulSoup
+
+url = 'https://example.com'
+response = requests.get(url)
+soup = BeautifulSoup(response.text, 'html.parser')
+titles = soup.find_all('h2')
+
+for title in titles:
+    print(title.text)",python,user_2Z3CKSIRMbRMG5mImMwCY9GZYRY,python,4
+184,Simple Console App,"using System;
+
+class Program {
+    static void Main() {
+        Console.WriteLine(""Hello, C#!"");
+    }
+}",csharp,user_2Z3CKSIRMbRMG5mImMwCY9GZYRY,csharp,5
+185,Generate Random Password,"function generateRandomPassword($length = 8) {
+    $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    $password = '';
+    for ($i = 0; $i < $length; $i++) {
+        $password .= $characters[rand(0, strlen($characters) - 1)];
+    }
+    return $password;
+}
+
+echo generateRandomPassword();",php,user_2Z3CKSIRMbRMG5mImMwCY9GZYRY,php,6
+186,Fibonacci Sequence,"def fibonacci(n)
+  return n if n <= 1
+  fibonacci(n - 1) + fibonacci(n - 2)
+end
+
+puts fibonacci(7)",ruby,user_2Z3CKSIRMbRMG5mImMwCY9GZYRY,ruby,7
+189,Read and Print Lines from File,"import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.io.IOException;
+
+public class FileReader {
+    public static void main(String[] args) throws IOException {
+        String fileName = ""sample.txt"";
+        Files.lines(Paths.get(fileName)).forEach(System.out::println);
+    }
+}",java,user_2Z3CKSIRMbRMG5mImMwCY9GZYRY,java,9
+190,Retrieve and Display Data from Database,"using System;
+using System.Data.SqlClient;
+
+class Program {
+    static void Main() {
+        string connectionString = ""Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=SampleDB;Integrated Security=True"";
+        using (SqlConnection connection = new SqlConnection(connectionString)) {
+            connection.Open();
+            string sql = ""SELECT Name FROM Employees"";
+            using (SqlCommand command = new SqlCommand(sql, connection)) {
+                using (SqlDataReader reader = command.ExecuteReader()) {
+                    while (reader.Read()) {
+                        Console.WriteLine(""Employee Name: "" + reader[""Name""]);
+                    }
+                }
+            }
+        }
+    }
+}",csharp,user_2Z3CKSIRMbRMG5mImMwCY9GZYRY,csharp,10
+191," Retrieve and Display Data from MySQL Database","$servername = ""localhost"";
+$username = ""username"";
+$password = ""password"";
+$dbname = ""myDB"";
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+    die(""Connection failed: "" . $conn->connect_error);
+}
+
+$sql = ""SELECT id, name, email FROM users"";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    while($row = $result->fetch_assoc()) {
+        echo ""ID: "" . $row[""id""]. "" - Name: "" . $row[""name""]. "" - Email: "" . $row[""email""]. ""<br>"";
+    }
+} else {
+    echo ""0 results"";
+}
+
+$conn->close();",php,user_2Z3CKSIRMbRMG5mImMwCY9GZYRY,php,11
+192,Query and Display Data from MongoDB,"require 'mongo'
+
+client = Mongo::Client.new('mongodb://localhost:27017/mydb')
+collection = client[:users]
+
+result = collection.find({}, projection: { _id: 0, name: 1, email: 1 })
+result.each { |document| puts ""Name: #{document['name']}, Email: #{document['email']}"" }",ruby,user_2Z3CKSIRMbRMG5mImMwCY9GZYRY,ruby,12
+193,Asynchronous Image Download using URLSession,"import UIKit
+
+func downloadImage(from url: URL, completion: @escaping (UIImage?) -> Void) {
+    URLSession.shared.dataTask(with: url) { data, _, error in
+        guard let data = data, error == nil else {
+            completion(nil)
+            return
+        }
+        completion(UIImage(data: data))
+    }.resume()
+}
+
+let imageUrl = URL(string: ""https://example.com/image.jpg"")!
+downloadImage(from: imageUrl) { image in
+    if let image = image {
+        print(""Image downloaded successfully!"")
+    } else {
+        print(""Failed to download image."")
+    }
+}",swift,user_2Z3CKSIRMbRMG5mImMwCY9GZYRY,swift,13
+194,Coroutines for Asynchronous File Reading,"import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import java.io.File
+
+fun main() {
+    GlobalScope.launch(Dispatchers.IO) {
+        val fileName = ""sample.txt""
+        File(fileName).forEachLine { line ->
+            println(""Read line: $line"")
+        }
+    }
+    Thread.sleep(1000) // Allow time for coroutines to complete
+}",kotlin,user_2Z3CKSIRMbRMG5mImMwCY9GZYRY,kotlin,14
+195,Linked List Implementation,"#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+void printList(struct Node* node) {
+    while (node != NULL) {
+        printf(""%d "", node->data);
+        node = node->next;
+    }
+}
+
+int main() {
+    struct Node* head = NULL;
+    struct Node* second = NULL;
+    struct Node* third = NULL;
+
+    head = (struct Node*)malloc(sizeof(struct Node));
+    second = (struct Node*)malloc(sizeof(struct Node));
+    third = (struct Node*)malloc(sizeof(struct Node));
+
+    head->data = 1;
+    head->next = second;
+
+    second->data = 2;
+    second->next = third;
+
+    third->data = 3;
+    third->next = NULL;
+
+    printList(head);
+
+    return 0;
+}",c,user_2Z3CKSIRMbRMG5mImMwCY9GZYRY,c,15
+198,Responsive Flexbox Layout,".container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.item {
+    flex: 1;
+    min-width: 200px;
+    margin: 10px;
+}",css,user_2Z3CKSIRMbRMG5mImMwCY9GZYRY,css,16
+228,A super function,"function superFunction( a : string){
+ return a
+}",typescript,user_2Z3CKSIRMbRMG5mImMwCY9GZYRY,nodejs,17
+204,"Metadata ","import { Metadata } from 'next'
+ 
+export const metadata: Metadata = {
+  title: 'Next.js',
+}
+ 
+export default function Page() {
+  return '...'
+}",jsx,user_2Z3CKSIRMbRMG5mImMwCY9GZYRY,nextjs,nextjs-page-with-metadata
+205,Active link in nav,"'use client'
+ 
+import { usePathname } from 'next/navigation'
+import Link from 'next/link'
+ 
+export function Links() {
+  const pathname = usePathname()
+ 
+  return (
+    <nav>
+      <ul>
+        <li>
+          <Link className={`link ${pathname === '/' ? 'active' : ''}`} href=""/"">
+            Home
+          </Link>
+        </li>
+        <li>
+          <Link
+            className={`link ${pathname === '/about' ? 'active' : ''}`}
+            href=""/about""
+          >
+            About
+          </Link>
+        </li>
+      </ul>
+    </nav>
+  )
+}",jsx,user_2Z3CKSIRMbRMG5mImMwCY9GZYRY,nextjs,29
+202,Simple page,"export default function Page() {
+  return <h1>Hello, Next.js!</h1>
+}",jsx,user_2Z3CKSIRMbRMG5mImMwCY9GZYRY,nextjs,nextjs-page
+203,Root layout,"export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  return (
+    <html lang=""en"">
+      <body>{children}</body>
+    </html>
+  )
+}",jsx,user_2Z3CKSIRMbRMG5mImMwCY9GZYRY,nextjs,nextjs-layout
+206,useMemo example,"import { useState } from 'react';
+
+export function CalculateFactorial() {
+  const [number, setNumber] = useState(1);
+  const [inc, setInc] = useState(0);
+
+  const factorial = factorialOf(number);
+
+  const onChange = event => {
+    setNumber(Number(event.target.value));
+  };
+  const onClick = () => setInc(i => i + 1);
+  
+  return (
+    <div>
+      Factorial of 
+      <input type=""number"" value={number} onChange={onChange} />
+      is {factorial}
+      <button onClick={onClick}>Re-render</button>
+    </div>
+  );
+}
+
+function factorialOf(n) {
+  console.log('factorialOf(n) called!');
+  return n <= 0 ? 1 : n * factorialOf(n - 1);
+}",jsx,user_2Z3CKSIRMbRMG5mImMwCY9GZYRY,react,19
+201," Simple HTTP Server with Actix-web","use actix_web::{web, App, HttpServer, Responder};
+
+async fn index() -> impl Responder {
+    ""Hello, Rust!""
+}
+
+#[actix_web::main]
+async fn main() -> std::io::Result<()> {
+    HttpServer::new(|| {
+        App::new().service(web::resource(""/"").to(index))
+    })
+    .bind(""127.0.0.1:8080"")?
+    .run()
+    .await
+}",rust,user_2Z3CKSIRMbRMG5mImMwCY9GZYRY,rust,20
+208,Random number,"function getRandomNumber(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
+const randomValue = getRandomNumber(1, 100);
+console.log(""Random Number:"", randomValue);",javascript,user_2Z3CKSIRMbRMG5mImMwCY9GZYRY,javascript,js-random-number
+209,Reverse a String,"function reverseString(str) {
+    return str.split('').reverse().join('');
+}
+
+const originalString = ""Hello, World!"";
+const reversedString = reverseString(originalString);
+console.log(""Reversed String:"", reversedString);",javascript,user_2Z3CKSIRMbRMG5mImMwCY9GZYRY,javascript,js-reverse-string
+210,Palindrome,"function isPalindrome(str) {
+    const cleanedStr = str.toLowerCase().replace(/[^a-zA-Z0-9]/g, '');
+    const reversedStr = cleanedStr.split('').reverse().join('');
+    return cleanedStr === reversedStr;
+}
+
+const testString = ""A man, a plan, a canal, Panama!"";
+console.log(""Is Palindrome:"", isPalindrome(testString));",javascript,user_2Z3CKSIRMbRMG5mImMwCY9GZYRY,javascript,js-palindrome
+211,Format date YYYY-MM-DD,"// JavaScript - Format Current Date in YYYY-MM-DD
+function formatDate() {
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+}
+
+const formattedDate = formatDate();
+console.log(""Formatted Date:"", formattedDate);",javascript,user_2Z3CKSIRMbRMG5mImMwCY9GZYRY,javascript,js-date-to-yyyymmdd
+212,Square root,"#include <iostream>
+
+int calculateSquare(int num) {
+    return num * num;
+}
+
+int main() {
+    int number = 5;
+    int square = calculateSquare(number);
+    std::cout << ""Square of "" << number << "": "" << square << std::endl;
+    return 0;
+}",cpp,user_2Z3CKSIRMbRMG5mImMwCY9GZYRY,cpp,23
+213,Find maximum,"#include <iostream>
+
+int findMaximum(int a, int b) {
+    return (a > b) ? a : b;
+}
+
+int main() {
+    int num1 = 8, num2 = 12;
+    int maximum = findMaximum(num1, num2);
+    std::cout << ""Maximum of "" << num1 << "" and "" << num2 << "": "" << maximum << std::endl;
+    return 0;
+}",cpp,user_2Z3CKSIRMbRMG5mImMwCY9GZYRY,cpp,24
+216,Responsive Grid tailwind,"<!-- HTML with Tailwind CSS - Responsive Grid -->
+<div class=""grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"">
+    <div class=""bg-gray-200 p-4 rounded"">Item 1</div>
+    <div class=""bg-gray-200 p-4 rounded"">Item 2</div>
+    <div class=""bg-gray-200 p-4 rounded"">Item 3</div>
+    <div class=""bg-gray-200 p-4 rounded"">Item 4</div>
+</div>",jsx,user_2Z3CKSIRMbRMG5mImMwCY9GZYRY,html,25
+217,Area of rectangle,"Swift - Calculate Area of a Rectangle:
+swift
+Copy code
+// Swift - Calculate Area of a Rectangle
+func calculateRectangleArea(length: Double, width: Double) -> Double {
+    return length * width
+}
+
+let area = calculateRectangleArea(length: 5.0, width: 3.0)
+print(""Area of the rectangle: \(area)"")",swift,user_2Z3CKSIRMbRMG5mImMwCY9GZYRY,swift,26
+227,A new one,"function superFunction( param : string ){
+ return param
+}",typescript,user_2Z3CKSIRMbRMG5mImMwCY9GZYRY,typescript,27
+207,Sign up form,"<!DOCTYPE html>
+<html lang=""en"">
+<head>
+    <meta charset=""UTF-8"">
+    <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"">
+    <title>Sign Up Form</title>
+</head>
+<body>
+
+    <h1>Sign Up</h1>
+
+    <form action=""/signup"" method=""post"">
+        <label for=""username"">Username:</label>
+        <input type=""text"" id=""username"" name=""username"" required>
+
+        <label for=""email"">Email:</label>
+        <input type=""email"" id=""email"" name=""email"" required>
+
+        <label for=""password"">Password:</label>
+        <input type=""password"" id=""password"" name=""password"" required>
+
+        <button type=""submit"">Sign Up</button>
+    </form>
+
+</body>
+</html>",xml-doc,user_2Z3CKSIRMbRMG5mImMwCY9GZYRY,html,28
+214,Tailwind card,"<!-- HTML with Tailwind CSS - Responsive Card -->
+<!DOCTYPE html>
+<html lang=""en"">
+<head>
+    <meta charset=""UTF-8"">
+    <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"">
+    <title>Responsive Card</title>
+    <link rel=""stylesheet"" href=""https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"">
+</head>
+<body class=""bg-gray-100 flex justify-center items-center h-screen"">
+
+    <div class=""max-w-md mx-auto bg-white rounded overflow-hidden shadow-lg"">
+        <img class=""w-full h-64 object-cover"" src=""https://placekitten.com/600/400"" alt=""Card Image"">
+        <div class=""p-6"">
+            <div class=""font-bold text-xl mb-2"">Card Title</div>
+            <p class=""text-gray-700 text-base"">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        </div>
+        <div class=""p-6 flex justify-end"">
+            <button class=""bg-blue-500 text-white font-bold py-2 px-4 rounded"">Read More</button>
+        </div>
+    </div>
+
+</body>
+</html>",jsx,user_2Z3CKSIRMbRMG5mImMwCY9GZYRY,html,30
+215,Center text tailwind,"<div class=""flex justify-center items-center h-screen"">
+    <p class=""text-2xl text-center"">Centered Text</p>
+</div>",jsx,user_2Z3CKSIRMbRMG5mImMwCY9GZYRY,html,31
+218,Calculate Fibonacci Sequence,"fn fibonacci(n: u64) -> u64 {
+    match n {
+        0 | 1 => 1,
+        _ => fibonacci(n - 1) + fibonacci(n - 2),
+    }
+}
+
+fn main() {
+    let result = fibonacci(7);
+    println!(""Fibonacci of 7: {}"", result);
+}
+",rust,user_2Z3CKSIRMbRMG5mImMwCY9GZYRY,rust,32
+219,useReducer example,"import React, { useReducer } from 'react';
+
+// Reducer function
+const counterReducer = (state, action) => {
+  switch (action.type) {
+    case 'INCREMENT':
+      return { count: state.count + 1 };
+    case 'DECREMENT':
+      return { count: state.count - 1 };
+    case 'RESET':
+      return { count: 0 };
+    default:
+      return state;
+  }
+};
+
+// Component
+const Counter = () => {
+  // Initial state and dispatch function from useReducer
+  const [state, dispatch] = useReducer(counterReducer, { count: 0 });
+
+  return (
+    <div>
+      <h1>Count: {state.count}</h1>
+      <button onClick={() => dispatch({ type: 'INCREMENT' })}>Increment</button>
+      <button onClick={() => dispatch({ type: 'DECREMENT' })}>Decrement</button>
+      <button onClick={() => dispatch({ type: 'RESET' })}>Reset</button>
+    </div>
+  );
+};
+
+export default Counter;",jsx,user_2Z3CKSIRMbRMG5mImMwCY9GZYRY,react,33
+221,Express server,"const express = require('express');
+const app = express();
+const port = 3000;
+
+// Define a route
+app.get('/', (req, res) => {
+  res.send('Hello, Express!');
+});
+
+// Start the server
+app.listen(port, () => {
+  console.log(`Server is listening at http://localhost:${port}`);
+});",typescript,user_2Z3CKSIRMbRMG5mImMwCY9GZYRY,nodejs,nodejs-express-server
+222,Capitalize,"fun capitalizeAndGreet(name: String): String {
+    val capitalized = name.capitalize()
+    return ""Hello, $capitalized!""
+}
+
+fun main() {
+    val personName = ""john""
+    val greeting = capitalizeAndGreet(personName)
+    println(greeting)
+}",kotlin,user_2Z3CKSIRMbRMG5mImMwCY9GZYRY,kotlin,38
+223,Button gradient,".button {
+    display: inline-block;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    background: linear-gradient(to right, #ff7e5f, #feb47b);
+    color: #ffffff;
+    transition: background 0.3s ease;
+}
+
+.button:hover {
+    background: linear-gradient(to right, #ff7e5f, #feb47b);
+}",css,user_2Z3CKSIRMbRMG5mImMwCY9GZYRY,css,39
+224,Factorial,"#include <stdio.h>
+
+int calculateFactorial(int n) {
+    if (n <= 1) {
+        return 1;
+    } else {
+        return n * calculateFactorial(n - 1);
+    }
+}
+
+int main() {
+    // Example usage
+    int number = 5;
+    int factorial = calculateFactorial(number);
+
+    printf(""Factorial of %d is: %d\n"", number, factorial);
+
+    return 0;
+}",c,user_2Z3CKSIRMbRMG5mImMwCY9GZYRY,c,40
+220,Toggle,"import React, { useState } from 'react';
+
+const ToggleComponent = () => {
+  const [isToggled, setToggled] = useState(false);
+
+  return (
+    <div>
+      <button onClick={() => setToggled(!isToggled)}>
+        {isToggled ? 'Turn Off' : 'Turn On'}
+      </button>
+      {isToggled && <p>Toggle is ON!</p>}
+    </div>
+  );
+};
+
+export default ToggleComponent;",jsx,user_2Z3CKSIRMbRMG5mImMwCY9GZYRY,react,react-toggle
+199,Read write file,"const fs = require('fs');
+
+// Reading a file
+fs.readFile('example.txt', 'utf8', (err, data) => {
+    if (err) {
+        console.error(err);
+        return;
+    }
+    console.log('File content:', data);
+});
+
+// Writing to a file
+fs.writeFile('newFile.txt', 'Hello, Node.js!', (err) => {
+    if (err) {
+        console.error(err);
+        return;
+    }
+    console.log('File written successfully!');
+});",typescript,user_2Z3CKSIRMbRMG5mImMwCY9GZYRY,nodejs,ts-read-file
+200,Form handling,"import React, { useState } from 'react';
+
+const FormComponent = () => {
+    const [formData, setFormData] = useState({ username: '', password: '' });
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log('Form data submitted:', formData);
+    };
+
+    return (
+        <form onSubmit={handleSubmit}>
+            <label>
+                Username:
+                <input type=""text"" name=""username"" value={formData.username} onChange={handleChange} />
+            </label>
+            <label>
+                Password:
+                <input type=""password"" name=""password"" value={formData.password} onChange={handleChange} />
+            </label>
+            <button type=""submit"">Submit</button>
+        </form>
+    );
+};
+
+export default FormComponent;",jsx,user_2Z3CKSIRMbRMG5mImMwCY9GZYRY,react,react-signin-form
+183,Calculate super factorial,"public class FactorialCalculator {
+    public static int calculateFactorial(int n) {
+        if (n == 0 || n == 1) {
+            return 1;
+        } else {
+            return n * calculateFactorial(n - 1);
+        }
+    }
+
+    public static void main(String[] args) {
+        int result = calculateFactorial(5);
+        System.out.println(""Factorial of 5: "" + result);
+    }
+}",java,user_2Z3CKSIRMbRMG5mImMwCY9GZYRY,java,41
+230,Quicksort algorithm,"def quicksort(arr):  
+    if len(arr) < 2:  
+        return arr  
+    pivot = arr[0]  
+    left = [x for x in arr[1:] if x < pivot]  
+    right = [x for x in arr[1:] if x >= pivot]  
+    return quicksort(left) + [pivot] + quicksort(right)  ",python,user_2Z3CKSIRMbRMG5mImMwCY9GZYRY,python,42
+231,Create a Next.js page that fetches data from an API,"import React from 'react';
+
+const YourPage = ({ data }) => {
+  return (
+    <div>
+      <h1>Your Next.js Page</h1>
+      <p>{data.someProperty}</p>
+    </div>
+  );
+};
+
+export async function getServerSideProps() {
+  // Fetch data on the server side
+  const response = await fetch('your-api-endpoint');
+  const data = await response.json();
+
+  return {
+    props: {
+      data,
+    },
+  };
+}
+
+export default YourPage;",jsx,user_2Z3CKSIRMbRMG5mImMwCY9GZYRY,nextjs,43
