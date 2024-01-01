@@ -76,11 +76,14 @@ export function SnippetDetail(p: { snippet: Snippet }) {
   const title = (
     <div className="flex space-x-4">
       <Image
-        className="w-10  -top-10 right-[10%] "
+        className="w-10 h-10 -top-10 right-[10%] "
         src={progLngItem.src}
         alt="Prog language image"
       />
-      <h1>{p.snippet?.title}</h1>
+      <div>
+        <h1>{p.snippet?.title}</h1>
+        <div className="mt-2 text-main-200">({p.snippet.name})</div>
+      </div>
     </div>
   );
 
@@ -118,6 +121,7 @@ export function SnippetDetail(p: { snippet: Snippet }) {
       <div className="p-8 mb-44 relative border-2 border-main-500 rounded-xl">
         <div>
           {title}
+
           <div className="flex flex-col">
             {actionButtons}
             {codeHightLighter}

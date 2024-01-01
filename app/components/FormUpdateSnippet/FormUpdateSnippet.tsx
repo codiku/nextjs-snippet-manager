@@ -13,6 +13,7 @@ import { FieldError } from "@/components/FieldError";
 
 const formSchema = z.object({
   title: z.string().min(1),
+  name: z.string().min(1),
   content: z.string().min(1),
   technology: z.nativeEnum(Technology),
 });
@@ -32,6 +33,7 @@ export function FormUpdateSnippet(p: { snippet: Snippet }) {
       content: p.snippet.content,
       title: p.snippet.title,
       technology: p.snippet.technology,
+      name: p.snippet.name,
     },
   });
 
@@ -86,6 +88,16 @@ export function FormUpdateSnippet(p: { snippet: Snippet }) {
       <FieldError errors={errors} name="content" />
     </div>
   );
+
+  const inputName = (
+    <div className="space-y-3">
+      <label htmlFor="name" className="flex items-center space-x-4">
+        <div>name</div>
+      </label>
+      <input {...register("name")} id="name" />
+      <FieldError errors={errors} name="name" />
+    </div>
+  );
   return (
     <form
       onSubmit={handleSubmit(submitServerAction)}
@@ -94,6 +106,7 @@ export function FormUpdateSnippet(p: { snippet: Snippet }) {
       <div className="space-y-6">
         <h1>Update snippet</h1>
         {inputTitle}
+        {inputName}
         {technoSelect}
         {textareaContent}
       </div>
