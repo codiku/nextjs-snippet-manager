@@ -1,17 +1,19 @@
 "use server";
+import { ApiResponse } from "@/types/response";
 import { TextCortexResponse } from "@/types/text-cortex-ai-type";
 import { Technology } from "@prisma/client";
 
-type Resp =
-  | { title: string; technology: Technology; error?: false }
-  | {
-      title?: string;
-      technology?: Technology;
-      error: true;
-    };
-export async function genCodeMetadata(code: string): Promise<Resp> {
-  const codeWithoutLineBreaks = code.replace(/(\r\n|\n|\r)/gm, "");
-  const prompt = `An exemple of short good title can be Sort array by first letter or Simple http server or Modal component.Return also the technology(language or framework or library) of the code.Your response should have the following format : title/technology  Example: Find max value in array/python or Generate random value/java  The technology should be in lowercase.Here is a list of all valid technologies :  python javascript java csharp php ruby swift kotlin c cpp bash css nextjs nodejs react rust typescript html. Return a response for this piece of code : ${codeWithoutLineBreaks}`;
+export async function genCodeMetadata(
+  code: string
+): Promise<
+  ApiResponse<{ title: string; technology: Technology; name: string }>
+> {
+  const codeWithoutLineBreaks = code
+    .replace(/(\r\n|\n|\r)/gm, "")
+    .replace(/ +/g, " ")
+    .replace(/"/g, "'");
+  console.log("codeWithoutLineBreaks", codeWithoutLineBreaks);
+  const prompt = `An exemple of short good title can be Sort array by first letter or Simple http server or Modal component.Return also the technology(language or framework or library) of the code and a name in keba case.Your response should have the following format : title/technology/name  Example: Find max value in array/python/find-max-value or Generate random value/java/random-value  The technology should be in lowercase.Here is a list of all valid technologies :  python javascript java csharp php ruby swift kotlin c cpp bash css nextjs nodejs react rust typescript html. Return a response for this piece of code : ${codeWithoutLineBreaks}`;
 
   const options = {
     method: "POST",
@@ -34,18 +36,25 @@ export async function genCodeMetadata(code: string): Promise<Resp> {
         console.log(err);
       });
 
-    const [title, technology] = res.data.outputs[0].text.split("/");
+    console.log("***", res.data.outputs);
+    const [title, technology, name] = res.data.outputs[0].text.split("/");
     console.log({
       title,
       technology: technology.toLowerCase() as Technology,
+      name,
       "token remaining": res.data.remaining_credits,
     });
     return {
-      title,
-      technology: technology.toLowerCase() as Technology,
+      data: {
+        name,
+        title,
+        technology: technology.toLowerCase() as Technology,
+      },
     };
   } catch (err) {
+    console.log(err);
     return {
+      data: null,
       error: true,
     };
   }

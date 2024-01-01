@@ -1,9 +1,8 @@
 export type ApiResponse<T> =
   | {
-      data: T | null;
+      data: null;
       message?: string;
+      status?: number;
+      error: true;
     }
-  | {
-      status: number;
-      error: boolean;
-    };
+  | { data: T | null; message?: string; error?: false; status?: number };

@@ -11,6 +11,7 @@ export const deleteSnippet = async (
     const { userId } = auth();
     if (!userId) {
       return {
+        data: null,
         error: true,
         status: 401,
         message: "User not signed in",
@@ -23,6 +24,7 @@ export const deleteSnippet = async (
     };
   } catch (error) {
     return {
+      data: null,
       error: true,
       status: 500,
       message: "Something went wrong when deleting the snippet",
@@ -49,6 +51,7 @@ export const updateSnippet = async (
     const { userId } = auth();
     if (!userId) {
       return {
+        data: null,
         error: true,
         status: 401,
         message: "User not signed in",
@@ -58,6 +61,7 @@ export const updateSnippet = async (
       updateSnippetSchema.parse(body);
     } catch (error) {
       return {
+        data: null,
         error: true,
         status: 500,
         message: (error as z.ZodError).issues
@@ -76,6 +80,7 @@ export const updateSnippet = async (
     };
   } catch (err) {
     return {
+      data: null,
       error: true,
       status: 500,
       message: "Something went wrong when updating the snippet ",
@@ -111,6 +116,7 @@ export const readSnippet = async (
     };
   } catch (err) {
     return {
+      data: null,
       error: true,
       status: 500,
       message: "Something went wrong when fetching the snippet ",

@@ -13,9 +13,10 @@ import { FieldError } from "@/components/FieldError";
 import { ClipboardEvent } from "react";
 import { genCodeMetadata } from "@/actions/text-cortex";
 
-const MAX_LENGTH_CONTENT = 500;
+const MAX_LENGTH_CONTENT = 1000;
 const formSchema = z.object({
   title: z.string().min(1),
+  name: z.string().min(5),
   content: z.string().min(1).max(MAX_LENGTH_CONTENT),
   technology: z.nativeEnum(Technology),
 });
@@ -37,6 +38,7 @@ export function FormCreateSnippet() {
     defaultValues: {},
   });
   const content = watch("content");
+
   const submit = async (formData: Form) => {
     // Retrieve associated language
     const language = SNIPPETS_METADATA[formData.technology].language;
@@ -64,12 +66,14 @@ export function FormCreateSnippet() {
   const handleContentPaste = async (e: ClipboardEvent<HTMLTextAreaElement>) => {
     const pastedText = e.clipboardData.getData("Text");
     if (pastedText.trim().length < MAX_LENGTH_CONTENT) {
-      const { title, technology, error } = await genCodeMetadata(pastedText);
-      if (!error) {
-        setValue("title", title);
-
-        if (SNIPPETS_METADATA[technology]) {
-          setValue("technology", technology);
+      console.log("GEN");
+      const { data } = await genCodeMetadata(pastedText);
+      console.log("DATA", data);
+      if (data) {
+        setValue("title", data.title);
+        if (SNIPPETS_METADATA[data.technology]) {
+          setValue("technology", data.technology);
+          setValue("name", data.technology + "-" + data.name);
         }
       }
     } else {
@@ -111,6 +115,16 @@ export function FormCreateSnippet() {
     </div>
   );
 
+  const inputName = (
+    <div className="space-y-3">
+      <label htmlFor="name" className="flex items-center space-x-4">
+        <div>name</div> <RxMagicWand />
+      </label>
+      <input {...register("name")} id="name" />
+      <FieldError errors={errors} name="name" />
+    </div>
+  );
+
   const textareaContent = (
     <div className="space-y-3">
       <label htmlFor="content">Content</label>
@@ -124,12 +138,17 @@ export function FormCreateSnippet() {
     </div>
   );
   return (
-    <form onSubmit={handleSubmit(submit)} className="space-y-8 w-[50rem] ">
+    <form onSubmit={handleSubmit(submit)} className="space-y-8 w-[50rem]  ">
       <div className="space-y-6">
         <h1>New snippet</h1>
         {textareaContent}
-        {content && inputTitle}
-        {content && technoSelect}
+        {content && (
+          <>
+            {inputName}
+            {inputTitle}
+            {technoSelect}
+          </>
+        )}
       </div>
       <div className="flex justify-end">
         <button>Save</button>

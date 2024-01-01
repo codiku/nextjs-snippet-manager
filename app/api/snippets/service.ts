@@ -13,14 +13,7 @@ export const readAllSnippet = async (
 ): Promise<ApiResponse<Snippet[]>> => {
   try {
     readAllSnippetsSchema.parse(queryParams);
-    // const { userId } = auth();
-    // if (!userId) {
-    //   return {
-    //     error: true,
-    //     status: 401,
-    //     message: "User not logged",
-    //   };
-    // }
+
     const snippet = await db.snippet.findMany({ where: { ...queryParams } });
 
     return {
@@ -28,6 +21,7 @@ export const readAllSnippet = async (
     };
   } catch (error) {
     return {
+      data: null,
       error: true,
       status: 500,
       message:
@@ -52,6 +46,7 @@ export const createSnippet = async (
     const { userId } = auth();
     if (!userId) {
       return {
+        data: null,
         error: true,
         status: 401,
         message: "User not signed in",
@@ -72,6 +67,7 @@ export const createSnippet = async (
     };
   } catch (error) {
     return {
+      data: null,
       error: true,
       status: 500,
       message: "Something went wrong when creating the snippet",

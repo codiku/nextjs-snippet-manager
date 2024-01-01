@@ -2,9 +2,9 @@
 
 import { Snippet } from "@prisma/client";
 import { updateSnippet } from "../api/snippets/[id]/service";
-import { ApiResponse } from "@/types/response";
 import { SNIPPETS_METADATA } from "@/constant";
 import { FormValuesUpdateSnippet } from "../components/FormUpdateSnippet/FormUpdateSnippet";
+import { ApiResponse } from "@/types/response";
 
 export async function updateSnippetServAction(
   id: number,
