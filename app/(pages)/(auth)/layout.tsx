@@ -11,7 +11,7 @@ export default function AuthLayout({
       <div className="space-y-4 flex-1 flex flex-col items-center bg-main-700 h-full justify-center rounded-bl-[8rem] shadow-2xl">
         <Image src={logoAuthPng} alt="Logo" />
         <div className="text-2xl text-white">
-          The one place for all your code snippets
+          The one place for all your code snippets, with a touch of AI
         </div>
       </div>
     </div>
