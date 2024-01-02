@@ -34,9 +34,6 @@ export async function readAllSnippet(filters?: Partial<Snippet>) {
       data: snippets,
     };
   } catch (err) {
-    console.log(
-      "Something went wrong fetching the snippets " + (err as Error).message
-    );
     return {
       data: [],
       error: true,
