@@ -1,3 +1,4 @@
+"use server";
 import { Language, Snippet, Technology } from "@prisma/client";
 import { db } from "@/app/lib/db";
 import { z } from "zod";
@@ -47,6 +48,7 @@ const deleteSnippetSchema = z.number();
 export async function deleteSnippet(id: number) {
   if (!auth().userId) {
     return {
+      data: null,
       error: true,
       status: 401,
       message: "You must be signed in",
@@ -57,9 +59,12 @@ export async function deleteSnippet(id: number) {
     const deletedSnippet = await db.snippet.delete({
       where: { id },
     });
-    return deletedSnippet;
+    return {
+      data: deleteSnippet,
+    };
   } catch (err) {
     return {
+      data: null,
       error: true,
       status: 500,
       message:
