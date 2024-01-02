@@ -66,9 +66,8 @@ export function FormCreateSnippet() {
   const handleContentPaste = async (e: ClipboardEvent<HTMLTextAreaElement>) => {
     const pastedText = e.clipboardData.getData("Text");
     if (pastedText.trim().length < MAX_LENGTH_CONTENT) {
-      console.log("GEN");
       const { data } = await genCodeMetadata(pastedText);
-      console.log("DATA", data);
+
       if (data) {
         setValue("title", data.title);
         if (SNIPPETS_METADATA[data.technology]) {
@@ -133,6 +132,7 @@ export function FormCreateSnippet() {
         id="content"
         className="h-96 w-full"
         onPaste={handleContentPaste}
+        placeholder="Paste your snippet here..."
       />
       <FieldError errors={errors} name="content" />
     </div>

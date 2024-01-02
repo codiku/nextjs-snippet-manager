@@ -32,7 +32,7 @@ export function SnippetSearch(p: { snippets: Snippet[] }) {
     </div>
   );
   return (
-    <main className="flex flex-col h-[90vh] ">
+    <main className="flex flex-col h-[89vh] ">
       <SearchBar onChange={setCurrSearchQuery} />
       <div className="overflow-y-auto  h-full">
         {filteredSnippets.length > 0 ? (

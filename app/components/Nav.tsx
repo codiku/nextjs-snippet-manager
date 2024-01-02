@@ -24,7 +24,7 @@ const Nav = () => {
   );
   return (
     <div className="text-white bg-main-900 py-8 px-6  min-w-[12rem] text-sm rounded-lg flex h-full  justify-center">
-      <ul className="space-y-4">
+      <ul className="space-y-2">
         {Object.values(SNIPPETS_METADATA).map(renderLinkItem)}
       </ul>
     </div>

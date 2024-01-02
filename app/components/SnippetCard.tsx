@@ -12,9 +12,8 @@ export function SnippetCard(p: { snippet: Snippet }) {
 
   const copyCodeToClipboard = (e: MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
-    navigator.clipboard.writeText(p.snippet.content);
-
-    toast("Code copied into clipboard");
+    navigator.clipboard.writeText("npx snipia add " + p.snippet.name);
+    toast("Command copied into clipboard");
   };
   const cardBody = (
     <div className="flex flex-col justify-end h-full ">

@@ -10,9 +10,7 @@ export default function SnippetLayout({
       <Header />
       <div className="flex p-8">
         <Nav />
-        <div className="ml-8 w-full h-screen overflow-y-auto pb-60">
-          {children}
-        </div>
+        <div className="ml-8  ">{children}</div>
       </div>
     </div>
   );
