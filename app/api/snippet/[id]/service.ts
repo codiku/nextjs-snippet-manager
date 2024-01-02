@@ -60,7 +60,7 @@ export async function deleteSnippet(id: number) {
       where: { id },
     });
     return {
-      data: deleteSnippet,
+      data: deletedSnippet,
     };
   } catch (err) {
     return {
