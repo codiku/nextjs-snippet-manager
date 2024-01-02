@@ -51,9 +51,11 @@ const createSnippetSchema = z.object({
   language: z.nativeEnum(Language),
   technology: z.nativeEnum(Technology),
 });
-export async function createSnippet(body: Omit<Snippet, "id">) {
-  if (!auth().userId) {
+export async function createSnippet(body: typeof createSnippetSchema._type) {
+  const { userId } = auth();
+  if (!userId) {
     return {
+      data: null,
       error: true,
       status: 401,
       message: "You must be signed in",
@@ -62,10 +64,13 @@ export async function createSnippet(body: Omit<Snippet, "id">) {
 
   try {
     createSnippetSchema.parse(body);
-    const snippetCreated = await db.snippet.create({ data: body });
-    return snippetCreated;
+    const snippetCreated = await db.snippet.create({
+      data: { ...body, userId },
+    });
+    return { data: snippetCreated };
   } catch (err) {
     return {
+      data: null,
       error: true,
       status: 500,
       message:
