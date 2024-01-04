@@ -22,6 +22,7 @@ const formSchema = z.object({
 type Form = typeof formSchema._type;
 
 export default function CreateSnippetPage() {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -29,7 +30,6 @@ export default function CreateSnippetPage() {
   } = useForm<Form>({
     resolver: zodResolver(formSchema),
   });
-  const router = useRouter();
 
   async function submit(formData: Form) {
     const { error } = await createSnippet({
@@ -37,7 +37,7 @@ export default function CreateSnippetPage() {
       language: SNIPPETS_METADATA[formData.technology].language,
     });
     if (!error) {
-      toast.success("Snippet successfully created.");
+      toast.success("Snippet created successfully");
       router.push("/");
       router.refresh();
     }
