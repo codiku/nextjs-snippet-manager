@@ -25,17 +25,13 @@ export default function CreateSnippetPage() {
   const {
     register,
     handleSubmit,
-    getValues,
-    watch,
     formState: { errors },
   } = useForm<Form>({
     resolver: zodResolver(formSchema),
-    mode: "onChange",
   });
   const router = useRouter();
 
   async function submit(formData: Form) {
-    alert(JSON.stringify(formData));
     const { error } = await createSnippet({
       ...formData,
       language: SNIPPETS_METADATA[formData.technology].language,
