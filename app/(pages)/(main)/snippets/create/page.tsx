@@ -4,7 +4,6 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Technology } from "@prisma/client";
 import { useForm } from "react-hook-form";
-import { ErrorMessage } from "@hookform/error-message";
 import { FieldError } from "@/app/components/FieldError/FieldError";
 import { createSnippet } from "@/app/api/snippet/service";
 import { toast } from "sonner";
