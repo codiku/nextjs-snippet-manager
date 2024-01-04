@@ -4,7 +4,7 @@ import { FormUpdateSnippet } from "@/app/components/FormUpdateSnippet/FormUpdate
 export default async function UpdateSnippetPage(p: { params: { id: string } }) {
   const { data: snippet } = await readSnippet(Number(p.params.id));
   if (!snippet) {
-    return <div className="text-white">No snippet found...</div>;
+    return <div>No snippet found...</div>;
   }
   return <FormUpdateSnippet snippet={snippet} />;
 }

@@ -5,7 +5,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Snippet, Technology } from "@prisma/client";
 import { useForm } from "react-hook-form";
 import { FieldError } from "@/app/components/FieldError/FieldError";
-import { createSnippet } from "@/app/api/snippet/service";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { updateSnippet } from "@/app/api/snippet/[id]/service";
@@ -32,9 +31,9 @@ export function FormUpdateSnippet(p: { snippet: Snippet }) {
   });
 
   async function submit(formData: Form) {
-    const { error } = await updateSnippet(Number(p.snippet.id), formData);
+    const { error } = await updateSnippet(p.snippet.id, formData);
     if (!error) {
-      toast.success("Snippet updates successfully");
+      toast.success("Snippet updated successfully");
       router.push("/");
       router.refresh();
     }
@@ -63,7 +62,7 @@ export function FormUpdateSnippet(p: { snippet: Snippet }) {
   const inputTitle = (
     <div className="space-y-3 w-72">
       <label htmlFor="title">Title</label>
-      <input {...register("title")} defaultValue={p.snippet.title} id="title" />
+      <input {...register("title")} id="title" defaultValue={p.snippet.title} />
       <FieldError errors={errors} name={"title"} />
     </div>
   );
@@ -84,7 +83,7 @@ export function FormUpdateSnippet(p: { snippet: Snippet }) {
   return (
     <form onSubmit={handleSubmit(submit)} className="space-y-8 w-[50rem]">
       <div className="space-y-6">
-        <h1>Edit snippet</h1>
+        <h1>Update snippet</h1>
         {inputTitle}
         {technoSelect}
         {textareaContent}
