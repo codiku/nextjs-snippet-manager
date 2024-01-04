@@ -17,10 +17,12 @@ const updateSnippetSchema = z
 
 export async function updateSnippet(
   id: number,
-  body: Partial<Omit<Snippet, "id">>
+  body: typeof updateSnippetSchema._type
 ) {
-  if (!auth().userId) {
+  const { userId } = auth();
+  if (!userId) {
     return {
+      data: null,
       error: true,
       status: 401,
       message: "You must be signed in",
@@ -30,11 +32,12 @@ export async function updateSnippet(
     updateSnippetSchema.parse(body);
     const updatedSnippet = await db.snippet.update({
       data: body,
-      where: { id },
+      where: { id, userId },
     });
-    return updatedSnippet;
+    return { data: updatedSnippet };
   } catch (err) {
     return {
+      data: null,
       error: true,
       status: 500,
       message:

@@ -30,7 +30,6 @@ export async function readAllSnippet(filters?: Partial<Snippet>) {
         userId: userId,
       },
     });
-    console.log(snippets);
     return {
       data: snippets,
     };
