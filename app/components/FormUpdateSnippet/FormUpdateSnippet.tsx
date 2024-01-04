@@ -5,6 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Snippet, Technology } from "@prisma/client";
 import { useForm } from "react-hook-form";
 import { FieldError } from "@/app/components/FieldError/FieldError";
+import { createSnippet } from "@/app/api/snippet/service";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { updateSnippet } from "@/app/api/snippet/[id]/service";
