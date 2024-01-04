@@ -33,6 +33,8 @@ export default function IndexPage() {
   );
 }
 */
+
+/*
 import { revalidatePath } from "next/cache";
 
 export default async function IndexPage() {
@@ -66,6 +68,50 @@ export default async function IndexPage() {
       <button type="submit">Submit</button>
       <h1>Post list</h1>
       {posts.map((post) => (
+        <div className="text-white flex" key={post.id}>
+          {post.id} - {post.title}
+        </div>
+      ))}
+    </form>
+  );
+}
+*/
+
+import { revalidatePath } from "next/cache";
+import { FormEvent } from "react";
+
+export default async function IndexPage() {
+  const response = await fetch("http://localhost:3090/posts");
+  const posts = await response.json();
+
+  const submit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const formValues = Object.fromEntries(formData.entries());
+
+    const body = JSON.stringify({
+      title: formValues.title,
+      author: "Robin",
+    });
+
+    console.log("body ", body);
+    const resp = await fetch("http://localhost:3090/posts", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body,
+    }).then((res) => res.json());
+
+    revalidatePath("/");
+  };
+
+  return (
+    <form onSubmit={submit}>
+      <input name="title" />
+      <button type="submit">Submit</button>
+      <h1>Post list</h1>
+      {posts.map((post: any) => (
         <div className="text-white flex" key={post.id}>
           {post.id} - {post.title}
         </div>
