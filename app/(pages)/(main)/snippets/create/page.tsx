@@ -10,8 +10,12 @@ import { createSnippet } from "@/app/api/snippet/service";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 const formSchema = z.object({
-  title: z.string().min(1, { message: "This field is required" }),
-  content: z.string().min(1, { message: "This field is required" }),
+  title: z
+    .string()
+    .min(5, { message: "This field must be at least 5 characters" }),
+  content: z
+    .string()
+    .min(10, { message: "This field must be at least 10 characters" }),
   technology: z.nativeEnum(Technology),
 });
 
@@ -38,8 +42,8 @@ export default function CreateSnippetPage() {
     });
     if (!error) {
       toast.success("Snippet successfully created.");
-      router.refresh();
       router.push("/");
+      router.refresh();
     }
   }
   const technoSelect = (

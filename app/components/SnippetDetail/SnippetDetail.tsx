@@ -69,8 +69,8 @@ export function SnippetDetail(p: { snippet: Snippet }) {
     const { data } = await deleteSnippet(p.snippet.id);
     if (data) {
       toast.success("Snippet deleted successfully");
-      router.refresh();
       router.push("/");
+      router.refresh();
     }
   };
 
