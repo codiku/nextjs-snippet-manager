@@ -1,0 +1,10 @@
+{
+  "main": {
+    "snippets": {
+      "create": {
+        "title": "Créer un snippet"
+      }
+    },
+    "searchPlaceholder": "Recherche dans tes snippets"
+  }
+}

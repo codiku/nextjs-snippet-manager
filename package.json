@@ -9,12 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@clerk/localizations": "^1.26.13",
     "@clerk/nextjs": "^4.28.0",
     "@clerk/themes": "^1.7.9",
     "@hookform/error-message": "^2.0.1",
     "@hookform/resolvers": "^3.3.3",
     "@prisma/client": "^5.7.1",
     "next": "14.0.4",
+    "next-intl": "^3.4.1",
     "react": "^18",
     "react-dom": "^18",
     "react-hook-form": "^7.49.2",
