@@ -11,10 +11,9 @@ export const metadata: Metadata = {
   description: "The one place for all your code snippets",
 };
 
-export default function RootLayout({
-  children,
-}: {
+export default function RootLayout(p: {
   children: React.ReactNode;
+  params: { locale: string };
 }) {
   return (
     <ClerkProvider
@@ -24,10 +23,10 @@ export default function RootLayout({
         elements: { card: "bg-main-700 shadow-none" },
       }}
     >
-      <html lang="en">
+      <html lang={p.params.locale}>
         <body className={inter.className}>
           <Toaster richColors />
-          {children}
+          {p.children}
         </body>
       </html>
     </ClerkProvider>

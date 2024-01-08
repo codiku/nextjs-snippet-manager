@@ -1,0 +1,19 @@
+{
+  "auth": {
+    "subtitle": "The one place for all your code snippets",
+    "sign-in": {
+      "title": "Sign in"
+    },
+    "sign-up": {
+      "title": "Sign up"
+    }
+  },
+  "main": {
+    "snippets": {
+      "create": {
+        "title": "Create a snippet"
+      }
+    },
+    "searchPlaceholder": "Search your snippets"
+  }
+}

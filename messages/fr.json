@@ -1,0 +1,19 @@
+{
+  "auth": {
+    "subtitle": "Le seul endroit pour tous vos extraits de code",
+    "sign-in": {
+      "title": "Se connecter"
+    },
+    "sign-up": {
+      "title": "S'inscrire"
+    }
+  },
+  "main": {
+    "snippets": {
+      "create": {
+        "title": "Créer un snippet"
+      }
+    },
+    "searchPlaceholder": "Recherchez vos extraits"
+  }
+}
