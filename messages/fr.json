@@ -14,6 +14,7 @@
         "title": "Créer un snippet"
       }
     },
-    "searchPlaceholder": "Recherchez vos extraits"
+    "searchPlaceholder": "Recherchez vos extraits",
+    "addButton": "+ NOUVEAU"
   }
 }

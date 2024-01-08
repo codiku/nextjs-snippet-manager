@@ -6,6 +6,7 @@ const intlMiddleware = createMiddleware({
   locales: LOCALES,
   defaultLocale: DEFAULT_LOCALE,
 });
+
 export default authMiddleware({
   beforeAuth(request) {
     if (!request.url.includes("/api/")) {
