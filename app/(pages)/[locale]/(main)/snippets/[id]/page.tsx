@@ -5,7 +5,7 @@ export default async function SnippetDetailPage(p: { params: { id: string } }) {
   const { data: snippet } = await readSnippet(Number(p.params.id));
 
   if (!snippet) {
-    return <div>No snippet found...</div>;
+    return <div className="text-white">No snippet found...</div>;
   }
   return <SnippetDetail snippet={snippet} />;
 }

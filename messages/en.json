@@ -1,10 +1,16 @@
 {
+  "auth": {
+    "sign-in": {
+      "title": "Sign in !"
+    }
+  },
   "main": {
     "snippets": {
       "create": {
         "title": "Create a snippet"
       }
     },
-    "searchPlaceholder": "Search your snippets"
+    "searchPlaceholder": "Search your snippets",
+    "addButton": "+ ADD"
   }
 }

@@ -1,10 +1,16 @@
 {
+  "auth": {
+    "sign-in": {
+      "title": "Connecte toi !"
+    }
+  },
   "main": {
     "snippets": {
       "create": {
         "title": "Créer un snippet"
       }
     },
-    "searchPlaceholder": "Recherche dans tes snippets"
+    "searchPlaceholder": "Recherche dans tes snippets",
+    "addButton": "+ NOUVEAU"
   }
 }
